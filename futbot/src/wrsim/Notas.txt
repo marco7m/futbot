@@ -1,7 +1,0 @@
-Very Small Size
-
-1 pixel = 1 mm (escala na hora de fazer as imagens)
-
-UNIDADES DESSE PROJETO
-[mm]/[ms]
-
