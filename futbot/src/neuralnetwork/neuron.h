@@ -1,7 +1,7 @@
 #ifndef NEURON_H
 #define NEURON_H
 
-#include "my_ptr.h"
+#include "../utils/my_ptr.h"
 #include <vector>
 
 class Neuron{

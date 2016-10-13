@@ -19,23 +19,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ***/
 
-#ifndef GRAFICOENTRADA_H
-#define GRAFICOENTRADA_H
+#ifndef GRAFICO_H
+#define GRAFICO_H
 
-#include <QGraphicsPixmapItem>
-#include "WRSim/objetos/robovss.h"
-#include "WRSim/objetos/bola.h"
-#include "WRSim/config.h"
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "graficoentrada.h"
+#include "graficorobovss.h"
+#include "../objetos/robovss.h"
+#include "graficobola.h"
+#include "../objetos/bola.h"
+#include "graficoprobe.h"
+#include "../objetos/probe.h"
+#include "graficocampovss.h"
 
-class graficoentrada: public QGraphicsPixmapItem{
+class grafico: public QGraphicsView{
 public:
-    graficoentrada(bola *b, robovss *r, QGraphicsItem *parent = 0);
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
+    grafico(robovss *r, bola *b, probe *p);
+    QGraphicsScene *tela;
+    graficorobovss *grobo;
+    graficobola *gbola;
+    graficoprobe *gprobe;
+    graficoentrada *gentrada;
+    graficocampovss *gcampoVss;
 
+    void roda();
 private:
     robovss *robo;
     bola *_bola;
-    int *selectRobot;
+    probe *_probe;
 };
-#endif // GRAFICOENTRADA_H
+
+#endif // GRAFICO_H

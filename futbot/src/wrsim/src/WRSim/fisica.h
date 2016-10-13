@@ -26,10 +26,10 @@
 #include <QLineF>
 #include <cmath>
 
-#include "WRSim/objetos/bola.h"
-#include "WRSim/objetos/robovss.h"
-#include "WRSim/cte.h"
-#include "WRSim/objetos/probe.h"
+#include "objetos/bola.h"
+#include "objetos/robovss.h"
+#include "cte.h"
+#include "objetos/probe.h"
 
 #include <QDebug>
 

@@ -22,7 +22,7 @@
 #ifndef ROBOVSS_H
 #define ROBOVSS_H
 
-#include "WRSim/cte.h"
+#include "../cte.h"
 #include <cmath>
 #include <QtGlobal>
 

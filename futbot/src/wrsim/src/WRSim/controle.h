@@ -22,11 +22,11 @@
 #define CONTROLE_H
 
 #include <QObject>
-#include "WRSim/grafico/grafico.h"
-#include "WRSim/fisica.h"
-#include "WRSim/objetos/bola.h"
-#include "WRSim/objetos/robovss.h"
-#include "WRSim/interface.h"
+#include "grafico/grafico.h"
+#include "fisica.h"
+#include "objetos/bola.h"
+#include "objetos/robovss.h"
+#include "interface.h"
 
 
 class Controle: public QObject{

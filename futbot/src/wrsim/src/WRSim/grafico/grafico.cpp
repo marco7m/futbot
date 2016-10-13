@@ -19,8 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ***/
 
-#include "WRSim/grafico/grafico.h"
-#include "WRSim/cte.h"
+#include "grafico.h"
+#include "../cte.h"
 
 // escala: 0.5
 grafico::grafico(robovss *r, bola *b, probe *p){
