@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>robovss.png</file>
+        <file>bola.png</file>
+        <file>probe.png</file>
+        <file>probei2.png</file>
+        <file>probei.png</file>
+        <file>probe2.png</file>
+        <file>campoVss.png</file>
+    </qresource>
+</RCC>

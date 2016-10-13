@@ -1,0 +1,5 @@
+- a classe NeuralNetwork recebe no construtor a sua topologia, seu número de entradas e de saídas.
+    - o primeiro número da topologia é o número de entradas
+        - os neuronios da primeira camada na topologia (indice [1] da topologia, e não indice[0]), recebem como entradas todas as entradas
+- a última camada da topologia tem o mesmo número de neuronios que a quantidade de saídas
+
