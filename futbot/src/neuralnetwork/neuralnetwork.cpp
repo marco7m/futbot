@@ -1,5 +1,7 @@
 #include "neuralnetwork.h"
+#include <stdlib.h>
 #include <iostream>
+#include <fstream>
 
 #define VERBOSE true
 
@@ -10,7 +12,7 @@
 // CONEXOES:
 // network_input - connector - network_output
 NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp){
-    set_topology(tp);
+    Load("save0000.txt");
     CreateNetwork();
     set_input(in);
     set_output(out); 
@@ -19,11 +21,23 @@ NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp)
     PrintNeuralNetwork();
     DoTheJobOnce();
     DeleteAll();
+
+//    set_topology(tp);
+//    CreateNetwork();
+//    set_input(in);
+//    set_output(out); 
+//    ConnectAll();
+//    PrintTopology();
+//    PrintNeuralNetwork();
+//    DoTheJobOnce();
+//    Save("save0000.txt");
+//    DeleteAll();
 }
 
 void NeuralNetwork::CreateNetwork(){
     if(VERBOSE) std::cout << std::endl << "CreateNetwork" << std::endl;
     if(topology.size() != 0){
+        network.clear();
 
         // caminha por cada coluna da rede, ignorando a [0] (num inputs da rede)
         for(int i = 1; i < (int)topology.size(); i++){
@@ -167,5 +181,66 @@ void NeuralNetwork::DoTheJobOnce(){
         for(int j = 0; j < (int)network[i].size(); j++){
             network[i][j].work();
         }
+    }
+}
+
+void NeuralNetwork::Save(std::string name){
+    if(VERBOSE) std::cout << std::endl << "save" << std::endl;
+    std::ofstream file;
+    file.open(name.c_str());
+    if(file.is_open()){
+        for(int i = 0; i < (int)topology.size(); i++){
+            file << topology[i];
+            file << " ";
+        }
+        file << "\n ";
+        // salva os pesos de todos os neurons, passando fileira por fileira, de cima para baixo
+        for(int i = 0; i < (int)network.size(); i++){
+            for(int j = 0; j < (int)network[i].size(); j++){
+                // esse loop passa por todos os pesos do neuron
+                for(int k = 0; k < topology[i]; k++){
+                    file << network[i][j].get_weight(k);
+                    file << " ";
+                }
+            }
+        }
+        file << "\n ";
+        file.close();
+    }
+    else{
+        std::cout << "ERROR: couldn't open file." << std::endl;
+    }
+}
+
+void NeuralNetwork::Load(std::string name){
+    if(VERBOSE) std::cout << std::endl << "load" << std::endl;
+    if(topology.size() != 0) topology.clear();
+    std::ifstream file;
+    file.open(name);
+    if(file.is_open()){
+        std::string line = " ";
+        // carrega topologia
+        do{
+            if(std::getline(file,line,' ')){
+                if(line == "\n") break;
+                topology.push_back(atoi(line.c_str()));
+                std::cout << line << std::endl;
+                std::cout << "topology.size() "<< (int)topology.size() << std::endl;
+            }
+        }while(line != "\n");
+
+        
+        //carrega pesos
+        do{
+            if(std::getline(file,line,' ')){
+                if(line == "\n") break;
+                // aqui vai passar peso por peso que está no arquivo
+                std::cout << "peso: " << line << std::endl;
+
+            }
+        }while(line != "\n");
+    }
+    else{
+        std::cout << "ERROR: couldn't open file." << std::endl;
     }
 }

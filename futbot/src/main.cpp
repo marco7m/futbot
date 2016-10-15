@@ -1,5 +1,5 @@
 // main do WRSim
-
+//
 //#include <QApplication>
 //#include "wrsim/src/WRSim/controle.h"
 //
@@ -42,4 +42,3 @@ int main(){
 
     return 0;
 }
-

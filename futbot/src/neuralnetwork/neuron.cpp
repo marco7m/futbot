@@ -5,6 +5,10 @@
 Neuron::Neuron(){
 }
 
+Neuron::Neuron(std::vector<double> w){
+    weight = w;
+}
+
 void Neuron::set_randon_weight(){
     if(input.size == 0){
         std::cout << "ERROR: tried to set weight in neuron without inputs set." << std::endl;
@@ -32,8 +36,19 @@ void Neuron::set_uni_weight(){
 }
 
 void Neuron::connect_input(double_ptr in){
-    input = in;
-    set_randon_weight();
+    if(weight.size() == 0){
+        input = in;
+        set_randon_weight();
+    }
+    else{
+        if((int)weight.size() != input.size){
+            std::cout << "ERROR: weight size and input size don't match." << std::endl;
+            exit(1);
+        }
+        else{
+            input = in;
+        }
+    }
 }
 
 void Neuron::connect_output(double *out){

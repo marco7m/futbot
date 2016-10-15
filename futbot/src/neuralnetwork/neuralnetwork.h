@@ -3,6 +3,7 @@
 
 #include "neuron.h"
 #include <vector>
+#include <string>
 
 
 class NeuralNetwork{
@@ -17,6 +18,8 @@ public:
     void set_input(double_ptr i);
     void set_output(double_ptr o);
     void DoTheJobOnce();
+    void Save(std::string name);
+    void Load(std::string name);
 
 private:
     // a rede contém todos os neuronios

@@ -7,6 +7,7 @@
 class Neuron{
 public:
     Neuron();
+    Neuron(std::vector<double> w);
     void set_randon_weight();
     void set_uni_weight();
     void connect_input(double_ptr in);
