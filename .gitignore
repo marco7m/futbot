@@ -2,3 +2,4 @@ Session.vim
 tmp/
 bin/
 Makefile
+*.swp
