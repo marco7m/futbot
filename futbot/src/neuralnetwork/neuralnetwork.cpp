@@ -12,14 +12,12 @@
 // CONEXOES:
 // network_input - connector - network_output
 NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp){
-    Load("save0000.txt");
-    CreateNetwork();
     set_input(in);
     set_output(out); 
-    ConnectAll();
+    LoadNetwork("save0000.txt");
     PrintTopology();
     PrintNeuralNetwork();
-    DoTheJobOnce();
+//    DoTheJobOnce();
     DeleteAll();
 
 //    set_topology(tp);
@@ -27,10 +25,11 @@ NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp)
 //    set_input(in);
 //    set_output(out); 
 //    ConnectAll();
+//    set_random_weights();
 //    PrintTopology();
 //    PrintNeuralNetwork();
-//    DoTheJobOnce();
-//    Save("save0000.txt");
+////    DoTheJobOnce();
+//    SaveNetwork("save0000.txt");
 //    DeleteAll();
 }
 
@@ -68,6 +67,10 @@ void NeuralNetwork::PrintTopology(){
 
 void NeuralNetwork::PrintNeuralNetwork(){
     if(VERBOSE) std::cout << std::endl << "PrintNeuralNetwork" << std::endl;
+    if((int)network.size() == 0){
+        std::cout << "ERROR: tried to print a neural network with size zero" << std::endl;
+        exit(1);
+    }
     for(int i = 0; i < (int)network.size(); i++){
         for(int k = 0; k < topology[i]; k++){ // percorre a coluna anterior, para saber o número de entradas que o neuronio tem
             for(int j = 0; j < (int)network[i].size(); j++){
@@ -144,7 +147,6 @@ void NeuralNetwork::DeleteAll(){
 void NeuralNetwork::set_topology(std::vector<int> t){
     if(VERBOSE) std::cout << std::endl << "set_topology" << std::endl;
     topology.clear();
-    topology.push_back(network_input.size);
     for(int i = 0; i < (int)t.size(); i++){
         topology.push_back(t[i]);
     }
@@ -155,12 +157,24 @@ void NeuralNetwork::set_topology(std::vector<int> t){
         std::cout << "ERROR: Outputs number differ from topology outputs number" << std::endl;
         exit(1);
     }
+
+    // NÃO TESTADO
+    // se a entrada já foi definida e a primeira camada tem um número diferente de neuronios do número de entradas, gera um erro
+    if((network_input.size != topology[0]) && (network_output.size != 0)){
+        std::cout << "ERROR: Inputs number differ from topology inputs number" << std::endl;
+        exit(1);
+    }
 }
 
 void NeuralNetwork::set_input(double_ptr i){
     if(VERBOSE) std::cout << std::endl << "set_input" << std::endl;
     network_input = i;
-    topology[0] = network_input.size;
+
+    // se a topologia já foi definida e a primeira camada tem um número diferente de neuronios do numero de entradas, gera um erro
+    if(((int)topology.size() != 0) && (network_input.size != topology[0])){
+        std::cout << "ERROR: Inputs number differ from topology inputs number" << std::endl;
+        exit(1);
+    }
 }
 
 void NeuralNetwork::set_output(double_ptr o){
@@ -184,7 +198,7 @@ void NeuralNetwork::DoTheJobOnce(){
     }
 }
 
-void NeuralNetwork::Save(std::string name){
+void NeuralNetwork::SaveNetwork(std::string name){
     if(VERBOSE) std::cout << std::endl << "save" << std::endl;
     std::ofstream file;
     file.open(name.c_str());
@@ -212,7 +226,7 @@ void NeuralNetwork::Save(std::string name){
     }
 }
 
-void NeuralNetwork::Load(std::string name){
+void NeuralNetwork::LoadNetwork(std::string name){
     if(VERBOSE) std::cout << std::endl << "load" << std::endl;
     if(topology.size() != 0) topology.clear();
     std::ifstream file;
@@ -224,23 +238,57 @@ void NeuralNetwork::Load(std::string name){
             if(std::getline(file,line,' ')){
                 if(line == "\n") break;
                 topology.push_back(atoi(line.c_str()));
-                std::cout << line << std::endl;
-                std::cout << "topology.size() "<< (int)topology.size() << std::endl;
             }
         }while(line != "\n");
 
-        
+        // cria rede neural
+        CreateNetwork();
+
+        // conecta as entradas e saidas
+        ConnectAll();
+
         //carrega pesos
+        int i = 0; // coluna de neuronios
+        int j = 0; // neuronio na coluna
+        int k = -1; // peso no neuronio (-1 para a lógica dos ifs logo abaixo funcionar
+        // debug
+        PrintTopology();
         do{
             if(std::getline(file,line,' ')){
                 if(line == "\n") break;
-                // aqui vai passar peso por peso que está no arquivo
-                std::cout << "peso: " << line << std::endl;
 
+                // move as variaveis i,j,k
+                if(++k < network[i][j].get_number_inputs()){
+                }
+                else if(++j < (int)network[i].size()){
+                    k = 0;
+                }
+                else if(++i < (int)network.size()){
+                    j = 0;
+                    k = 0;
+                }
+                else{
+                    break;
+                }
+
+
+                // aqui vai passar peso por peso que está no arquivo
+                network[i][j].set_weight(k,std::stod(line.c_str()));
+               
             }
         }while(line != "\n");
     }
     else{
         std::cout << "ERROR: couldn't open file." << std::endl;
+        exit(1);
     }
+}
+
+void NeuralNetwork::set_random_weights(){
+    if(VERBOSE) std::cout << "set_random_weights" << std::endl;
+    for(int i = 0; i < (int)network.size(); i++){
+        for(int j = 0; j < (int)network[i].size(); j++){
+            network[i][j].set_randon_weight();
+        }
+    }    
 }

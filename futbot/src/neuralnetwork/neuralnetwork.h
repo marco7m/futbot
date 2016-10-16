@@ -18,8 +18,9 @@ public:
     void set_input(double_ptr i);
     void set_output(double_ptr o);
     void DoTheJobOnce();
-    void Save(std::string name);
-    void Load(std::string name);
+    void set_random_weights();
+    void SaveNetwork(std::string name);
+    void LoadNetwork(std::string name);
 
 private:
     // a rede contém todos os neuronios
