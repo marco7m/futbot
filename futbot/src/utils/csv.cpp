@@ -25,25 +25,25 @@ tabela Csv::GetData(){
                 exit(1);
             } 
 
-                //cria um vetor de string para add ele no vetor de vetor de string
-                std::vector<std::string> line_data;
+            //cria um vetor de string para add ele no vetor de vetor de string
+            std::vector<std::string> line_data;
 
-                while(data != "\n" && data != "\neof"){
-                    // coleta dado
-                    if(std::getline(file,data, sc)){
-                        w_dentro ++;
-                        if(w_dentro > 100000){
-                            std::cout << "Error: or CSV file is bad formatted or it has a line larger than 100000 characteres" << std::endl;
-                            exit(1);
-                        } 
-                        if(data != "\n" && data != "\neof"){
-                            line_data.push_back(data);
-                        }
+            while(data != "\n" && data != "\neof"){
+                // coleta dado
+                if(std::getline(file,data, sc)){
+                    w_dentro ++;
+                    if(w_dentro > 100000){
+                        std::cout << "Error: or CSV file is bad formatted or it has a line larger than 100000 characteres" << std::endl;
+                        exit(1);
+                    } 
+                    if(data != "\n" && data != "\neof"){
+                        line_data.push_back(data);
                     }
                 }
-                if(data != "\neof") data = " ";
+            }
+            if(data != "\neof") data = " ";
 
-                all_data.push_back(line_data);
+            all_data.push_back(line_data);
         }
     file.close();
     }

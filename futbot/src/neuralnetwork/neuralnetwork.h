@@ -4,6 +4,7 @@
 #include "neuron.h"
 #include <vector>
 #include <string>
+#include "../utils/csv.h"
 
 
 class NeuralNetwork{
@@ -20,7 +21,9 @@ public:
     void DoTheJobOnce();
     void set_random_weights();
     void SaveNetwork(std::string name);
+    void _OldSaveNetwork(std::string name);
     void LoadNetwork(std::string name);
+    void _OldLoadNetwork(std::string name);
 
 private:
     // a rede contém todos os neuronios

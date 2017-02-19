@@ -1,4 +1,18 @@
-// main do WRSim
+// main do HeadController
+
+#include <QApplication>
+#include "headcontroller/recordgame.h"
+
+//// main generica
+//int main(int argc, char *argv[]){
+//    QApplication a(argc, argv);
+//
+//    RecordGame *_recordgame = new RecordGame();
+//
+//    return a.exec();
+//}
+
+//// main do WRSim
 //
 //#include <QApplication>
 //#include "wrsim/src/WRSim/controle.h"
@@ -22,7 +36,7 @@
 #include <iostream>
 
 int main(){
-    std::vector<int> topologia1 = { 2, 5, 4 };
+    std::vector<int> topologia1 = {2, 5, 4};
 
     std::vector<int> topologia2 = {3, 2, 6, 4, 5, 4, 3, 1};
     

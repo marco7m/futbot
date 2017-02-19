@@ -1,6 +1,7 @@
 #include "neuron.h"
 #include <iostream>
 #include "random.h"
+#include "math.h"
 
 Neuron::Neuron(){
 }
@@ -78,5 +79,7 @@ void Neuron::work(){
     for(int i = 0; i < input.size; i++){
         *output += (weight[i] * input.ptr[i]);
     }
+    // a função de ativação é tangente hiperbólico
+    *output = (2/(1 + exp(-2 * (*output))))-1;
     std::cout << *output << std::endl;
 }

@@ -199,7 +199,36 @@ void NeuralNetwork::DoTheJobOnce(){
 }
 
 void NeuralNetwork::SaveNetwork(std::string name){
-    if(VERBOSE) std::cout << std::endl << "save" << std::endl;
+    if(VERBOSE) std::cout << std::endl << "SaveNetwork" << std::endl;
+    std::vector<std::vector<std::string> > nn_to_save;
+    std::vector<std::string> nn_line;
+    // prepara a primeira linha com a topologia
+    for(int i = 0; i < (int)topology.size(); i++){
+        nn_line.push_back(std::to_string(topology[i]));
+    }
+    nn_to_save.push_back(nn_line);
+    nn_line.clear();
+ 
+    // prepara a segunda linha com os pesos
+    for(int i = 0; i < (int)network.size(); i++){
+        for(int j = 0; j < (int)network[i].size(); j++){
+            // esse loop passa por todos os pesos do neuron
+            for(int k = 0; k < topology[i]; k++){
+                nn_line.push_back(std::to_string(network[i][j].get_weight(k)));
+            }
+        }
+    }
+    nn_to_save.push_back(nn_line);
+  
+    // cria o arquivo e salva
+    std::string data_name = "data/" + name;
+    Csv csv(data_name);
+    csv.SaveData(nn_to_save, ',');
+}
+
+// essa função não usa a classe Csv que criei
+void NeuralNetwork::_OldSaveNetwork(std::string name){
+    if(VERBOSE) std::cout << std::endl << "_OldSaveNetwork" << std::endl;
     std::ofstream file;
     file.open(name.c_str());
     if(file.is_open()){
@@ -226,8 +255,9 @@ void NeuralNetwork::SaveNetwork(std::string name){
     }
 }
 
-void NeuralNetwork::LoadNetwork(std::string name){
-    if(VERBOSE) std::cout << std::endl << "load" << std::endl;
+void NeuralNetwork::_OldLoadNetwork(std::string name){
+    if(VERBOSE) std::cout << std::endl << "LoadNetwork" << std::endl;
+
     if(topology.size() != 0) topology.clear();
     std::ifstream file;
     file.open(name);
@@ -277,10 +307,62 @@ void NeuralNetwork::LoadNetwork(std::string name){
                
             }
         }while(line != "\n");
+        file.close();
     }
     else{
         std::cout << "ERROR: couldn't open file." << std::endl;
         exit(1);
+    }
+}
+
+// essa função não utiliza a classe Csv que criei
+void NeuralNetwork::LoadNetwork(std::string name){
+    if(VERBOSE) std::cout << std::endl << "load" << std::endl;
+
+    std::vector<std::vector<std::string> > nn_data;
+
+    std::string data_name = "data/" + name;
+    Csv csv(data_name);
+    nn_data = csv.GetData();
+
+    if(topology.size() != 0) topology.clear();
+
+    for(int i = 0; i < (int)nn_data[0].size(); i++){
+        topology.push_back(atoi(nn_data[0][i].c_str()));
+    }
+
+    // cria rede neural
+    CreateNetwork();
+
+    // conecta as entradas e saidas
+    ConnectAll();
+
+    //carrega pesos
+    int i = 0; // coluna de neuronios
+    int j = 0; // neuronio na coluna
+    int k = -1; // peso no neuronio (-1 para a lógica dos ifs logo abaixo funcionar
+    // debug
+    PrintTopology();
+   
+    for(int c = 0; i < (int)nn_data[1].size(); c++){
+    
+        // move as variaveis i,j,k
+        if(++k < network[i][j].get_number_inputs()){
+        }
+        else if(++j < (int)network[i].size()){
+            k = 0;
+        }
+        else if(++i < (int)network.size()){
+            j = 0;
+            k = 0;
+        }
+        else{
+            break;
+        }
+        
+        // aqui vai passar peso por peso que está no arquivo
+        network[i][j].set_weight(k,std::stod(nn_data[1][c].c_str()));
+        std::cout << "c=" << c << std::endl;
     }
 }
 

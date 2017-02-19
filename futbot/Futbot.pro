@@ -26,6 +26,7 @@ INCLUDEPATH *= . src
 
 SOURCES += \
     src/main.cpp \
+    src/headcontroller/recordgame.cpp \
 # WRSim source files
     src/wrsim/src/WRSim/controle.cpp \
     src/wrsim/src/WRSim/fisica.cpp \
@@ -42,11 +43,14 @@ SOURCES += \
     src/wrsim/src/WRSim/interface.cpp \
 # NeuralNetwork source files
     src/neuralnetwork/neuron.cpp \
-    src/neuralnetwork/neuralnetwork.cpp 
-#    src/neuralnetwork/main.cpp
+    src/neuralnetwork/neuralnetwork.cpp \
+    # src/neuralnetwork/main.cpp \
+# utils source files
+    src/utils/csv.cpp
   
 # Header files
 HEADERS  += \
+    src/headcontroller/recordgame.h \
 # WRSim header files
     src/wrsim/src/WRSim/controle.h \
     src/wrsim/src/WRSim/cte.h \
@@ -68,6 +72,7 @@ HEADERS  += \
     src/neuralnetwork/neuralnetwork.h\
 # utils header files
     src/utils/my_ptr.h
+    src/utils/csv.h
 
 # Forms
 FORMS    += \

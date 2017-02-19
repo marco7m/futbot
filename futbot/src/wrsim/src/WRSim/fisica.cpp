@@ -60,7 +60,7 @@ void fisica::roda(){
          * Colisao do robô com o campo
          *
          * precisa ser otimizado
-         * substituir todos os setQuinas() por um ponteiro, para não ter que fazer as operações todas as vezes
+         * substituir todos os getQuinas() por um ponteiro, para não ter que fazer as operações todas as vezes
          * nas laterais internas dos gols pode dar bug pois não coloquei isso:
          * && (tQuinRobTemp[i].x() - tQuinRob[i].x() < 0) && (tQuinRobTemp[i].y() - tQuinRob[i].y() < 0)
          * se der bug mesmo, arrumar isso
@@ -69,8 +69,8 @@ void fisica::roda(){
         bool move = true;
 
         for(int i = 0; i < 4; i++){
-            tQuinRobTemp[i] = setQuinas(tempRobo, i);
-            tQuinRob[i] = setQuinas(k,i);
+            tQuinRobTemp[i] = getQuinas(tempRobo, i);
+            tQuinRob[i] = getQuinas(k,i);
         }
 
             // faz os testes para todas as quinas dos robôs
@@ -99,19 +99,19 @@ void fisica::roda(){
 
             //DIAGONAL
             // canto superior esquerdo
-            else if(JRS(QLineF(100,100, 170, 25),QPointF(setQuinas(tempRobo,i))) <= 0){
+            else if(JRS(QLineF(100,100, 170, 25),QPointF(getQuinas(tempRobo,i))) <= 0){
                 move = false;
             }
             // canto superior direito
-            else if(JRS(QLineF(1600,100, 1530, 25),QPointF(setQuinas(tempRobo,i))) >= 0){
+            else if(JRS(QLineF(1600,100, 1530, 25),QPointF(getQuinas(tempRobo,i))) >= 0){
                 move = false;
             }
             // canto inferior direito
-            else if(JRS(QLineF(1600,1255, 1530, 1325),QPointF(setQuinas(tempRobo,i))) <= 0){
+            else if(JRS(QLineF(1600,1255, 1530, 1325),QPointF(getQuinas(tempRobo,i))) <= 0){
                 move = false;
             }
             // canto inferior esquerdo
-            else if(JRS(QLineF(100,1255, 170, 1325),QPointF(setQuinas(tempRobo,i))) >= 0){
+            else if(JRS(QLineF(100,1255, 170, 1325),QPointF(getQuinas(tempRobo,i))) >= 0){
                 move = false;
             }
 
@@ -198,7 +198,7 @@ void fisica::roda(){
                 if(dist(robo[k].getX(),robo[k].getY(),robo[n].getX(),robo[n].getY()) <= 2*robovss::largura/cte::raiz2){
                     qDebug() << "Área de perigo"; 
                     for(int q0 = 0; q0 < 4; q0++){
-                        tQuinRobN[q0] = setQuinas(n, q0);
+                        tQuinRobN[q0] = getQuinas(n, q0);
                     }
                     // checo se alguma das quinas do robô k está dentro do robô n
                     for(int q1 = 0; q1 < 4; q1++){
@@ -239,7 +239,7 @@ void fisica::roda(){
 
             // encontra todos as quinas do robo
             for(int i = 0; i < 4; i++){
-                tempQuinas[i] = setQuinas(k, i);
+                tempQuinas[i] = getQuinas(k, i);
             }
 
             // com as quinas encontra todos os lados do robo
@@ -616,7 +616,7 @@ void fisica::roda(){
     tempoAnterior = *tempo;
 }
 
-QPointF fisica::setQuinas(int rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai esq; 3 - top esq
+QPointF fisica::getQuinas(int rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai esq; 3 - top esq
     QPointF quina;
     if(l == 0){
         quina.setY(robo[rob].getY() - ((robovss::largura/cte::raiz2) * cos(cte::PI/180 * (robo[rob].getAng() + 45))));
@@ -637,7 +637,7 @@ QPointF fisica::setQuinas(int rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai 
     return quina;
 }
 
-QPointF fisica::setQuinas(robovss rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai esq; 3 - top esq
+QPointF fisica::getQuinas(robovss rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai esq; 3 - top esq
     QPointF quina;
     if(l == 0){
         quina.setY(rob.getY() - ((robovss::largura/cte::raiz2) * cos(cte::PI/180 * (rob.getAng() + 45))));

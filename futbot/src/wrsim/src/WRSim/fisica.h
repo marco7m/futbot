@@ -49,8 +49,8 @@ private:
     unsigned long long tempoAnterior;
 
     //funções
-    QPointF setQuinas(int rob, int l);
-    QPointF setQuinas(robovss rob, int l);
+    QPointF getQuinas(int rob, int l);
+    QPointF getQuinas(robovss rob, int l);
     double deltaT();
     double dist(double x1,double y1,double x2,double y2);
     double dist(QPointF p1, QPointF p2);
