@@ -30,8 +30,13 @@ private:
     probe *_probe;
     unsigned long long *_tempo; // dois tempos de 10 minutos ou dois tempo de 600000000 microsegundos
 
+    int recording_time; 
+    bool file_saved;
+
     // VARIÁVEIS PARA SALVAR OS DADOS
-    std::ofstream file;
+    std::vector<std::vector<double> > data_input_double;
+    std::vector<std::vector<double> > data_output_double;
+
     
     // jogador lado esquerdo
     std::vector<double> l_pos_center_x;
@@ -82,8 +87,7 @@ private:
     std::vector<double> b_vel_x;
     std::vector<double> b_vel_y;
 
- 
-
+    
     QPointF getQuinas(robovss rob, int l);
 };
 
