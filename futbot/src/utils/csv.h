@@ -23,13 +23,12 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<std::vector<std::string> > tabela;
-
 class Csv{
 public:
     Csv(std::string name);
-    tabela GetData();
-    void SaveData(tabela all_data, char sc);
+    std::vector<std::vector<std::string> > GetData();
+    void SaveData(std::vector<std::vector<std::string> > all_data, char sc);
+    void SaveData(std::vector<std::vector<double> > all_data, char sc);
     void ChangeFile(std::string new_name);
     std::string GetFileName();
 

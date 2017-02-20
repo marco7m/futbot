@@ -6,9 +6,9 @@ Csv::Csv(std::string name){
     Csv::name = name;
 }
 
-tabela Csv::GetData(){
+std::vector<std::vector<std::string> > Csv::GetData(){
     std::ifstream file;
-    tabela all_data;
+    std::vector<std::vector<std::string> > all_data;
     file.open(name.c_str());
     if(file.is_open()){
         // inicializa variáveis
@@ -53,7 +53,7 @@ tabela Csv::GetData(){
     return all_data;
 }
 
-void Csv::SaveData(tabela all_data, char sc){
+void Csv::SaveData(std::vector<std::vector<std::string> > all_data, char sc){
     std::ofstream file;
     file.open(name.c_str());
     if(file.is_open()){
@@ -71,7 +71,26 @@ void Csv::SaveData(tabela all_data, char sc){
         std::cout << "ERROR: Couldn't open file." << std::endl;
     }
 }
-    
+ 
+void Csv::SaveData(std::vector<std::vector<double> > all_data, char sc){
+    std::ofstream file;
+    file.open(name.c_str());
+    if(file.is_open()){
+        file << sc;
+        for(int i = 0; i < (int)all_data.size(); i++){
+            for(int j = 0; j < (int)all_data[i].size(); j++){
+                file << all_data[i][j] << sc;
+            }
+            if(i+1 < all_data.size()) file << "\n" << sc;
+        }
+        file << "\n" << "eof" << sc;
+    file.close();
+    }
+    else{
+        std::cout << "ERROR: Couldn't open file." << std::endl;
+    }
+}   
+
 void Csv::ChangeFile(std::string new_name){
     this->name = new_name;
 }
