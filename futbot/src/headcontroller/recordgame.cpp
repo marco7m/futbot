@@ -37,7 +37,7 @@ RecordGame::RecordGame(){
     _bola->setY(650);
 
     // tempo de gravação em milisegundos
-    recording_time = 120000;
+    recording_time = 300000;
 
     *_tempo = 0;
     
@@ -162,10 +162,8 @@ void RecordGame::mostra(){
 
 
     // gerar arquivos csv
-    Csv csv("data/recordgame/000_data_input.csv");
-    csv.SaveData(data_input_double, ',');
-    csv.ChangeFile("data/recordgame/000_data_output.csv");
-    csv.SaveData(data_output_double, ',');
+    Csv::SaveData(data_input_double, "data/recordgame/000_data_input.csv", ',');
+    Csv::SaveData(data_output_double, "data/recordgame/000_data_output.csv", ',');
     }
 }
 

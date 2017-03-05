@@ -222,8 +222,7 @@ void NeuralNetwork::SaveNetwork(std::string name){
   
     // cria o arquivo e salva
     std::string data_name = "data/" + name;
-    Csv csv(data_name);
-    csv.SaveData(nn_to_save, ',');
+    Csv::SaveData(nn_to_save, data_name, ',');
 }
 
 // essa função não usa a classe Csv que criei
@@ -315,15 +314,13 @@ void NeuralNetwork::_OldLoadNetwork(std::string name){
     }
 }
 
-// essa função não utiliza a classe Csv que criei
 void NeuralNetwork::LoadNetwork(std::string name){
     if(VERBOSE) std::cout << std::endl << "load" << std::endl;
 
     std::vector<std::vector<std::string> > nn_data;
 
     std::string data_name = "data/" + name;
-    Csv csv(data_name);
-    nn_data = csv.GetData();
+    nn_data = Csv::GetStringData(data_name);
 
     if(topology.size() != 0) topology.clear();
 

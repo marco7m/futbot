@@ -23,18 +23,14 @@
 #include <string>
 #include <vector>
 
+
 class Csv{
 public:
-    Csv(std::string name);
-    std::vector<std::vector<std::string> > GetData();
-    void SaveData(std::vector<std::vector<std::string> > all_data, char sc);
-    void SaveData(std::vector<std::vector<double> > all_data, char sc);
-    void ChangeFile(std::string new_name);
-    std::string GetFileName();
-
-private:
-    std::string name;
-
+    Csv();
+    static std::vector<std::vector<std::string> > GetStringData(std::string name);
+    static std::vector<std::vector<double> > GetDoubleData(std::string name);
+    static void SaveData(std::vector<std::vector<std::string> > all_data, std::string name, char sc);
+    static void SaveData(std::vector<std::vector<double> > all_data, std::string name, char sc);
 
 };
 
