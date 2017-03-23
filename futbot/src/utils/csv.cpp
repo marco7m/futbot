@@ -1,6 +1,7 @@
 #include "csv.h"
 
 #include <cstdlib>
+#include <sstream>
 
 Csv::Csv(){
 }
@@ -85,7 +86,10 @@ std::vector<std::vector<double> > Csv::GetDoubleData(std::string name){
                         exit(1);
                     } 
                     if(data != "\n" && data != "\neof"){
-                        line_data.push_back(std::stod(data.c_str()));
+                        std::stringstream ss(data);
+                        double double_data;
+                        ss >> double_data;
+                        line_data.push_back(double_data);
                     }
                 }
             }

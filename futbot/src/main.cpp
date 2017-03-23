@@ -1,16 +1,25 @@
 // main do HeadController
 
 #include <QApplication>
-#include "headcontroller/recordgame.h"
+#include "headcontroller/simpleia.h"
+#include "headcontroller/getbperror.h"
 
 // main generica
 int main(int argc, char *argv[]){
-    QApplication a(argc, argv);
+//    QApplication a(argc, argv);
 
-    RecordGame *_recordgame = new RecordGame();
+//    SimpleIa simpleia;
+    GetBPError getbperror;
 
-    return a.exec();
+//    return a.exec();
+    return 0;
 }
+
+
+
+
+
+//========================================================
 
 //// main do WRSim
 //
@@ -27,6 +36,7 @@ int main(int argc, char *argv[]){
 //    return a.exec();
 //}
 
+//========================================================
 
 //// main do NeuralNetwork
 //
@@ -57,3 +67,24 @@ int main(int argc, char *argv[]){
 //
 //    return 0;
 //}
+//
+
+//========================================================
+//
+// main do NeuralNetwork 2
+//
+//#include "neuralnetwork/neuralnetwork.h"
+//#include "neuralnetwork/neuron.h"
+//#include "utils/my_ptr.h"
+//#include <iostream>
+//
+//int main(){
+//    double_ptr input(26);
+//
+//    double_ptr output(2);
+//
+//    NeuralNetwork neural_network(input, output, "nn0001.csv");
+//
+//    return 0;
+//}
+//

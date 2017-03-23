@@ -1,6 +1,7 @@
 Session.vim
 tmp/
 bin/
+data/
 Makefile
 *.swp
 go.sh

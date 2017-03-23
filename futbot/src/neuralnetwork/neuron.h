@@ -17,6 +17,7 @@ public:
     void set_weight(int n, double w);
     int get_number_inputs();
     void work();
+    double get_output_value();
 
 private:
     double_ptr input;

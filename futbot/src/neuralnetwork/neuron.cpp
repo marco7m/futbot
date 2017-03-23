@@ -81,5 +81,9 @@ void Neuron::work(){
     }
     // a função de ativação é tangente hiperbólico
     *output = (2/(1 + exp(-2 * (*output))))-1;
-    std::cout << *output << std::endl;
+}
+
+
+double Neuron::get_output_value(){
+    return *output;
 }

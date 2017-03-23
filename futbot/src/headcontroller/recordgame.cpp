@@ -1,6 +1,5 @@
 #include "recordgame.h"
 #include <QTimer>
-//#include "../wrsim/src/WRSim/cte.h"
 #include <unistd.h>
 #include <ctime>
 #include <cstdlib>
@@ -37,7 +36,7 @@ RecordGame::RecordGame(){
     _bola->setY(650);
 
     // tempo de gravação em milisegundos
-    recording_time = 300000;
+    recording_time = 10000;
 
     *_tempo = 0;
     
@@ -147,18 +146,6 @@ void RecordGame::mostra(){
     // OUTPUT   
     data_output_double.push_back(r_vel);
     data_output_double.push_back(r_vel_rot);
-
-//    // passar o tipo de double para string
-//    std::vector<std::vector<std::string> > data_input_string;
-//    std::vector<std::vector<std::string> > data_output_string;
-//
-//    for(int i = 0; i < (int)data_input_double.size(); i++){
-//        for(int j = 0; j < (int)data_input_double[i].size(); j++){
-//            data_input_string.push_back(
-//            
-//            
-//        }
-//    }
 
 
     // gerar arquivos csv

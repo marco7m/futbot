@@ -27,8 +27,13 @@ INCLUDEPATH *= . src
 SOURCES += \
     src/main.cpp \
     src/headcontroller/recordgame.cpp \
+    src/headcontroller/playrecordedgame.cpp \
+    src/headcontroller/simpleia.cpp \
+    src/headcontroller/getbperror.cpp \
+    src/headcontroller/goalkick.cpp \
 # WRSim source files
     src/wrsim/src/WRSim/controle.cpp \
+    src/wrsim/src/WRSim/controlewrsim.cpp \
     src/wrsim/src/WRSim/fisica.cpp \
     src/wrsim/src/WRSim/grafico/grafico.cpp \
     src/wrsim/src/WRSim/grafico/graficobola.cpp \
@@ -51,8 +56,13 @@ SOURCES += \
 # Header files
 HEADERS  += \
     src/headcontroller/recordgame.h \
+    src/headcontroller/playrecordedgame.h \
+    src/headcontroller/simpleia.h \
+    src/headcontroller/getbperror.h \
+    src/headcontroller/goalkick.h \
 # WRSim header files
     src/wrsim/src/WRSim/controle.h \
+    src/wrsim/src/WRSim/controlewrsim.h \
     src/wrsim/src/WRSim/cte.h \
     src/wrsim/src/WRSim/fisica.h \
     src/wrsim/src/WRSim/grafico/grafico.h \

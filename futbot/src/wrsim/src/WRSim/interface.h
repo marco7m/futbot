@@ -49,7 +49,7 @@ public:
 
     double getPosBolaX();
 
-    double getPosBolaY();
+    double get_pos_bola_y();
 
 
 private:

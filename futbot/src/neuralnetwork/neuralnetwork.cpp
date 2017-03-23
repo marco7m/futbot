@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-#define VERBOSE true
+#define VERBOSE false
 
 // primeiro cria os neuronios e os organiza na topologia escolhida
 // depois connecta os neuronios
@@ -14,23 +14,23 @@
 NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp){
     set_input(in);
     set_output(out); 
-    LoadNetwork("save0000.txt");
+    set_topology(tp);
+    CreateNetwork();
+    ConnectAll();
+    set_random_weights();
+}
+
+NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::string name){
+    set_input(in);
+    set_output(out);
+    LoadNetwork(name);
     PrintTopology();
     PrintNeuralNetwork();
-//    DoTheJobOnce();
-    DeleteAll();
+//
+}
 
-//    set_topology(tp);
-//    CreateNetwork();
-//    set_input(in);
-//    set_output(out); 
-//    ConnectAll();
-//    set_random_weights();
-//    PrintTopology();
-//    PrintNeuralNetwork();
-////    DoTheJobOnce();
-//    SaveNetwork("save0000.txt");
-//    DeleteAll();
+NeuralNetwork::~NeuralNetwork(){
+    DeleteAll();
 }
 
 void NeuralNetwork::CreateNetwork(){
@@ -194,6 +194,10 @@ void NeuralNetwork::DoTheJobOnce(){
     for(int i = 0; i < (int)network.size(); i++){
         for(int j = 0; j < (int)network[i].size(); j++){
             network[i][j].work();
+            if( i == (int)network.size() - 1 ){
+                if(network[i][j].get_output_value() != 0){
+                }
+            }
         }
     }
 }
@@ -315,17 +319,17 @@ void NeuralNetwork::_OldLoadNetwork(std::string name){
 }
 
 void NeuralNetwork::LoadNetwork(std::string name){
-    if(VERBOSE) std::cout << std::endl << "load" << std::endl;
+    if(VERBOSE) std::cout << std::endl << "LoadNetwork" << std::endl;
 
-    std::vector<std::vector<std::string> > nn_data;
-
-    std::string data_name = "data/" + name;
-    nn_data = Csv::GetStringData(data_name);
+    std::vector<std::vector<double> > nn_data; 
+    std::string data_name = "data/" + name; 
+    nn_data = Csv::GetDoubleData(data_name);
+    Csv::SaveData(nn_data, "teste", ',');
 
     if(topology.size() != 0) topology.clear();
 
     for(int i = 0; i < (int)nn_data[0].size(); i++){
-        topology.push_back(atoi(nn_data[0][i].c_str()));
+        topology.push_back((int)nn_data[0][i]);
     }
 
     // cria rede neural
@@ -338,8 +342,6 @@ void NeuralNetwork::LoadNetwork(std::string name){
     int i = 0; // coluna de neuronios
     int j = 0; // neuronio na coluna
     int k = -1; // peso no neuronio (-1 para a lógica dos ifs logo abaixo funcionar
-    // debug
-    PrintTopology();
    
     for(int c = 0; i < (int)nn_data[1].size(); c++){
     
@@ -358,8 +360,7 @@ void NeuralNetwork::LoadNetwork(std::string name){
         }
         
         // aqui vai passar peso por peso que está no arquivo
-        network[i][j].set_weight(k,std::stod(nn_data[1][c].c_str()));
-        std::cout << "c=" << c << std::endl;
+        network[i][j].set_weight(k,nn_data[1][c]);
     }
 }
 

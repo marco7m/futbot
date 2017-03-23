@@ -20,6 +20,7 @@
  ***/
 
 #include "interface.h"
+#include <iostream>
 
 interface::interface(robovss *r, bola *b){
 _robo = r;
@@ -33,6 +34,7 @@ int interface::encontraRobo(quint8 time, quint8 idRobo){
         }
     }
     //caso o robô expecificado não existe, envia -1 para o método saber o que fazer
+    std::cout << "Wrong team or idRobo in encontraRobo" << std::endl;
     return -1; 
 }
 
@@ -131,7 +133,7 @@ double interface::getPosBolaX(){
     return _bola->getX();
 }
 
-double interface::getPosBolaY(){
+double interface::get_pos_bola_y(){
     return _bola->getY();
 }
 
