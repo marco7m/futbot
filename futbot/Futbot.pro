@@ -5,7 +5,7 @@ TARGET = WRSim
 
 # Qt config
 CONFIG += console
-CONFIG -= app_bundle
+CONFIG -= app_bundle #?
 QT += core gui widgets
 
 CONFIG += c++11
@@ -27,7 +27,6 @@ INCLUDEPATH *= . src
 SOURCES += \
     src/main.cpp \
     src/headcontroller/recordgame.cpp \
-    src/headcontroller/playrecordedgame.cpp \
     src/headcontroller/simpleia.cpp \
     src/headcontroller/getbperror.cpp \
     src/headcontroller/goalkick.cpp \
@@ -56,7 +55,6 @@ SOURCES += \
 # Header files
 HEADERS  += \
     src/headcontroller/recordgame.h \
-    src/headcontroller/playrecordedgame.h \
     src/headcontroller/simpleia.h \
     src/headcontroller/getbperror.h \
     src/headcontroller/goalkick.h \

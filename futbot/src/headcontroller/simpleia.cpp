@@ -70,7 +70,7 @@ void SimpleIa::mostra(){
         input.ptr[3] = getQuinas(_robo[1], 0).y();
         input.ptr[4] = getQuinas(_robo[1], 1).x();
         input.ptr[5] = getQuinas(_robo[1], 1).y();
-        input.ptr[6] = getQuinas(_robo[2], 2).x();
+        input.ptr[6] = getQuinas(_robo[1], 2).x();
         input.ptr[7] = getQuinas(_robo[1], 2).y();
         input.ptr[8] = getQuinas(_robo[1], 3).x();
         input.ptr[9] = getQuinas(_robo[1], 3).y();
