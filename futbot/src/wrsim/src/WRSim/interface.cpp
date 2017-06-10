@@ -50,7 +50,7 @@ double interface::getPosX(quint8 time, quint8 idRobo){
 void interface::setPosX(quint8 time, quint8 idRobo, double posx){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
-        // chamar função de erro
+        return;
     }
     else{
         _robo[robo_encontrado].setX(posx);
@@ -66,12 +66,32 @@ double interface::getPosY(quint8 time, quint8 idRobo){
     }
 }
 
+void interface::setPosY(quint8 time, quint8 idRobo, double posy){
+    int robo_encontrado = encontraRobo(time, idRobo);
+    if(robo_encontrado == -1){
+        return;
+    }
+    else{
+        _robo[robo_encontrado].setY(posy);
+    }
+}
+
 double interface::getAng(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
         return _robo[encontraRobo(time, idRobo)].getAng();
+    }
+}
+
+void interface::setAng(quint8 time, quint8 idRobo, double ang){
+    int robo_encontrado = encontraRobo(time, idRobo);
+    if(robo_encontrado == -1){
+        return;
+    }
+    else{
+        _robo[robo_encontrado].setAng(ang);
     }
 }
 
@@ -125,7 +145,7 @@ void interface::setVelAng(quint8 time, quint8 idRobo, double velAng){
         return;
     }   
     else{
-        return _robo[encontraRobo(time, idRobo)].setVelAng(velAng);
+        _robo[encontraRobo(time, idRobo)].setVelAng(velAng);
     }
 }
 
@@ -133,7 +153,34 @@ double interface::getPosBolaX(){
     return _bola->getX();
 }
 
-double interface::get_pos_bola_y(){
+void interface::setPosBolaX(double posbx){
+    _bola->setX(posbx);
+}
+
+double interface::getPosBolaY(){
     return _bola->getY();
 }
+
+void interface::setPosBolaY(double posby){
+    _bola->setY(posby);
+}
+
+double interface::getVelBolaX(){
+    return _bola->getVelX();
+}
+
+void interface::setVelBolaX(double velbx){
+    _bola->setVelX(velbx);
+}
+
+double interface::getVelBolaY(){
+    return _bola->getVelY();
+}
+
+void interface::setVelBolaY(double velby){
+    _bola->setVelY(velby);
+}
+
+
+
 

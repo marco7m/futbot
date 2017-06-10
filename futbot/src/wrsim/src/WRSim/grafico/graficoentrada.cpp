@@ -3,7 +3,7 @@
  * University of Sao Paulo (USP) at Sao Carlos
  * http://www.warthog.sc.usp.br/
  *
- * This file is part of xxxxxx project.
+ * This file is part of WRSim project.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

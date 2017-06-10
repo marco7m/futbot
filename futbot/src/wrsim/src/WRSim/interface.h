@@ -30,26 +30,25 @@ public:
     interface(robovss *r, bola *b);
 
     double getPosX(quint8 time, quint8 idRobo);
-
-    void setPosX(quint8 time, quint8 idRobo, double vel);
-
+    void setPosX(quint8 time, quint8 idRobo, double posx);
     double getPosY(quint8 time, quint8 idRobo);
-
+    void setPosY(quint8 time, quint8 idRobo, double posy);
     double getAng(quint8 time, quint8 idRobo);
-    
+    void setAng(quint8 time, quint8 idRobo, double ang);
     double getVel(quint8 time, quint8 idRobo);
     void setVel(quint8 time, quint8 idRobo, double vel);
-    
     double getVelX(quint8 time, quint8 idRobo);
-
     double getVelY(quint8 time, quint8 idRobo);
-
     double getVelAng(quint8 time, quint8 idRobo);
     void setVelAng(quint8 time, quint8 idRobo, double velAng);
-
     double getPosBolaX();
-
-    double get_pos_bola_y();
+    void setPosBolaX(double posbx);
+    double getPosBolaY();
+    void setPosBolaY(double posby);
+    double getVelBolaX();
+    void setVelBolaX(double velbx);
+    double getVelBolaY();
+    void setVelBolaY(double velby);
 
 
 private:
