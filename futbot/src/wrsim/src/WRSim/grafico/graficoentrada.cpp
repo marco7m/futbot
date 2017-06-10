@@ -88,6 +88,13 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
             robo[i].setY((rand() % (int)(1300 - (2*robo[i].largura))) + 25 + robo[i].largura);
         }
     }
+    
+    // coloca o robo[0] nessa posição
+    if(event->key() == Qt::Key_P){
+        robo[0].setX(1300);
+        robo[0].setY(650);
+        robo[0].setAng(0);
+    }
 
     // seleção
     if(event->key() == Qt::Key_0){

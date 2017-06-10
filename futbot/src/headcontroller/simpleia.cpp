@@ -96,14 +96,19 @@ void SimpleIa::mostra(){
         input.ptr[23] = _bola->getY();
         input.ptr[24] = _bola->getVelX();
         input.ptr[25] = _bola->getVelY();
+        input.ptr[26] = _robo[0].getVel();
+        input.ptr[27] = _robo[0].getVelAng();
 
+        for(int h = 0; h < input.size; h++){
+            input.ptr[h] = input.ptr[h]/1000;
+        }
 
         // calcula a sainda da rede neural a partir das entradas
         neural_network.DoTheJobOnce();
         
         // Saida de dados
-        _robo[0].setVel(output.ptr[0] * 100);
-        _robo[0].setVelAng(output.ptr[1] * 100);
+        _robo[0].setVel(output.ptr[0] * 1000);
+        _robo[0].setVelAng(output.ptr[1] * 1000);
 
 }
 

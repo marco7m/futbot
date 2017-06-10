@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <sstream>
+#include <stdlib.h>
 
 Csv::Csv(){
 }
@@ -277,4 +278,19 @@ void Csv::print_data(std::vector<std::vector<double> > data){
         }
         std::cout << std::endl;
     }
+}
+
+std::vector<std::vector<double> > Csv::transpose(std::vector<std::vector<double> > data){
+    // check if data is square and can be transposed
+    for(int i = 0, s = (int)data[0].size(); i < (int)data.size(); i++){
+        if(data[i].size() != s){
+            std::cout << "DATA CAN NOT BE TRANSPOSED BY THIS FUNCTION!!!" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    std::vector<std::vector<double> > outtrans(data[0].size(), std::vector<double>(data.size()));
+    for(size_t i = 0; i < data.size(); ++i)
+        for(size_t j = 0; j < data[0].size(); ++j)
+            outtrans[j][i] = data[i][j]; 
+    return outtrans;
 }

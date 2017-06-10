@@ -37,7 +37,7 @@ public:
     static void SaveData(std::vector<std::vector<double> > all_data, std::string name, char sc);
     static void print_data(std::vector<std::vector<std::string> > data);
     static void print_data(std::vector<std::vector<double> > data);
-
+    static std::vector<std::vector<double> > transpose(std::vector<std::vector<double> > data);
 };
 
 #endif 

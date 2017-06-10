@@ -35,10 +35,10 @@ private:
     unsigned long long *_tempo; // dois tempos de 10 minutos ou dois tempo de 600000000 microsegundos
 
     // ponteiros de entrada e saida da rede neural
-    double_ptr input = double_ptr(26);
+    double_ptr input = double_ptr(28);
     double_ptr output{2};
 
-    NeuralNetwork neural_network{input, output, "nn0001.csv"};
+    NeuralNetwork neural_network{input, output, "nn0002.csv"};
     
     QPointF getQuinas(robovss rob, int l);
 };

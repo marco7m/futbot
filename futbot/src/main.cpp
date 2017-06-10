@@ -3,11 +3,13 @@
 #include <QApplication>
 #include "headcontroller/simpleia.h"
 #include "headcontroller/getbperror.h"
+#include "headcontroller/recordgame.h"
 
 // main generica
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
+//    RecordGame recordgame;
     SimpleIa simpleia;
 //    GetBPError getbperror;
 
