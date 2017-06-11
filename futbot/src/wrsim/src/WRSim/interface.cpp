@@ -22,12 +22,12 @@
 #include "interface.h"
 #include <iostream>
 
-interface::interface(robovss *r, bola *b){
+Interface::Interface(robovss *r, bola *b){
 _robo = r;
 _bola = b;
 } 
 
-int interface::encontraRobo(quint8 time, quint8 idRobo){
+int Interface::encontraRobo(quint8 time, quint8 idRobo){
     for(int i = 0; robovss::nRobos; i++){
         if((_robo[i].getIdRobo() == idRobo) && (_robo[i].getTime() == time)){
         return i;
@@ -38,7 +38,7 @@ int interface::encontraRobo(quint8 time, quint8 idRobo){
     return -1; 
 }
 
-double interface::getPosX(quint8 time, quint8 idRobo){
+double Interface::getPosX(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -47,7 +47,7 @@ double interface::getPosX(quint8 time, quint8 idRobo){
     }
 }
 
-void interface::setPosX(quint8 time, quint8 idRobo, double posx){
+void Interface::setPosX(quint8 time, quint8 idRobo, double posx){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
         return;
@@ -57,7 +57,7 @@ void interface::setPosX(quint8 time, quint8 idRobo, double posx){
     }
 }
 
-double interface::getPosY(quint8 time, quint8 idRobo){
+double Interface::getPosY(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -66,7 +66,7 @@ double interface::getPosY(quint8 time, quint8 idRobo){
     }
 }
 
-void interface::setPosY(quint8 time, quint8 idRobo, double posy){
+void Interface::setPosY(quint8 time, quint8 idRobo, double posy){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
         return;
@@ -76,7 +76,7 @@ void interface::setPosY(quint8 time, quint8 idRobo, double posy){
     }
 }
 
-double interface::getAng(quint8 time, quint8 idRobo){
+double Interface::getAng(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -85,7 +85,7 @@ double interface::getAng(quint8 time, quint8 idRobo){
     }
 }
 
-void interface::setAng(quint8 time, quint8 idRobo, double ang){
+void Interface::setAng(quint8 time, quint8 idRobo, double ang){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
         return;
@@ -95,7 +95,7 @@ void interface::setAng(quint8 time, quint8 idRobo, double ang){
     }
 }
 
-double interface::getVel(quint8 time, quint8 idRobo){
+double Interface::getVel(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -104,7 +104,7 @@ double interface::getVel(quint8 time, quint8 idRobo){
     }
 } 
 
-void interface::setVel(quint8 time, quint8 idRobo, double vel){
+void Interface::setVel(quint8 time, quint8 idRobo, double vel){
     if(encontraRobo(time, idRobo) == -1){
         return;
     }
@@ -113,7 +113,7 @@ void interface::setVel(quint8 time, quint8 idRobo, double vel){
     }
 }
     
-double interface::getVelX(quint8 time, quint8 idRobo){
+double Interface::getVelX(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -122,7 +122,7 @@ double interface::getVelX(quint8 time, quint8 idRobo){
     }
 }
 
-double interface::getVelY(quint8 time, quint8 idRobo){
+double Interface::getVelY(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -131,7 +131,7 @@ double interface::getVelY(quint8 time, quint8 idRobo){
     }
 }
 
-double interface::getVelAng(quint8 time, quint8 idRobo){
+double Interface::getVelAng(quint8 time, quint8 idRobo){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -140,7 +140,7 @@ double interface::getVelAng(quint8 time, quint8 idRobo){
     }
 }
 
-void interface::setVelAng(quint8 time, quint8 idRobo, double velAng){
+void Interface::setVelAng(quint8 time, quint8 idRobo, double velAng){
     if(encontraRobo(time, idRobo) == -1){
         return;
     }   
@@ -149,35 +149,35 @@ void interface::setVelAng(quint8 time, quint8 idRobo, double velAng){
     }
 }
 
-double interface::getPosBolaX(){
+double Interface::getPosBolaX(){
     return _bola->getX();
 }
 
-void interface::setPosBolaX(double posbx){
+void Interface::setPosBolaX(double posbx){
     _bola->setX(posbx);
 }
 
-double interface::getPosBolaY(){
+double Interface::getPosBolaY(){
     return _bola->getY();
 }
 
-void interface::setPosBolaY(double posby){
+void Interface::setPosBolaY(double posby){
     _bola->setY(posby);
 }
 
-double interface::getVelBolaX(){
+double Interface::getVelBolaX(){
     return _bola->getVelX();
 }
 
-void interface::setVelBolaX(double velbx){
+void Interface::setVelBolaX(double velbx){
     _bola->setVelX(velbx);
 }
 
-double interface::getVelBolaY(){
+double Interface::getVelBolaY(){
     return _bola->getVelY();
 }
 
-void interface::setVelBolaY(double velby){
+void Interface::setVelBolaY(double velby){
     _bola->setVelY(velby);
 }
 

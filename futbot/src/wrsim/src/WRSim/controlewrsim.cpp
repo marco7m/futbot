@@ -13,9 +13,6 @@ ControleWRSim::ControleWRSim(){
     _bola = new bola();
     _probe = new probe[cte::nProbes];
     
-    // atualmente esta instancia está sendo criada sem necessidade
-    _interface = new interface(_robo, _bola);
-
     _tempo = new unsigned long long;
 
     // cria fisica
@@ -52,7 +49,6 @@ ControleWRSim::~ControleWRSim(){
     delete _timer;
     delete _fisica;
     delete _grafico;
-    delete _interface; 
 }
 
 void ControleWRSim::mostra(){

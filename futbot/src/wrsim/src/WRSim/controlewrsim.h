@@ -6,8 +6,6 @@
 #include "fisica.h"
 #include "objetos/bola.h"
 #include "objetos/robovss.h"
-#include "interface.h"
-
 
 class ControleWRSim: public QObject{
 Q_OBJECT
@@ -21,7 +19,6 @@ public slots:
 private:
     grafico *_grafico;
     fisica *_fisica;
-    interface *_interface;
     
     // timer
     QTimer *_timer;

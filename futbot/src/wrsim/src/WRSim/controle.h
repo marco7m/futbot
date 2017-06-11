@@ -1,3 +1,4 @@
+
 /***
  * Warthog Robotics
  * University of Sao Paulo (USP) at Sao Carlos
@@ -40,7 +41,7 @@ public slots:
 private:
     grafico *_grafico;
     fisica *_fisica;
-    interface *_interface;
+    Interface *_interface;
 
     // VIAS
     robovss *robo;

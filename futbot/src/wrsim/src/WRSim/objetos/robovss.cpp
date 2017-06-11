@@ -22,9 +22,11 @@
 #include "robovss.h"
 
 robovss::robovss(){
+    time = 0;
+    idRobo = 0;
     vel = 0;
-    x = 100;
-    y = 100;
+    x = 0;
+    y = 0;
     ang = 0;
     velAng = 0;
 }

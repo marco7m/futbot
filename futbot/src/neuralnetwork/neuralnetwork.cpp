@@ -26,7 +26,6 @@ NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::string name){
     LoadNetwork(name);
     PrintTopology();
     PrintNeuralNetwork();
-//
 }
 
 NeuralNetwork::~NeuralNetwork(){
@@ -324,7 +323,6 @@ void NeuralNetwork::LoadNetwork(std::string name){
     std::vector<std::vector<double> > nn_data; 
     std::string data_name = "data/" + name; 
     nn_data = Csv::get_double_data(data_name, ',');
-    Csv::save_data(nn_data, "teste", ',');
 
     if(topology.size() != 0) topology.clear();
 

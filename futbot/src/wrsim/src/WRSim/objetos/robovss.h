@@ -32,7 +32,7 @@ public:
 
     // dimensões do robo
     static constexpr double largura = 80; // [mm]
-    static constexpr int nRobos = 2;
+    static constexpr int nRobos = 6; // não alterar esse número
 
     double getVel() const;
     void setVel(double value);

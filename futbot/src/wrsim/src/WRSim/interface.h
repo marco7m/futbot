@@ -25,9 +25,9 @@
 #include "objetos/robovss.h"
 #include "objetos/bola.h"
 
-class interface{
+class Interface{
 public:
-    interface(robovss *r, bola *b);
+    Interface(robovss *r, bola *b);
 
     double getPosX(quint8 time, quint8 idRobo);
     void setPosX(quint8 time, quint8 idRobo, double posx);

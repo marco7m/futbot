@@ -35,7 +35,7 @@ Controle::Controle(){
     _probe = new probe[cte::nProbes];
     
     // atualmente esta instancia está sendo criada sem necessidade
-    _interface = new interface(robo, _bola);
+    _interface = new Interface(robo, _bola);
 
     tempo = new unsigned long long;
 

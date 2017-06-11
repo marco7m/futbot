@@ -196,7 +196,6 @@ void fisica::roda(){
             if(n != k){
                 // checo se o robô n está na área de perigo do robô k
                 if(dist(robo[k].getX(),robo[k].getY(),robo[n].getX(),robo[n].getY()) <= 2*robovss::largura/cte::raiz2){
-                    qDebug() << "Área de perigo"; 
                     for(int q0 = 0; q0 < 4; q0++){
                         tQuinRobN[q0] = getQuinas(n, q0);
                     }

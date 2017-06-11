@@ -29,7 +29,7 @@
 
 class graficoentrada: public QGraphicsPixmapItem{
 public:
-    graficoentrada(bola *b, robovss *r, QGraphicsItem *parent = 0);
+    graficoentrada(bola *b, robovss *r, QGraphicsItem *parent = 0); 
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
 
