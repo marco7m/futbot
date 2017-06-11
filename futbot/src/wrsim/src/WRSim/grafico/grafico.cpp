@@ -23,10 +23,11 @@
 #include "../cte.h"
 
 // escala: 0.5
-grafico::grafico(robovss *r, bola *b, probe *p){
+grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
     _probe = p;
     robo = r;
     _bola = b;
+    interface = inter;
 
     // cria janela
     tela = new QGraphicsScene();
@@ -38,7 +39,9 @@ grafico::grafico(robovss *r, bola *b, probe *p){
     scale(0.5,0.5);
 
     // cria item que recebe entrada
-    gentrada = new graficoentrada(_bola, robo);
+//    gentrada = new graficoentrada(_bola, robo);
+
+    gentrada = new graficoentrada(interface);
     gentrada->setFlag(QGraphicsItem::ItemIsFocusable);
     gentrada->setFocus();
     gentrada->setPos(0,0);

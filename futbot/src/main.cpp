@@ -4,14 +4,16 @@
 #include "headcontroller/simpleia.h"
 #include "headcontroller/getbperror.h"
 #include "headcontroller/recordgame.h"
+#include "headcontroller/one_player_alone.h"
 
 // main generica
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
 //    RecordGame recordgame;
-    SimpleIa simpleia;
+//    SimpleIa simpleia;
 //    GetBPError getbperror;
+    OnePlayerAlone oneplayeralone;
 
     return a.exec();
 //    return 0;

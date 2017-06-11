@@ -28,6 +28,7 @@
 class Interface{
 public:
     Interface(robovss *r, bola *b);
+    Interface();
 
     double getPosX(quint8 time, quint8 idRobo);
     void setPosX(quint8 time, quint8 idRobo, double posx);

@@ -27,6 +27,10 @@ _robo = r;
 _bola = b;
 } 
 
+Interface::Interface(){
+
+}
+
 int Interface::encontraRobo(quint8 time, quint8 idRobo){
     for(int i = 0; robovss::nRobos; i++){
         if((_robo[i].getIdRobo() == idRobo) && (_robo[i].getTime() == time)){

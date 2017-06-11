@@ -32,22 +32,24 @@
 #include "graficoprobe.h"
 #include "../objetos/probe.h"
 #include "graficocampovss.h"
+#include "../interface.h"
 
 class grafico: public QGraphicsView{
 public:
-    grafico(robovss *r, bola *b, probe *p);
+    grafico(robovss *r, bola *b, probe *p, Interface interface);
     QGraphicsScene *tela;
     graficorobovss *grobo;
     graficobola *gbola;
     graficoprobe *gprobe;
     graficoentrada *gentrada;
     graficocampovss *gcampoVss;
-
+    
     void roda();
 private:
     robovss *robo;
     bola *_bola;
     probe *_probe;
+    Interface interface;
 };
 
 #endif // GRAFICO_H
