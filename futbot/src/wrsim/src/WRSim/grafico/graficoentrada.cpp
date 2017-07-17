@@ -37,18 +37,34 @@ graficoentrada::graficoentrada(Interface inter){
 void graficoentrada::keyPressEvent(QKeyEvent *event){
     // controla o robo
     if(event->key() == Qt::Key_Up){
-        interface.setVel(0,0,-0.5);
+        interface.setVel(0,0,0.75); // vel abaixo de 0.5 na interface é vel negativa
     }
     if(event->key() == Qt::Key_Down){
-        interface.setVel(0,0,0.5);
+        interface.setVel(0,0,0.25);
     }
 
     if(event->key() == Qt::Key_Left){
-        interface.setVelAng(0,0,-0.5);
+        interface.setVelAng(0,0,0.25);
     }
     if(event->key() == Qt::Key_Right){
-        interface.setVelAng(0,0,0.5);
+        interface.setVelAng(0,0,0.75);
     }
+    
+    if(event->key() == Qt::Key_D){
+        qDebug() << "\n";
+        qDebug() << "PosX(0,0) = " << interface.getPosX(0,0);
+        qDebug() << "PosY(0,0) = " << interface.getPosY(0,0);
+        qDebug() << "Vel(0,0) = " << interface.getVel(0,0);
+        qDebug() << "VelX(0,0) = " << interface.getVelX(0,0);
+        qDebug() << "VelY(0,0) = " << interface.getVelY(0,0);
+        qDebug() << "Ang(0,0) = " << interface.getAng(0,0);
+        qDebug() << "VelAng(0,0) = " << interface.getVelAng(0,0);
+        qDebug() << "PosBolaX() = " << interface.getPosBolaX();
+        qDebug() << "PosBolaY() = " << interface.getPosBolaY();
+        qDebug() << "VelBolaX() = " << interface.getVelBolaX();
+        qDebug() << "VelBolaY() = " << interface.getVelBolaY();
+    }
+    
 
 
 //    if(config::in2Bola){
@@ -116,10 +132,10 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
 
 void graficoentrada::keyReleaseEvent(QKeyEvent *event){
     if((event->key() == Qt::Key_Up) || (event->key() == Qt::Key_Down)){
-        interface.setVel(0,0,0);
+        interface.setVel(0,0,0.5);
     }
     else if((event->key() == Qt::Key_Left) || (event->key() == Qt::Key_Right)){
-        interface.setVelAng(0,0,0);
+        interface.setVelAng(0,0,0.5);
     }
 
 //    if(config::in2Jogador1){
@@ -130,4 +146,5 @@ void graficoentrada::keyReleaseEvent(QKeyEvent *event){
 //            robo[1].setVelAng(0);
 //        }
 //    }
+
 }

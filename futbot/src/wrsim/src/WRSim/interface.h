@@ -1,23 +1,3 @@
-/***
- * Warthog Robotics
- * University of Sao Paulo (USP) at Sao Carlos
- * http://www.warthog.sc.usp.br/
- *
- * This file is part of WRSim project.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ***/
 
 #ifndef INTERFACE_H
 #define INTERFACE_H
@@ -50,12 +30,32 @@ public:
     void setVelBolaX(double velbx);
     double getVelBolaY();
     void setVelBolaY(double velby);
+    double getPosXQuina(quint8 time, quint8 idRobo, int quina);
+    double getPosYQuina(quint8 time, quint8 idRobo, int quina);
 
 
 private:
     robovss *_robo;
     bola *_bola;
     int encontraRobo(quint8 time, quint8 idRobo);
-};
+    double normaliza(double max, double min, double atual);
+    double desnormaliza(double max, double min, double val_normalizado);
+    double getQuinaX(robovss rob, int l);
+    double getQuinaY(robovss rob, int l);
 
+    // Seto aqui os parâmetros de contorno do robô real, unidades:
+    static constexpr double MAX_VEL_ROBO = 1;      // [mm]/[ms]
+    static constexpr double MIN_VEL_ROBO = -1;     // [mm]/[ms]
+    static constexpr double MAX_VEL_BOLA = 3;      // [mm]/[ms]
+    static constexpr double MIN_VEL_BOLA = -3;      // [mm]/[ms]
+    static constexpr double MAX_VEL_ANG_ROBO = 1;
+    static constexpr double MIN_VEL_ANG_ROBO = -1; 
+    static constexpr double MAX_POS_X = 1700;          // maior X possível
+    static constexpr double MIN_POS_X = 0;             // menor X possível
+    static constexpr double MAX_POS_Y = 1325;          // maior Y possível
+    static constexpr double MIN_POS_Y = 25;            // menor Y possível
+    static constexpr double MIN_ANG = 0;                // [graus] angulo 0 -> robo para cima; angulo aumenta no sentido horário
+    static constexpr double MAX_ANG = 360;
+
+}; 
 #endif
