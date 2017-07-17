@@ -9,13 +9,14 @@
 
 OnePlayerAlone::OnePlayerAlone(){
 
-    // inicialização dos ponteiros das vias
+    // inicialização dos robôs
     _robo = new robovss[robovss::nRobos];
     _robo[0].setTime(0);
     _robo[0].setIdRobo(0);
     
     _robo[1].setTime(1);
     _robo[1].setIdRobo(0);
+    //
 
     _bola = new bola();
     _probe = new probe[cte::nProbes];
@@ -26,23 +27,30 @@ OnePlayerAlone::OnePlayerAlone(){
 
     // cria fisica
     _fisica = new fisica(_robo, _tempo, _bola, _probe);
+    //
 
     // inicia módulo gráfico
     _grafico = new grafico(_robo, _bola, _probe, interface);
+    //
 
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _robo[0].setX(1300);
-    _robo[0].setY(650);
+    interface.setPosX(0,0,0.75);
+    interface.setPosY(0,0,0.5);
+//    interface.setAng(0,0,270);
+    interface.setAng(0,0,0.75);
     
-    _robo[1].setX(400);
-    _robo[1].setY(650);
-
+    interface.setPosX(1,0,0.25);
+    interface.setPosY(1,0,0.5);
+//    interface.setAng(1,0,90);
+    interface.setAng(1,0,0.25);
+    //
 
     // posiciona a bola
-    _bola->setX(850);
-    _bola->setY(650);
+    interface.setPosBolaX(0.5);
+    interface.setPosBolaY(0.5);
+    //
 
     *_tempo = 0;
     
@@ -62,7 +70,7 @@ OnePlayerAlone::~OnePlayerAlone(){
 }
 
 void OnePlayerAlone::mostra(){
-        _fisica->roda();
-        *_tempo = *_tempo+10;
-        _grafico->roda();
+    _fisica->roda();
+    *_tempo = *_tempo+10;
+    _grafico->roda();
 }

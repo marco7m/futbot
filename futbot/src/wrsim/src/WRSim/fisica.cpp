@@ -609,7 +609,7 @@ void fisica::roda(){
     //    if(colisao) qDebug() << "Colidiu!!!";
     //    else qDebug() << "sem colisão";
 
-    qDebug() << "tempo " << *tempo << " ms";
+    //    qDebug() << "tempo " << *tempo << " ms";
 
 
     tempoAnterior = *tempo;
