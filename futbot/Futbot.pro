@@ -26,8 +26,7 @@ INCLUDEPATH *= . src
 
 SOURCES += \
     src/main.cpp \
-#    src/headcontroller/recordgame.cpp \
-#    src/headcontroller/simpleia.cpp \
+    src/headcontroller/simpleia.cpp \
     src/headcontroller/getbperror.cpp \
     src/headcontroller/one_player_alone.cpp \
     src/headcontroller/save_game.cpp \
@@ -55,8 +54,7 @@ SOURCES += \
   
 # Header files
 HEADERS  += \
-#    src/headcontroller/recordgame.h \
-#    src/headcontroller/simpleia.h \
+    src/headcontroller/simpleia.h \
     src/headcontroller/getbperror.h \
     src/headcontroller/one_player_alone.h \
     src/headcontroller/save_game.h \

@@ -3,7 +3,6 @@
 #include <QApplication>
 #include "headcontroller/simpleia.h"
 #include "headcontroller/getbperror.h"
-#include "headcontroller/recordgame.h"
 #include "headcontroller/one_player_alone.h"
 #include "headcontroller/save_game.h"
 
@@ -11,11 +10,10 @@
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
-//    RecordGame recordgame;
-//    SimpleIa simpleia;
+    SimpleIa simpleia;
 //    GetBPError getbperror;
 //    OnePlayerAlone oneplayeralone;
-    SaveGame savegame;
+//    SaveGame savegame;
 
     return a.exec();
 //    return 0;

@@ -13,7 +13,7 @@
 #include "../utils/my_ptr.h"
 #include "../neuralnetwork/neuralnetwork.h"
 #include <iostream>
-#include <fstream>
+#include "../wrsim/src/WRSim/interface.h"
 
 class SimpleIa: public QObject{
 Q_OBJECT
@@ -32,15 +32,34 @@ private:
     robovss *_robo;
     bola *_bola;
     probe *_probe;
+    Interface *interface;
     unsigned long long *_tempo; // dois tempos de 10 minutos ou dois tempo de 600000000 microsegundos
 
     // ponteiros de entrada e saida da rede neural
-    double_ptr input = double_ptr(28);
+    double_ptr input = double_ptr(12);
     double_ptr output{2};
 
-    NeuralNetwork neural_network{input, output, "nn0002.csv"};
+    NeuralNetwork neural_network{input, output, "nn_save_data.csv"};
     
-    QPointF getQuinas(robovss rob, int l);
+    // entrada
+    std::vector<double> posx_centro;
+    std::vector<double> posx_0;
+    std::vector<double> posx_1;
+    std::vector<double> posx_2;
+    std::vector<double> posx_3;
+    std::vector<double> posy_centro;
+    std::vector<double> posy_0;
+    std::vector<double> posy_1;
+    std::vector<double> posy_2;
+    std::vector<double> posy_3;
+    std::vector<double> velx;
+    std::vector<double> vely;
+
+    // saida
+    std::vector<double> vel;
+    std::vector<double> velang;
+
+
 };
 
 #endif

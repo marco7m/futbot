@@ -1,4 +1,4 @@
-// Esse headcontroller faz o jogador jogar com outros robos parados
+// Esse headcontroller faz o jogador jogar com outros robos parados e salvar os dados do jogador da direita em .csv
 
 #include "save_game.h"
 #include <QTimer>
@@ -76,7 +76,7 @@ void SaveGame::mostra(){
         _grafico->roda();
         
         qDebug() << *_tempo; 
-        if(*_tempo > 120000){
+        if(*_tempo > 200000){
             qDebug() << "Acabou o tempo";
             
             input_data.push_back(posx_centro);
