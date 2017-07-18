@@ -5,6 +5,7 @@
 #include "headcontroller/getbperror.h"
 #include "headcontroller/recordgame.h"
 #include "headcontroller/one_player_alone.h"
+#include "headcontroller/save_game.h"
 
 // main generica
 int main(int argc, char *argv[]){
@@ -13,7 +14,8 @@ int main(int argc, char *argv[]){
 //    RecordGame recordgame;
 //    SimpleIa simpleia;
 //    GetBPError getbperror;
-    OnePlayerAlone oneplayeralone;
+//    OnePlayerAlone oneplayeralone;
+    SaveGame savegame;
 
     return a.exec();
 //    return 0;

@@ -12,6 +12,7 @@
 #include "../wrsim/src/WRSim/objetos/robovss.h"
 #include "../wrsim/src/WRSim/interface.h"
 
+
 class SaveGame: public QObject{
 Q_OBJECT
 public:
@@ -32,10 +33,14 @@ private:
     Interface *interface;
     unsigned long long *_tempo; // dois tempos de 10 minutos ou dois tempo de 600000000 microsegundos
 
-    // variaveis para armazenar os dados
-    // entrada
-    std::vector<std::vector<double> > input_data;
+    // flag
+    bool continua;
 
+    // variaveis para armazenar os dados
+    std::vector<std::vector<double> > input_data;
+    std::vector<std::vector<double> > output_data;
+
+    // entrada
     std::vector<double> posx_centro;
     std::vector<double> posx_0;
     std::vector<double> posx_1;

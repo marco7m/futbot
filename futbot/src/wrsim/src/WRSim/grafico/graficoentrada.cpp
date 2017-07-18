@@ -50,6 +50,7 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
         interface.setVelAng(0,0,0.75);
     }
     
+    // mostra dados para debug
     if(event->key() == Qt::Key_D){
         qDebug() << "\n";
         qDebug() << "PosX(0,0) = " << interface.getPosX(0,0);
@@ -65,6 +66,17 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
         qDebug() << "VelBolaY() = " << interface.getVelBolaY();
     }
     
+    // move para posição tal (debug)
+    if(event->key() == Qt::Key_C){
+        interface.setPosX(0,0,0.75);
+        interface.setPosY(0,0,0.5);
+        interface.setAng(0,0,0.75);
+        
+        interface.setPosX(1,0,0.25);
+        interface.setPosY(1,0,0.5);
+        interface.setAng(1,0,0.25);
+
+    }
 
 
 //    if(config::in2Bola){

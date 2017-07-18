@@ -25,7 +25,6 @@
 #include <QGraphicsPixmapItem>
 #include "../objetos/robovss.h"
 #include "../objetos/bola.h"
-#include "../config.h"
 #include "../interface.h"
 
 class graficoentrada: public QGraphicsPixmapItem{

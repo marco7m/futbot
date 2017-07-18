@@ -75,7 +75,6 @@ HEADERS  += \
     src/wrsim/src/WRSim/objetos/probe.h \
     src/wrsim/src/WRSim/objetos/robovss.h \
     src/wrsim/src/WRSim/mainwindow.h \
-    src/wrsim/src/WRSim/config.h \
     src/wrsim/src/WRSim/interface.h \
 # NeuralNetwork header files
     src/neuralnetwork/neuron.h\
@@ -98,3 +97,4 @@ DISTFILES += \
 
 DESTDIR = bin
 TARGET = futbot
+
