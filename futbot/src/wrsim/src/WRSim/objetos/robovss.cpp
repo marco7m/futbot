@@ -1,5 +1,5 @@
 /***
- * Warthog Robotics
+* Warthog Robotics
  * University of Sao Paulo (USP) at Sao Carlos
  * http://www.warthog.sc.usp.br/
  *

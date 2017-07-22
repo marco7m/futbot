@@ -38,6 +38,7 @@ private:
     robovss *robo;
     bola *_bola;
     Interface interface;
-    int *selectRobot;
+    int team_control;
+    int id_control;
 };
 #endif // GRAFICOENTRADA_H

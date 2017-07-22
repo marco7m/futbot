@@ -23,31 +23,26 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-//graficoentrada::graficoentrada(bola *b, robovss *r, QGraphicsItem *parent): QGraphicsPixmapItem(parent){
-//    robo = r;
-//    _bola = b;
-//    selectRobot = new int;
-//    *selectRobot = 0;
-//}
-
 graficoentrada::graficoentrada(Interface inter){
     interface = inter;
+    team_control = 0;
+    id_control = 0;
 }
 
 void graficoentrada::keyPressEvent(QKeyEvent *event){
     // controla o robo
     if(event->key() == Qt::Key_Up){
-        interface.setVel(0,0,0.75); // vel abaixo de 0.5 na interface é vel negativa
+        interface.setVel(team_control,id_control,0.75); // vel abaixo de 0.5 na interface é vel negativa
     }
     if(event->key() == Qt::Key_Down){
-        interface.setVel(0,0,0.25);
+        interface.setVel(team_control,id_control,0.25);
     }
 
     if(event->key() == Qt::Key_Left){
-        interface.setVelAng(0,0,0.25);
+        interface.setVelAng(team_control,id_control,0.25);
     }
     if(event->key() == Qt::Key_Right){
-        interface.setVelAng(0,0,0.75);
+        interface.setVelAng(team_control,id_control,0.75);
     }
     
     // mostra dados para debug
@@ -75,8 +70,38 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
         interface.setPosX(1,0,0.25);
         interface.setPosY(1,0,0.5);
         interface.setAng(1,0,0.25);
-
     }
+
+    // escolhe qual robo controlar
+    if(event->key() == Qt::Key_1){
+        team_control = 0;        
+        id_control = 0;
+    }
+    if(event->key() == Qt::Key_2){
+        team_control = 0;        
+        id_control = 1;
+    }
+    if(event->key() == Qt::Key_3){
+        team_control = 0;        
+        id_control = 2;
+    }
+    if(event->key() == Qt::Key_4){
+        team_control = 1;        
+        id_control = 0;
+    }
+    if(event->key() == Qt::Key_5){
+        team_control = 1;        
+        id_control = 1;
+    }
+    if(event->key() == Qt::Key_6){
+        team_control = 1;        
+        id_control = 2;
+    }
+
+
+
+
+
 
 
 //    if(config::in2Bola){
@@ -121,33 +146,14 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
 //        }
 //    }
     
-//    // seleção
-//    if(event->key() == Qt::Key_0){
-//        *selectRobot = 0;
-//    }
-//    if((event->key() == Qt::Key_1) && (robovss::nRobos > 1)){
-//        *selectRobot = 1;
-//    }
-//    if((event->key() == Qt::Key_2) && (robovss::nRobos > 2)){
-//        *selectRobot = 2;
-//    }
-//    if((event->key() == Qt::Key_3) && (robovss::nRobos > 3)){
-//        *selectRobot = 3;
-//    }
-//    if((event->key() == Qt::Key_4) && (robovss::nRobos > 4)){
-//        *selectRobot = 4;
-//    }
-//    if((event->key() == Qt::Key_5) && (robovss::nRobos > 5)){
-//        *selectRobot = 5;
-//    }
 }
 
 void graficoentrada::keyReleaseEvent(QKeyEvent *event){
     if((event->key() == Qt::Key_Up) || (event->key() == Qt::Key_Down)){
-        interface.setVel(0,0,0.5);
+        interface.setVel(team_control,id_control,0.5);
     }
     else if((event->key() == Qt::Key_Left) || (event->key() == Qt::Key_Right)){
-        interface.setVelAng(0,0,0.5);
+        interface.setVelAng(team_control,id_control,0.5);
     }
 
 //    if(config::in2Jogador1){

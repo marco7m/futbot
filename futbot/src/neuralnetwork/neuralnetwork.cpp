@@ -321,7 +321,7 @@ void NeuralNetwork::LoadNetwork(std::string name){
     if(VERBOSE) std::cout << std::endl << "LoadNetwork" << std::endl;
 
     std::vector<std::vector<double> > nn_data; 
-    std::string data_name = "data/" + name; 
+    std::string data_name = name; 
     nn_data = Csv::get_double_data(data_name, ',');
 
     if(topology.size() != 0) topology.clear();

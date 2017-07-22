@@ -1,6 +1,12 @@
 <RCC>
     <qresource prefix="/img">
         <file>robovss.png</file>
+        <file>robovss00.png</file>
+        <file>robovss01.png</file>
+        <file>robovss02.png</file>
+        <file>robovss10.png</file>
+        <file>robovss11.png</file>
+        <file>robovss12.png</file>
         <file>bola.png</file>
         <file>probe.png</file>
         <file>probei2.png</file>

@@ -21,6 +21,7 @@
 
 #include "grafico.h"
 #include "../cte.h"
+#include <iostream>
 
 // escala: 0.5
 grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
@@ -51,7 +52,28 @@ grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
     grobo = new graficorobovss[robovss::nRobos];
     for(int i = 0; i < robovss::nRobos; ++i){
         grobo[i].setTransformOriginPoint(QPoint(robovss::largura/2,robovss::largura/2));
-        grobo[i].setPixmap(QPixmap(":/img/robovss.png"));
+
+        if((int)robo[i].getTime() == 0 && (int)robo[i].getIdRobo() == 0){
+            grobo[i].setPixmap(QPixmap(":/img/robovss00.png"));
+        }
+        else if((int)robo[i].getTime() == 0 && (int)robo[i].getIdRobo() == 1){
+            grobo[i].setPixmap(QPixmap(":/img/robovss01.png"));
+        }      
+        else if((int)robo[i].getTime() == 0 && (int)robo[i].getIdRobo() == 2){
+            grobo[i].setPixmap(QPixmap(":/img/robovss02.png"));
+        }      
+        else if((int)robo[i].getTime() == 1 && (int)robo[i].getIdRobo() == 0){
+            grobo[i].setPixmap(QPixmap(":/img/robovss10.png"));
+        }      
+        else if((int)robo[i].getTime() == 1 && (int)robo[i].getIdRobo() == 1){
+            grobo[i].setPixmap(QPixmap(":/img/robovss11.png"));
+        }      
+        else if((int)robo[i].getTime() == 1 && (int)robo[i].getIdRobo() == 2){
+            grobo[i].setPixmap(QPixmap(":/img/robovss12.png"));
+        }      
+        else{
+            grobo[i].setPixmap(QPixmap(":/img/robovss.png"));
+        }
         grobo[i].setPos(robo[i].getX(),robo[i].getY());
 //        grobo[i].setScale(0.5);
     }
