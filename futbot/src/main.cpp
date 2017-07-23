@@ -11,10 +11,10 @@
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
-    Game game{};
-    game.manual_mode();
+//    Game game{};
+//    game.manual_mode();
 
-//    SimpleIa simpleia;
+    SimpleIa simpleia;
 //    GetBPError getbperror;
 //    OnePlayerAlone oneplayeralone;
 //    SaveGame savegame;

@@ -11,6 +11,7 @@
 #include "../utils/my_ptr.h"
 #include "../neuralnetwork/neuralnetwork.h"
 #include "../wrsim/src/WRSim/interface.h"
+#include "referee.h"
 
 class Game: public QObject{
 Q_OBJECT
@@ -35,13 +36,14 @@ private:
     robovss* _robo;
     bola *_bola;
     probe *_probe;
+    Referee* _referee;
     Interface interface;
 
     QTimer* _timer;
     unsigned long long *_tempo; // dois tempos de 10 minutos ou dois tempo de 600000000 microsegundos
 
     // ponteiros de entrada e saida da rede neural
-    double_ptr input = double_ptr(12);
+    double_ptr input = double_ptr(88);
     double_ptr output{2};
 
     NeuralNetwork neural_network{input, output, "data/nn_save_data.csv"};

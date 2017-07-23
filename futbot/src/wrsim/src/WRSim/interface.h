@@ -33,6 +33,8 @@ public:
     double getPosXQuina(quint8 time, quint8 idRobo, int quina);
     double getPosYQuina(quint8 time, quint8 idRobo, int quina);
 
+    double get_denormalized_pos_bola_x();
+
 
 private:
     robovss *_robo;

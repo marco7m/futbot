@@ -242,3 +242,8 @@ double Interface::getQuinaY(robovss rob, int l){ // 0 - top dir; 1 - bai dir; 2 
         return rob.getY() - ((robovss::largura/cte::raiz2) * cos(cte::PI/180 * (rob.getAng() - 45)));
     }
 }
+
+
+double Interface::get_denormalized_pos_bola_x(){
+    return _bola->getX();
+}

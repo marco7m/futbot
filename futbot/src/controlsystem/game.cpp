@@ -3,6 +3,7 @@
 Game::Game(){
     // flags
     has_graphic = false;
+    has_ai = false;
 
     // inicialização dos robôs
     _robo = new robovss[6];
@@ -25,12 +26,13 @@ Game::Game(){
     _robo[5].setTime(1);
     _robo[5].setIdRobo(2);
  
-
     _bola = new bola();
 
     interface = Interface(_robo, _bola);
-    
+
     _tempo = new unsigned long long;
+    
+    _referee = new Referee(interface, _tempo);
     
     // cria fisica
     _fisica = new fisica(_robo, _tempo, _bola, _probe);
@@ -83,10 +85,12 @@ Game::~Game(){
     delete _fisica;
     delete _grafico;
     delete _timer;
+    delete _referee;
 }
 
 void Game::mostra(){
     _fisica->roda();
+    _referee->check_game();
     *_tempo = *_tempo+10;
     
     if(has_graphic){
@@ -95,18 +99,49 @@ void Game::mostra(){
 
     if(has_ai){
         // Entrada de dados
-        input.ptr[0] = interface.getPosX(0,0);
-        input.ptr[1] = interface.getPosXQuina(0,0,0);
-        input.ptr[2] = interface.getPosXQuina(0,0,1);
-        input.ptr[3] = interface.getPosXQuina(0,0,2);
-        input.ptr[4] = interface.getPosXQuina(0,0,3);
-        input.ptr[5] = interface.getPosY(0,0);
-        input.ptr[6] = interface.getPosYQuina(0,0,0);
-        input.ptr[7] = interface.getPosYQuina(0,0,1);
-        input.ptr[8] = interface.getPosYQuina(0,0,2);
-        input.ptr[9] = interface.getPosYQuina(0,0,3);
-        input.ptr[10] = interface.getVelX(0,0);
-        input.ptr[11] = interface.getVelY(0,0);
+        int i = 0;
+        for(int t = 0; t < 2; t++){
+            for(int id = 0; id < 3; id++){
+                input.ptr[i] = interface.getPosX(t,id);
+                i++;
+                input.ptr[i] = interface.getPosXQuina(t,id,0);
+                i++;
+                input.ptr[i] = interface.getPosXQuina(t,id,1);
+                i++;
+                input.ptr[i] = interface.getPosXQuina(t,id,2);
+                i++;
+                input.ptr[i] = interface.getPosXQuina(t,id,3);
+                i++;
+                input.ptr[i] = interface.getPosY(t,id);
+                i++;
+                input.ptr[i] = interface.getPosYQuina(t,id,0);
+                i++;
+                input.ptr[i] = interface.getPosYQuina(t,id,1);
+                i++;
+                input.ptr[i] = interface.getPosYQuina(t,id,2);
+                i++;
+                input.ptr[i] = interface.getPosYQuina(t,id,3);
+                i++;
+                input.ptr[i] = interface.getVelX(t,id);
+                i++;
+                input.ptr[i] = interface.getVelY(t,id);
+                i++;
+                input.ptr[i] = interface.getVelAng(t,id);
+                i++;
+                input.ptr[i] = interface.getVel(t,id);
+                i++;
+            }
+        } 
+
+        input.ptr[i] = interface.getPosBolaX();
+                i++;
+        input.ptr[i] = interface.getPosBolaY();
+                i++;
+        input.ptr[i] = interface.getVelBolaX();
+                i++;
+        input.ptr[i] = interface.getVelBolaY();
+
+        i = 0;
 
         // calcula a saida da rede neural a partir das entradas
         neural_network.DoTheJobOnce();
@@ -116,7 +151,7 @@ void Game::mostra(){
         interface.setVelAng(0,0,output.ptr[1]);
     }
 
-        std::cout << *_tempo << std::endl;
+//        std::cout << *_tempo << std::endl;
 }
 
 double Game::run_and_get_fitness(){
@@ -137,27 +172,27 @@ double Game::run_and_get_fitness(){
 void Game::watch_game(){
     // flags
     has_graphic = true;
-    has_ai = true;
+#include "game.h"
 
-    _grafico = new grafico(_robo, _bola, _probe, interface);
-    _probe = new probe[cte::nProbes];
-//    initial_condition();
-    
-    _timer = new QTimer();
-    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
-    _timer->start(10);
-}
-
-void Game::manual_mode(){
+Game::Game(){
     // flags
-    has_graphic = true;
+    has_graphic = false;
     has_ai = false;
 
-    _grafico = new grafico(_robo, _bola, _probe, interface);
-    _probe = new probe[cte::nProbes];
-//    initial_condition();
+    // inicialização dos robôs
+    _robo = new robovss[6];
 
-    _timer = new QTimer();
-    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
-    _timer->start(10);
-}
+    _robo[0].setTime(0);
+    _robo[0].setIdRobo(0);
+ 
+    _robo[1].setTime(0);
+    _robo[1].setIdRobo(1);
+ 
+    _robo[2].setTime(0);
+    _robo[2].setIdRobo(2);
+ 
+    _robo[3].setTime(1);
+    _robo[3].setIdRobo(0);
+ 
+    _robo[4].setTime(1);
+    _robo[4].setIdRobo(1);

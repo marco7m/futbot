@@ -73,7 +73,6 @@ void SimpleIa::mostra(){
         *_tempo = *_tempo+10;
         _grafico->roda();
 
-
         // Entrada de dados
         input.ptr[0] = interface->getPosX(0,0);
         input.ptr[1] = interface->getPosXQuina(0,0,0);
