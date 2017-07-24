@@ -1,0 +1,1 @@
+- class Game recebe o endereço da rede neural, e então carrega ela antes da partida, receber diretamente o objeto já montado da rede pode diminuir o tempo de execução do algoritmo evolutivo
