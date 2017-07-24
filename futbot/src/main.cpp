@@ -5,16 +5,16 @@
 #include "headcontroller/getbperror.h"
 #include "headcontroller/one_player_alone.h"
 #include "headcontroller/save_game.h"
-#include "controlsystem/game.h"
+#include "controlsystem/gamewatch.h"
 
 // main generica
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
-//    Game game{};
-//    game.manual_mode();
+    GameWatch game_watch{};
+    game_watch.manual_mode();
 
-    SimpleIa simpleia;
+//    SimpleIa simpleia;
 //    GetBPError getbperror;
 //    OnePlayerAlone oneplayeralone;
 //    SaveGame savegame;

@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMEWATCH_H
+#define GAMEWATCH_H
 
 #include <QObject>
 #include <QTimer>
@@ -13,22 +13,24 @@
 #include "../wrsim/src/WRSim/interface.h"
 #include "referee.h"
 
-class Game: public QObject{
+class GameWatch: public QObject{
 Q_OBJECT
 public:
-    Game();
-    ~Game();
+    GameWatch();
+    ~GameWatch();
     double run_and_get_fitness();
     void watch_game();
     void manual_mode();
+//    void manual_save_game();
 
 public slots:
     void mostra();
 
 private:
     // flags
-    bool has_graphic;
     bool has_ai;
+    bool has_timer;
+    bool has_grafico;
 
     grafico* _grafico;
     fisica* _fisica;

@@ -26,7 +26,7 @@ INCLUDEPATH *= . src
 
 SOURCES += \
     src/main.cpp \
-    src/controlsystem/game.cpp \
+    src/controlsystem/gamewatch.cpp \
     src/controlsystem/referee.cpp \
     src/headcontroller/simpleia.cpp \
     src/headcontroller/getbperror.cpp \
@@ -56,7 +56,7 @@ SOURCES += \
   
 # Header files
 HEADERS  += \
-    src/controlsystem/game.h \
+    src/controlsystem/gamewatch.h \
     src/controlsystem/referee.h \
     src/headcontroller/simpleia.h \
     src/headcontroller/getbperror.h \

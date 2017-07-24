@@ -1,9 +1,9 @@
-#include "game.h"
+#include "gamewatch.h"
 
-Game::Game(){
-    // flags
-    has_graphic = false;
+GameWatch::GameWatch(){
     has_ai = false;
+    has_timer = false;
+    has_grafico = false;
 
     // inicialização dos robôs
     _robo = new robovss[6];
@@ -37,6 +37,9 @@ Game::Game(){
     // cria fisica
     _fisica = new fisica(_robo, _tempo, _bola, _probe);
 
+    _probe = new probe[cte::nProbes];
+    
+
     // configurações pré inicio de partida
 
     // posiciona os robôs
@@ -69,33 +72,26 @@ Game::Game(){
     interface.setPosBolaX(0.5);
     interface.setPosBolaY(0.5);
 
-    // inicia rede neural
-//    if(has_ai){
-//        neural_network = NeuralNetwork(input, output, "data/nn_save_data.csv");
-//    }
-
     *_tempo = 0;
 }
 
-Game::~Game(){
+GameWatch::~GameWatch(){
     delete[] _robo;
     delete[] _probe;
     delete _bola;
     delete _tempo;
     delete _fisica;
-    delete _grafico;
-    delete _timer;
+    if(has_grafico) delete _grafico;
+    if(has_timer) delete _timer;
     delete _referee;
 }
 
-void Game::mostra(){
+void GameWatch::mostra(){
     _fisica->roda();
     _referee->check_game();
-    *_tempo = *_tempo+10;
+    _grafico->roda();
     
-    if(has_graphic){
-        _grafico->roda();
-    }
+    *_tempo = *_tempo+10;
 
     if(has_ai){
         // Entrada de dados
@@ -154,9 +150,7 @@ void Game::mostra(){
 //        std::cout << *_tempo << std::endl;
 }
 
-double Game::run_and_get_fitness(){
-    // flags 
-    has_graphic = false;
+double GameWatch::run_and_get_fitness(){
     has_ai = true;
 
 //    initial_condition();
@@ -169,30 +163,60 @@ double Game::run_and_get_fitness(){
     }
 }
 
-void Game::watch_game(){
-    // flags
-    has_graphic = true;
-#include "game.h"
+void GameWatch::watch_game(){
+    has_ai = true;
 
-Game::Game(){
-    // flags
-    has_graphic = false;
+    _grafico = new grafico(_robo, _bola, _probe, interface);
+    has_grafico = true;
+   
+    _timer = new QTimer();
+    has_timer = true;
+    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
+    _timer->start(10);
+}
+
+void GameWatch::manual_mode(){
     has_ai = false;
 
-    // inicialização dos robôs
-    _robo = new robovss[6];
+    _grafico = new grafico(_robo, _bola, _probe, interface);
+    has_grafico = true;
+   
+    _timer = new QTimer();
+    has_timer = true;
+    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
+    _timer->start(10);
+}
 
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
- 
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
- 
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
- 
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
- 
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
+//void GameWatch::manual_save_game(){
+//    has_ai = false;
+//
+//    _grafico = new grafico(_robo, _bola, _probe, interface);
+//    has_grafico = true;
+//   
+//    _timer = new QTimer();
+//    has_timer = true;
+//    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
+//    _timer->start(10);
+//   
+//    std::vector<std::vector<double> > input_data;
+//    std::vector<std::vector<double> > output_data;
+//
+//    // entrada
+//    std::vector<double> posx_centro;
+//    std::vector<double> posx_0;
+//    std::vector<double> posx_1;
+//    std::vector<double> posx_2;
+//    std::vector<double> posx_3;
+//    std::vector<double> posy_centro;
+//    std::vector<double> posy_0;
+//    std::vector<double> posy_1;
+//    std::vector<double> posy_2;
+//    std::vector<double> posy_3;
+//    std::vector<double> velx;
+//    std::vector<double> vely;
+//
+//    // saida
+//    std::vector<double> vel;
+//    std::vector<double> velang;
+//
+//}

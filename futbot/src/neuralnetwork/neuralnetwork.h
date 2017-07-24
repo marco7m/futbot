@@ -12,6 +12,9 @@ public:
     NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp);
     NeuralNetwork(double_ptr in, double_ptr out, std::string name);
     ~NeuralNetwork();
+
+
+
     void CreateNetwork();
     void PrintTopology();
     void PrintNeuralNetwork();
