@@ -4,6 +4,7 @@ GameWatch::GameWatch(){
     has_ai = false;
     has_timer = false;
     has_grafico = false;
+    record_game = false;
 
     // inicialização dos robôs
     _robo = new robovss[6];
@@ -43,34 +44,47 @@ GameWatch::GameWatch(){
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    interface.setPosX(0,0,0.75);
+    interface.setPosX(0,0,0.25);
     interface.setPosY(0,0,0.5);
-    interface.setAng(0,0,0.75);
+    interface.setAng(0,0,0.25);
+    interface.setVel(0,0,0.5);
+    interface.setVelAng(0,0,0.5);
 
-    interface.setPosX(0,1,0.75);
+    interface.setPosX(0,1,0.25);
     interface.setPosY(0,1,0.25);
-    interface.setAng(0,1,0.75);
+    interface.setAng(0,1,0.25);
+    interface.setVel(0,1,0.5);
+    interface.setVelAng(0,1,0.5);
 
-    interface.setPosX(0,2,0.75);
+    interface.setPosX(0,2,0.25);
     interface.setPosY(0,2,0.75);
-    interface.setAng(0,2,0.75);
+    interface.setAng(0,2,0.25);
+    interface.setVel(0,2,0.5);
+    interface.setVelAng(0,2,0.5);
 
-    interface.setPosX(1,0,0.25);
+    interface.setPosX(1,0,0.75);
     interface.setPosY(1,0,0.5);
-    interface.setAng(1,0,0.25);
+    interface.setAng(1,0,0.75);
+    interface.setVel(1,0,0.5);
+    interface.setVelAng(1,0,0.5);
 
-    interface.setPosX(1,1,0.25);
+    interface.setPosX(1,1,0.75);
     interface.setPosY(1,1,0.25);
-    interface.setAng(1,1,0.25);
+    interface.setAng(1,1,0.75);
+    interface.setVel(1,1,0.5);
+    interface.setVelAng(1,1,0.5);
 
-    interface.setPosX(1,2,0.25);
+    interface.setPosX(1,2,0.75);
     interface.setPosY(1,2,0.75);
-    interface.setAng(1,2,0.25);
-
+    interface.setAng(1,2,0.75);
+    interface.setVel(1,2,0.5);
+    interface.setVelAng(1,2,0.5);
 
     // posiciona a bola
     interface.setPosBolaX(0.5);
     interface.setPosBolaY(0.5);
+    interface.setVelBolaX(0.5);
+    interface.setVelBolaY(0.5);
 
     *_tempo = 0;
 }
@@ -136,7 +150,7 @@ void GameWatch::mostra(){
         input.ptr[i] = interface.getVelBolaX();
                 i++;
         input.ptr[i] = interface.getVelBolaY();
-
+        std::cout << "i = " << i << std::endl;
         i = 0;
 
         // calcula a saida da rede neural a partir das entradas
@@ -145,26 +159,87 @@ void GameWatch::mostra(){
         // Saida de dados
         interface.setVel(0,0,output.ptr[0]);
         interface.setVelAng(0,0,output.ptr[1]);
+        interface.setVel(0,1,output.ptr[2]);
+        interface.setVelAng(0,1,output.ptr[3]);
+        interface.setVel(0,2,output.ptr[4]);
+        interface.setVelAng(0,2,output.ptr[5]);
     }
 
-//        std::cout << *_tempo << std::endl;
-}
+    // se vai salvar o jogo:
+    if(record_game){
+        // armazena dados a cada 100 milisegundos
+        if(*_tempo % 100 == 0){
+            // Entrada de dados
+            int i = 0;
+            for(int t = 0; t < 2; t++){
+                for(int id = 0; id < 3; id++){
+                    input_data[i].push_back(interface.getPosX(t,id));
+                    i++;
+                    input_data[i].push_back(interface.getPosXQuina(t,id,0));
+                    i++;
+                    input_data[i].push_back(interface.getPosXQuina(t,id,1));
+                    i++;
+                    input_data[i].push_back(interface.getPosXQuina(t,id,2));
+                    i++;
+                    input_data[i].push_back(interface.getPosXQuina(t,id,3));
+                    i++;
+                    input_data[i].push_back(interface.getPosY(t,id));
+                    i++;
+                    input_data[i].push_back(interface.getPosYQuina(t,id,0));
+                    i++;
+                    input_data[i].push_back(interface.getPosYQuina(t,id,1));
+                    i++;
+                    input_data[i].push_back(interface.getPosYQuina(t,id,2));
+                    i++;
+                    input_data[i].push_back(interface.getPosYQuina(t,id,3));
+                    i++;
+                    input_data[i].push_back(interface.getVelX(t,id));
+                    i++;
+                    input_data[i].push_back(interface.getVelY(t,id));
+                    i++;
+                    input_data[i].push_back(interface.getVelAng(t,id));
+                    i++;
+                    input_data[i].push_back(interface.getVel(t,id));
+                    i++;
+                }
+            } 
 
-double GameWatch::run_and_get_fitness(){
-    has_ai = true;
+            input_data[i].push_back(interface.getPosBolaX());
+                    i++;
+            input_data[i].push_back(interface.getPosBolaY());
+                    i++;
+            input_data[i].push_back(interface.getVelBolaX());
+                    i++;
+            input_data[i].push_back(interface.getVelBolaY());
+            
+            i = 0;
+            
+            // Saida de dados
+            output_data[0].push_back(interface.getVel(0,0));
+            output_data[1].push_back(interface.getVelAng(0,0));
+            output_data[2].push_back(interface.getVel(0,1));
+            output_data[3].push_back(interface.getVelAng(0,1));
+            output_data[4].push_back(interface.getVel(0,2));
+            output_data[5].push_back(interface.getVelAng(0,2));
+        }
+        if((int)*_tempo > recording_time){
+            _timer->stop();
 
-//    initial_condition();
-    while(true){
-        mostra();
-        if(*_tempo > 20000){
-            std::cout << "\nend game" << std::endl;
-            return 42;
+            // save data to .csv file
+            Csv::save_data(input_data, "data/gamewatch/input.csv", ',');
+            Csv::save_data(output_data, "data/gamewatch/output.csv", ',');
         }
     }
+
+
+
+    // printa tempo
+//    if(*_tempo % 100 == 0) std::cout << *_tempo << std::endl;
 }
 
 void GameWatch::watch_game(){
     has_ai = true;
+    record_game = false;
 
     _grafico = new grafico(_robo, _bola, _probe, interface);
     has_grafico = true;
@@ -177,6 +252,7 @@ void GameWatch::watch_game(){
 
 void GameWatch::manual_mode(){
     has_ai = false;
+    record_game = false;
 
     _grafico = new grafico(_robo, _bola, _probe, interface);
     has_grafico = true;
@@ -187,36 +263,30 @@ void GameWatch::manual_mode(){
     _timer->start(10);
 }
 
-//void GameWatch::manual_save_game(){
-//    has_ai = false;
-//
-//    _grafico = new grafico(_robo, _bola, _probe, interface);
-//    has_grafico = true;
-//   
-//    _timer = new QTimer();
-//    has_timer = true;
-//    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
-//    _timer->start(10);
-//   
-//    std::vector<std::vector<double> > input_data;
-//    std::vector<std::vector<double> > output_data;
-//
-//    // entrada
-//    std::vector<double> posx_centro;
-//    std::vector<double> posx_0;
-//    std::vector<double> posx_1;
-//    std::vector<double> posx_2;
-//    std::vector<double> posx_3;
-//    std::vector<double> posy_centro;
-//    std::vector<double> posy_0;
-//    std::vector<double> posy_1;
-//    std::vector<double> posy_2;
-//    std::vector<double> posy_3;
-//    std::vector<double> velx;
-//    std::vector<double> vely;
-//
-//    // saida
-//    std::vector<double> vel;
-//    std::vector<double> velang;
-//
-//}
+// saves all inputs and as output only the data of team 0
+void GameWatch::manual_save_game(int rt){
+    has_ai = false;
+    record_game = true;
+
+    recording_time = rt;
+
+    // inicializa input_data
+    for(int i = 0; i < input.size; i++){
+        std::vector<double> tmp;
+        input_data.push_back(tmp);
+    }
+    
+    // inicializa output_data
+    for(int i = 0; i < 6; i++){
+        std::vector<double> tmp;
+        output_data.push_back(tmp);
+    }    
+
+    _grafico = new grafico(_robo, _bola, _probe, interface);
+    has_grafico = true;
+   
+    _timer = new QTimer();
+    has_timer = true;
+    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
+    _timer->start(10);
+}

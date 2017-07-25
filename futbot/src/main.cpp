@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
     GameWatch game_watch{};
-    game_watch.manual_mode();
+    game_watch.watch_game();
 
 //    SimpleIa simpleia;
 //    GetBPError getbperror;

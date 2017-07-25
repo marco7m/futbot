@@ -9,6 +9,7 @@
 #include "../wrsim/src/WRSim/objetos/bola.h"
 #include "../wrsim/src/WRSim/objetos/robovss.h"
 #include "../utils/my_ptr.h"
+#include "../utils/csv.h"
 #include "../neuralnetwork/neuralnetwork.h"
 #include "../wrsim/src/WRSim/interface.h"
 #include "referee.h"
@@ -18,10 +19,9 @@ Q_OBJECT
 public:
     GameWatch();
     ~GameWatch();
-    double run_and_get_fitness();
     void watch_game();
     void manual_mode();
-//    void manual_save_game();
+    void manual_save_game(int rt);
 
 public slots:
     void mostra();
@@ -31,6 +31,7 @@ private:
     bool has_ai;
     bool has_timer;
     bool has_grafico;
+    bool record_game;
 
     grafico* _grafico;
     fisica* _fisica;
@@ -46,9 +47,119 @@ private:
 
     // ponteiros de entrada e saida da rede neural
     double_ptr input = double_ptr(88);
-    double_ptr output{2};
+    double_ptr output{6};
+    NeuralNetwork neural_network{input, output, "data/nn0002.csv"};
 
-    NeuralNetwork neural_network{input, output, "data/nn_save_data.csv"};
+    // manual_save_game variables
+    std::vector<std::vector<double> > input_data;
+    std::vector<std::vector<double> > output_data;
+    int recording_time;
+
 };
 
 #endif
+
+
+
+
+
+
+
+
+//    // entrada
+//    std::vector<double> posx_centro_r00;
+//    std::vector<double> posx_0_r00;
+//    std::vector<double> posx_1_r00;
+//    std::vector<double> posx_2_r00;
+//    std::vector<double> posx_3_r00;
+//    std::vector<double> posy_centro_r00;
+//    std::vector<double> posy_0_r00;
+//    std::vector<double> posy_1_r00;
+//    std::vector<double> posy_2_r00;
+//    std::vector<double> posy_3_r00;
+//    std::vector<double> velx_r00;
+//    std::vector<double> vely_r00;
+//    std::vector<double> vel_ang_r00;
+//    std::vector<double> vel_lin_r00;
+//
+//    std::vector<double> posx_centro_r01;
+//    std::vector<double> posx_0_r01;
+//    std::vector<double> posx_1_r01;
+//    std::vector<double> posx_2_r01;
+//    std::vector<double> posx_3_r01;
+//    std::vector<double> posy_centro_r01;
+//    std::vector<double> posy_0_r01;
+//    std::vector<double> posy_1_r01;
+//    std::vector<double> posy_2_r01;
+//    std::vector<double> posy_3_r01;
+//    std::vector<double> velx_r01;
+//    std::vector<double> vely_r01;
+//    std::vector<double> vel_ang_r01;
+//    std::vector<double> vel_lin_r01;
+//
+//    std::vector<double> posx_centro_r02;
+//    std::vector<double> posx_0_r02;
+//    std::vector<double> posx_1_r02;
+//    std::vector<double> posx_2_r02;
+//    std::vector<double> posx_3_r02;
+//    std::vector<double> posy_centro_r02;
+//    std::vector<double> posy_0_r02;
+//    std::vector<double> posy_1_r02;
+//    std::vector<double> posy_2_r02;
+//    std::vector<double> posy_3_r02;
+//    std::vector<double> velx_r02;
+//    std::vector<double> vely_r02;
+//    std::vector<double> vel_ang_r02;
+//    std::vector<double> vel_lin_r02;
+//
+//    std::vector<double> posx_centro_r10;
+//    std::vector<double> posx_0_r10;
+//    std::vector<double> posx_1_r10;
+//    std::vector<double> posx_2_r10;
+//    std::vector<double> posx_3_r10;
+//    std::vector<double> posy_centro_r10;
+//    std::vector<double> posy_0_r10;
+//    std::vector<double> posy_1_r10;
+//    std::vector<double> posy_2_r10;
+//    std::vector<double> posy_3_r10;
+//    std::vector<double> velx_r10;
+//    std::vector<double> vely_r10;
+//    std::vector<double> vel_ang_r10;
+//    std::vector<double> vel_lin_r10;
+//
+//    std::vector<double> posx_centro_r11;
+//    std::vector<double> posx_0_r11;
+//    std::vector<double> posx_1_r11;
+//    std::vector<double> posx_2_r11;
+//    std::vector<double> posx_3_r11;
+//    std::vector<double> posy_centro_r11;
+//    std::vector<double> posy_0_r11;
+//    std::vector<double> posy_1_r11;
+//    std::vector<double> posy_2_r11;
+//    std::vector<double> posy_3_r11;
+//    std::vector<double> velx_r11;
+//    std::vector<double> vely_r11;
+//    std::vector<double> vel_ang_r11;
+//    std::vector<double> vel_lin_r11;
+//
+//    std::vector<double> posx_centro_r12;
+//    std::vector<double> posx_0_r12;
+//    std::vector<double> posx_1_r12;
+//    std::vector<double> posx_2_r12;
+//    std::vector<double> posx_3_r12;
+//    std::vector<double> posy_centro_r12;
+//    std::vector<double> posy_0_r12;
+//    std::vector<double> posy_1_r12;
+//    std::vector<double> posy_2_r12;
+//    std::vector<double> posy_3_r12;
+//    std::vector<double> velx_r12;
+//    std::vector<double> vely_r12;
+//    std::vector<double> vel_ang_r12;
+//    std::vector<double> vel_lin_r12;
+//
+//    std::vector<double> bola_posx;
+//    std::vector<double> bola_posy;
+//    std::vector<double> bola_velx;
+//    std::vector<double> bola_vely;
+//
+//
