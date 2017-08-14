@@ -25,11 +25,13 @@ NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::string name){
     set_output(out);
     LoadNetwork(name);
     PrintTopology();
-    PrintNeuralNetwork();
 }
 
 NeuralNetwork::~NeuralNetwork(){
-    DeleteAll();
+    if(VERBOSE) std::cout << std::endl << "DeleteAll" << std::endl;
+    for(int i = 0; i < (int)connection.size(); i++){
+        connection[i].del();
+    }
 }
 
 void NeuralNetwork::CreateNetwork(){
@@ -133,13 +135,6 @@ void NeuralNetwork::ConnectAll(){
         // &connection[(int)]network.size()-2].ptr[i] = ponteiro que aponta para 
         network[(int)network.size()-1][i].connect_output(&network_output.ptr[i]);
         if(VERBOSE) std::cout << "conectando output do neuronio (" << (int)network.size()-1 << "," << i << ") com a output (" << i << ") da rede neural" << std::endl;
-    }
-}
-
-void NeuralNetwork::DeleteAll(){
-    if(VERBOSE) std::cout << std::endl << "DeleteAll" << std::endl;
-    for(int i = 0; i < (int)connection.size(); i++){
-        connection[i].del();
     }
 }
 
@@ -317,11 +312,51 @@ void NeuralNetwork::_OldLoadNetwork(std::string name){
     }
 }
 
-void NeuralNetwork::LoadNetwork(std::string name){
+void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
+    if(VERBOSE) std::cout << std::endl << "LoadNetwork" << std::endl;
+
+    if(topology.size() != 0) topology.clear();
+
+    for(int i = 0; i < (int)nn_data[0].size(); i++){
+        topology.push_back((int)nn_data[0][i]);
+    }
+
+    // cria rede neural
+    CreateNetwork();
+
+    // conecta as entradas e saidas
+    ConnectAll();
+
+    //carrega pesos
+    int i = 0; // coluna de neuronios
+    int j = 0; // neuronio na coluna
+    int k = -1; // peso no neuronio (-1 para a lógica dos ifs logo abaixo funcionar
+   
+    for(int c = 0; i < (int)nn_data[1].size(); c++){
+    
+        // move as variaveis i,j,k
+        if(++k < network[i][j].get_number_inputs()){
+        }
+        else if(++j < (int)network[i].size()){
+            k = 0;
+        }
+        else if(++i < (int)network.size()){
+            j = 0;
+            k = 0;
+        }
+        else{
+            break;
+        }
+        
+        // aqui vai passar peso por peso que está no arquivo
+        network[i][j].set_weight(k,nn_data[1][c]);
+    }
+}
+
+void NeuralNetwork::LoadNetwork(std::string data_name){
     if(VERBOSE) std::cout << std::endl << "LoadNetwork" << std::endl;
 
     std::vector<std::vector<double> > nn_data; 
-    std::string data_name = name; 
     nn_data = Csv::get_double_data(data_name, ',');
 
     if(topology.size() != 0) topology.clear();

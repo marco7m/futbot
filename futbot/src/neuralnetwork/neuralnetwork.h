@@ -19,7 +19,6 @@ public:
     void PrintTopology();
     void PrintNeuralNetwork();
     void ConnectAll();
-    void DeleteAll();
     void set_topology(std::vector<int> t);
     void set_input(double_ptr i);
     void set_output(double_ptr o);
@@ -34,6 +33,7 @@ public:
 
     // igual a outra, mas sem a classe Csv
     void _OldSaveNetwork(std::string name);
+    void LoadNetwork(std::vector<std::vector<double> > nn_data);
     void LoadNetwork(std::string name);
     void _OldLoadNetwork(std::string name);
 
