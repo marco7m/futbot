@@ -13,18 +13,20 @@
 #include "../neuralnetwork/neuralnetwork.h"
 #include "../wrsim/src/WRSim/interface.h"
 #include "referee.h"
+#include <string>
 
 class GameWatch: public QObject{
 Q_OBJECT
 public:
     GameWatch();
     ~GameWatch();
-    void watch_game();
+    void watch_game(std::string ia_0, std::string ia_1);
     void manual_mode();
     void manual_save_game(int rt);
 
 public slots:
     void mostra();
+    void mostra_watch_game();
 
 private:
     // flags

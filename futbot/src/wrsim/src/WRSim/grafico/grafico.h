@@ -36,7 +36,8 @@
 
 class grafico: public QGraphicsView{
 public:
-    grafico(robovss *r, bola *b, probe *p, Interface interface);
+    grafico(robovss *r, bola *b, Interface interface, probe *p = 0);
+    ~grafico();
     QGraphicsScene *tela;
     graficorobovss *grobo;
     graficobola *gbola;

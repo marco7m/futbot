@@ -24,7 +24,7 @@
 #include <iostream>
 
 // escala: 0.5
-grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
+grafico::grafico(robovss *r, bola *b, Interface inter, probe *p){
     _probe = p;
     robo = r;
     _bola = b;
@@ -40,8 +40,6 @@ grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
     scale(0.5,0.5);
 
     // cria item que recebe entrada
-//    gentrada = new graficoentrada(_bola, robo);
-
     gentrada = new graficoentrada(interface);
     gentrada->setFlag(QGraphicsItem::ItemIsFocusable);
     gentrada->setFocus();
@@ -125,6 +123,16 @@ grafico::grafico(robovss *r, bola *b, probe *p, Interface inter){
     }
 
     show();
+}
+
+grafico::~grafico(){
+    close();
+    delete gentrada;
+    delete[] grobo;
+    delete gbola;
+    delete gcampoVss;
+    delete[] gprobe;
+    delete tela;
 }
 
 void grafico::roda(){

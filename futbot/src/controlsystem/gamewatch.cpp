@@ -62,21 +62,21 @@ GameWatch::GameWatch(){
     interface.setVel(0,2,0.5);
     interface.setVelAng(0,2,0.5);
 
-    interface.setPosX(1,0,0.75);
+    interface.setPosX(1,0,0.25);
     interface.setPosY(1,0,0.5);
-    interface.setAng(1,0,0.75);
+    interface.setAng(1,0,0.25);
     interface.setVel(1,0,0.5);
     interface.setVelAng(1,0,0.5);
 
-    interface.setPosX(1,1,0.75);
+    interface.setPosX(1,1,0.25);
     interface.setPosY(1,1,0.25);
-    interface.setAng(1,1,0.75);
+    interface.setAng(1,1,0.25);
     interface.setVel(1,1,0.5);
     interface.setVelAng(1,1,0.5);
 
-    interface.setPosX(1,2,0.75);
+    interface.setPosX(1,2,0.25);
     interface.setPosY(1,2,0.75);
-    interface.setAng(1,2,0.75);
+    interface.setAng(1,2,0.25);
     interface.setVel(1,2,0.5);
     interface.setVelAng(1,2,0.5);
 
@@ -98,6 +98,52 @@ GameWatch::~GameWatch(){
     if(has_grafico) delete _grafico;
     if(has_timer) delete _timer;
     delete _referee;
+}
+
+void GameWatch::mostra_watch_game(){
+    _fisica->roda();
+    _referee->check_game();
+    _grafico->roda();
+    
+    *_tempo = *_tempo+10;
+
+    // Entrada de dados
+    int i = 0;
+    for(int t = 0; t < 2; t++){
+        for(int id = 0; id < 3; id++){
+            input.ptr[i] = interface.getPosX(t,id);
+            i++;
+            input.ptr[i] = interface.getPosXQuina(t,id,0);
+            i++;
+            input.ptr[i] = interface.getPosXQuina(t,id,1);
+            i++;
+            input.ptr[i] = interface.getPosXQuina(t,id,2);
+            i++;
+            input.ptr[i] = interface.getPosXQuina(t,id,3);
+            i++;
+            input.ptr[i] = interface.getPosY(t,id);
+            i++;
+            input.ptr[i] = interface.getPosYQuina(t,id,0);
+            i++;
+            input.ptr[i] = interface.getPosYQuina(t,id,1);
+            i++;
+            input.ptr[i] = interface.getPosYQuina(t,id,2);
+            i++;
+            input.ptr[i] = interface.getPosYQuina(t,id,3);
+            i++;
+            input.ptr[i] = interface.getVelX(t,id);
+            i++;
+            input.ptr[i] = interface.getVelY(t,id);
+            i++;
+            input.ptr[i] = interface.getVelAng(t,id);
+            i++;
+            input.ptr[i] = interface.getVel(t,id);
+            i++;
+        }
+    } 
+
+
+
 }
 
 void GameWatch::mostra(){
@@ -143,11 +189,11 @@ void GameWatch::mostra(){
             }
         } 
 
-        input.ptr[i] = interface.getPosBolaX();
+        input.ptr[i] = interface.getPosBolaX(0);
                 i++;
         input.ptr[i] = interface.getPosBolaY();
                 i++;
-        input.ptr[i] = interface.getVelBolaX();
+        input.ptr[i] = interface.getVelBolaX(0);
                 i++;
         input.ptr[i] = interface.getVelBolaY();
         std::cout << "i = " << i << std::endl;
@@ -204,11 +250,11 @@ void GameWatch::mostra(){
                 }
             } 
 
-            input_data[i].push_back(interface.getPosBolaX());
+            input_data[i].push_back(interface.getPosBolaX(0));
                     i++;
             input_data[i].push_back(interface.getPosBolaY());
                     i++;
-            input_data[i].push_back(interface.getVelBolaX());
+            input_data[i].push_back(interface.getVelBolaX(0));
                     i++;
             input_data[i].push_back(interface.getVelBolaY());
             
@@ -237,18 +283,33 @@ void GameWatch::mostra(){
 //    if(*_tempo % 100 == 0) std::cout << *_tempo << std::endl;
 }
 
-void GameWatch::watch_game(){
-    has_ai = true;
-    record_game = false;
+void GameWatch::watch_game(std::string ia_0, std::string ia_1){
+    double_ptr input_ia_0{88};
+    double_ptr output_ia_0{6};
 
-    _grafico = new grafico(_robo, _bola, _probe, interface);
-    has_grafico = true;
-   
-    _timer = new QTimer();
-    has_timer = true;
-    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
-    _timer->start(10);
+    double_ptr input_ia_1 = double_ptr(88);
+    double_ptr output_ia_1 = double_ptr(6);
+
+    NeuralNetwork ia0 = NeuralNetwork(input_ia_0, output_ia_0, ia_0);
+    NeuralNetwork ia1 = NeuralNetwork(input_ia_1, output_ia_1, ia_1);
+
+    grafico _grafico = grafico(_robo, _bola, _probe, interface);
+
 }
+
+
+//void GameWatch::watch_game(){
+//    has_ai = true;
+//    record_game = false;
+//
+//    _grafico = new grafico(_robo, _bola, _probe, interface);
+//    has_grafico = true;
+//   
+//    _timer = new QTimer();
+//    has_timer = true;
+//    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(mostra()));
+//    _timer->start(10);
+//}
 
 void GameWatch::manual_mode(){
     has_ai = false;

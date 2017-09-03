@@ -36,7 +36,7 @@
 class fisica{
 
 public:
-    fisica(robovss *r, unsigned long long *t, bola *b, probe *p);
+    fisica(robovss *r, unsigned long long *t, bola *b, probe *p = 0);
     void roda();
 
     void colocaProbe(QPointF qpoint, int np);

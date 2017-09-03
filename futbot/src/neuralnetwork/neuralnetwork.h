@@ -11,10 +11,9 @@ class NeuralNetwork{
 public:
     NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp);
     NeuralNetwork(double_ptr in, double_ptr out, std::string name);
+    NeuralNetwork(std::vector<std::vector<double> > nn_data);
     ~NeuralNetwork();
-
-
-
+    
     void CreateNetwork();
     void PrintTopology();
     void PrintNeuralNetwork();
@@ -24,6 +23,10 @@ public:
     void set_output(double_ptr o);
     void DoTheJobOnce();
     void set_random_weights();
+
+    double_ptr input;
+    double_ptr output;
+
 
     // salva na primeira linha do arquivo .csv a topologia, na segunda linha os pesos dos neuronios
     // os pesos estão da seguinte forma:
@@ -41,8 +44,6 @@ private:
     // a rede contém todos os neuronios
     std::vector< std::vector<Neuron> > network;
 
-    double_ptr network_input;
-    double_ptr network_output;
 
     std::vector<double_ptr> connection;
     

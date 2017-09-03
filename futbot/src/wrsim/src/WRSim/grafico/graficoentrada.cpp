@@ -22,47 +22,88 @@
 #include "graficoentrada.h"
 #include <QKeyEvent>
 #include <QDebug>
+#include <iostream>
 
 graficoentrada::graficoentrada(Interface inter){
     interface = inter;
     team_control = 0;
     id_control = 0;
+    mirror = false;
 }
 
 void graficoentrada::keyPressEvent(QKeyEvent *event){
     // controla o robo
     if(event->key() == Qt::Key_Up){
         interface.setVel(team_control,id_control,0.75); // vel abaixo de 0.5 na interface é vel negativa
+        if(mirror) interface.setVel(team_control? 0:1,id_control,0.75, true); // vel abaixo de 0.5 na interface é vel negativa
     }
     if(event->key() == Qt::Key_Down){
         interface.setVel(team_control,id_control,0.25);
+        if(mirror) interface.setVel(team_control? 0:1,id_control,0.25, true);
     }
 
     if(event->key() == Qt::Key_Left){
         interface.setVelAng(team_control,id_control,0.25);
+        if(mirror) interface.setVelAng(team_control? 0:1,id_control,0.25, true);
     }
     if(event->key() == Qt::Key_Right){
         interface.setVelAng(team_control,id_control,0.75);
+        if(mirror) interface.setVelAng(team_control? 0:1,id_control,0.75, true);
     }
     
     // mostra dados para debug
     if(event->key() == Qt::Key_D){
-        qDebug() << "\n";
-        qDebug() << "PosX(0,0) = " << interface.getPosX(0,0);
-        qDebug() << "PosY(0,0) = " << interface.getPosY(0,0);
-        qDebug() << "Vel(0,0) = " << interface.getVel(0,0);
-        qDebug() << "VelX(0,0) = " << interface.getVelX(0,0);
-        qDebug() << "VelY(0,0) = " << interface.getVelY(0,0);
-        qDebug() << "Ang(0,0) = " << interface.getAng(0,0);
-        qDebug() << "VelAng(0,0) = " << interface.getVelAng(0,0);
-        qDebug() << "PosBolaX() = " << interface.getPosBolaX();
-        qDebug() << "PosBolaY() = " << interface.getPosBolaY();
-        qDebug() << "VelBolaX() = " << interface.getVelBolaX();
-        qDebug() << "VelBolaY() = " << interface.getVelBolaY();
+        std::cout << std::endl;
+        std::cout << "time 0" << std::endl;
+        std::cout << "getPosX " << interface.getPosX(0,0) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(0,0,0) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(0,0,1) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(0,0,2) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(0,0,3) << std::endl;
+        std::cout << "getPosY " << interface.getPosY(0,0) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(0,0,0) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(0,0,1) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(0,0,2) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(0,0,3) << std::endl;
+        std::cout << "getVelX " << interface.getVelX(0,0) << std::endl;
+        std::cout << "getVelY " << interface.getVelY(0,0) << std::endl;
+        std::cout << "getVelAng " << interface.getVelAng(0,0) << std::endl;
+        std::cout << "getVel " << interface.getVel(0,0) << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "time 1" << std::endl;
+        std::cout << "getPosX " << interface.getPosX(1,0,true) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(1,0,0,true) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(1,0,1,true) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(1,0,2,true) << std::endl;
+        std::cout << "getPosXQuina " << interface.getPosXQuina(1,0,3,true) << std::endl;
+        std::cout << "getPosY " << interface.getPosY(1,0,true) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(1,0,0,true) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(1,0,1,true) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(1,0,2,true) << std::endl;
+        std::cout << "getPosYQuina " << interface.getPosYQuina(1,0,3,true) << std::endl;
+        std::cout << "getVelX " << interface.getVelX(1,0,true) << std::endl;
+        std::cout << "getVelY " << interface.getVelY(1,0,true) << std::endl;
+        std::cout << "getVelAng " << interface.getVelAng(1,0,true) << std::endl;
+        std::cout << "getVel " << interface.getVel(1,0,true) << std::endl;
+
+
+        std::cout << std::endl;
+        std::cout << "bola" << std::endl;
+        std::cout << "getPosBolaX " << interface.getPosBolaX(true) << std::endl;
+        std::cout << "getPosBolaY " << interface.getPosBolaY(true) << std::endl;
+        std::cout << "getVelBolaX " << interface.getVelBolaX(true) << std::endl;
+        std::cout << "getVelBolaY " << interface.getVelBolaY(true) << std::endl;
     }
     
+    if(event->key() == Qt::Key_M){
+        mirror = !mirror;
+    }
+
     // move para posição tal (debug)
     if(event->key() == Qt::Key_C){
+
+        // posiciona os robôs
         interface.setPosX(0,0,0.25);
         interface.setPosY(0,0,0.5);
         interface.setAng(0,0,0.25);
@@ -81,24 +122,25 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
         interface.setVel(0,2,0.5);
         interface.setVelAng(0,2,0.5);
 
-        interface.setPosX(1,0,0.75);
-        interface.setPosY(1,0,0.5);
+        interface.setPosX(1,0,0.25,true);
+        interface.setPosY(1,0,0.5,true);
         interface.setAng(1,0,0.75);
-        interface.setVel(1,0,0.5);
-        interface.setVelAng(1,0,0.5);
+        interface.setVel(1,0,0.5,true);
+        interface.setVelAng(1,0,0.5,true);
 
-        interface.setPosX(1,1,0.75);
-        interface.setPosY(1,1,0.25);
+        interface.setPosX(1,1,0.25,true);
+        interface.setPosY(1,1,0.25,true);
         interface.setAng(1,1,0.75);
-        interface.setVel(1,1,0.5);
-        interface.setVelAng(1,1,0.5);
+        interface.setVel(1,1,0.5,true);
+        interface.setVelAng(1,1,0.5,true);
 
-        interface.setPosX(1,2,0.75);
-        interface.setPosY(1,2,0.75);
+        interface.setPosX(1,2,0.25,true);
+        interface.setPosY(1,2,0.75,true);
         interface.setAng(1,2,0.75);
-        interface.setVel(1,2,0.5);
-        interface.setVelAng(1,2,0.5);
+        interface.setVel(1,2,0.5,true);
+        interface.setVelAng(1,2,0.5,true);
 
+        // posiciona a bola
         interface.setPosBolaX(0.5);
         interface.setPosBolaY(0.5);
         interface.setVelBolaX(0.5);
@@ -184,9 +226,11 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
 void graficoentrada::keyReleaseEvent(QKeyEvent *event){
     if((event->key() == Qt::Key_Up) || (event->key() == Qt::Key_Down)){
         interface.setVel(team_control,id_control,0.5);
+        if(mirror) interface.setVel(team_control? 0:1,id_control,0.5);
     }
     else if((event->key() == Qt::Key_Left) || (event->key() == Qt::Key_Right)){
         interface.setVelAng(team_control,id_control,0.5);
+        if(mirror) interface.setVelAng(team_control? 0:1,id_control,0.5);
     }
 
 //    if(config::in2Jogador1){

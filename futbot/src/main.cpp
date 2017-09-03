@@ -1,23 +1,16 @@
 // main do HeadController
 
 #include <QApplication>
-#include "headcontroller/simpleia.h"
-#include "headcontroller/getbperror.h"
-#include "headcontroller/one_player_alone.h"
-#include "headcontroller/save_game.h"
-#include "controlsystem/gamewatch.h"
+#include "controlsystem/gameplay.h"
+#include "utils/csv.h"
 
 // main generica
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
-    GameWatch game_watch{};
-    game_watch.watch_game();
-
-//    SimpleIa simpleia;
-//    GetBPError getbperror;
-//    OnePlayerAlone oneplayeralone;
-//    SaveGame savegame;
+    GamePlay gameplay{};
+    gameplay.watch_mode(Csv::get_double_data("data/nn0002.csv"), Csv::get_double_data("data/nn0002.csv"));
+//    gameplay.manual_mode();
 
     return a.exec();
 //    return 0;

@@ -1,4 +1,3 @@
-
 #include "interface.h"
 #include <iostream>
 
@@ -18,7 +17,7 @@ int Interface::encontraRobo(quint8 time, quint8 idRobo){
         }
     }
     //caso o robô expecificado não existe, envia -1 para o método saber o que fazer
-    std::cout << "Wrong team or idRobo in encontraRobo" << std::endl;
+    std::cout << "Wrong team or idRobo in Interface::encontraRobo" << std::endl;
     return -1; 
 }
 
@@ -30,32 +29,36 @@ double Interface::desnormaliza(double max, double min, double val_normalizado){
     return val_normalizado*(max-min) + min;
 }
 
-double Interface::getPosX(quint8 time, quint8 idRobo){
+double Interface::getPosX(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
-        if(time == 0){
-            return normaliza(MAX_POS_X, MIN_POS_X, _robo[encontraRobo(time, idRobo)].getX());
+        if(espelhar){
+            return 1 - normaliza(MAX_POS_X, MIN_POS_X, _robo[encontraRobo(time, idRobo)].getX());
         }
         else{
-            return 1 - normaliza(MAX_POS_X, MIN_POS_X, _robo[encontraRobo(time, idRobo)].getX());
+            return normaliza(MAX_POS_X, MIN_POS_X, _robo[encontraRobo(time, idRobo)].getX());
         }
     }
 }
 
-//===========================================================================
-void Interface::setPosX(quint8 time, quint8 idRobo, double posx){
+void Interface::setPosX(quint8 time, quint8 idRobo, double posx, bool espelhar){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
         return;
     }
     else{
-        _robo[robo_encontrado].setX(desnormaliza(MAX_POS_X, MIN_POS_X, posx));
+        if(espelhar){
+            _robo[robo_encontrado].setX(desnormaliza(MAX_POS_X, MIN_POS_X, 1 - posx));
+        }
+        else{
+            _robo[robo_encontrado].setX(desnormaliza(MAX_POS_X, MIN_POS_X, posx));
+        }
     }
 }
 
-double Interface::getPosY(quint8 time, quint8 idRobo){
+double Interface::getPosY(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -64,7 +67,7 @@ double Interface::getPosY(quint8 time, quint8 idRobo){
     }
 }
 
-void Interface::setPosY(quint8 time, quint8 idRobo, double posy){
+void Interface::setPosY(quint8 time, quint8 idRobo, double posy, bool espelhar){
     int robo_encontrado = encontraRobo(time, idRobo);
     if(robo_encontrado == -1){
         return;
@@ -108,7 +111,7 @@ void Interface::setAng(quint8 time, quint8 idRobo, double ang){
     }
 }
 
-double Interface::getVel(quint8 time, quint8 idRobo){
+double Interface::getVel(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -118,7 +121,7 @@ double Interface::getVel(quint8 time, quint8 idRobo){
 } 
 
 // vel abaixo de 0.5 é negativa, e 0.5 = zero
-void Interface::setVel(quint8 time, quint8 idRobo, double vel){
+void Interface::setVel(quint8 time, quint8 idRobo, double vel, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return;
     }
@@ -127,16 +130,21 @@ void Interface::setVel(quint8 time, quint8 idRobo, double vel){
     }
 }
     
-double Interface::getVelX(quint8 time, quint8 idRobo){
+double Interface::getVelX(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
-        return normaliza(MAX_VEL_ROBO, MIN_VEL_ROBO, _robo[encontraRobo(time, idRobo)].getVelX());
+        if(espelhar){
+            return 1 - normaliza(MAX_VEL_ROBO, MIN_VEL_ROBO, _robo[encontraRobo(time, idRobo)].getVelX());
+        }
+        else{
+            return normaliza(MAX_VEL_ROBO, MIN_VEL_ROBO, _robo[encontraRobo(time, idRobo)].getVelX());
+        }
     }
 }
 
-double Interface::getVelY(quint8 time, quint8 idRobo){
+double Interface::getVelY(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
@@ -145,33 +153,48 @@ double Interface::getVelY(quint8 time, quint8 idRobo){
     }
 }
 
-double Interface::getVelAng(quint8 time, quint8 idRobo){
+double Interface::getVelAng(quint8 time, quint8 idRobo, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
-        return normaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, _robo[encontraRobo(time, idRobo)].getVelAng());
+        if(espelhar){
+            return 1 - normaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, _robo[encontraRobo(time, idRobo)].getVelAng());
+        }
+        else{
+            return normaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, _robo[encontraRobo(time, idRobo)].getVelAng());
+        }
     }
 }
 
-void Interface::setVelAng(quint8 time, quint8 idRobo, double velAng){
+void Interface::setVelAng(quint8 time, quint8 idRobo, double velAng, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return;
     }   
     else{
-        _robo[encontraRobo(time, idRobo)].setVelAng(desnormaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, velAng));
+        if(espelhar){
+            _robo[encontraRobo(time, idRobo)].setVelAng(desnormaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, 1 - velAng));
+        }
+        else{
+            _robo[encontraRobo(time, idRobo)].setVelAng(desnormaliza(MAX_VEL_ANG_ROBO, MIN_VEL_ANG_ROBO, velAng));
+        }
     }
 }
 
-double Interface::getPosBolaX(){
-    return normaliza(MAX_POS_X, MIN_POS_X, _bola->getX());
+double Interface::getPosBolaX(bool espelhar){
+    if(espelhar){
+        return 1 - normaliza(MAX_POS_X, MIN_POS_X, _bola->getX());
+    }
+    else{
+        return normaliza(MAX_POS_X, MIN_POS_X, _bola->getX());
+    }
 }
 
 void Interface::setPosBolaX(double posbx){
     _bola->setX(desnormaliza(MAX_POS_X, MIN_POS_X, posbx));
 }
 
-double Interface::getPosBolaY(){
+double Interface::getPosBolaY(bool espelhar){
     return normaliza(MAX_POS_Y, MIN_POS_Y, _bola->getY());
 }
 
@@ -179,15 +202,20 @@ void Interface::setPosBolaY(double posby){
     _bola->setY(desnormaliza(MAX_POS_Y, MIN_POS_Y, posby));
 }
 
-double Interface::getVelBolaX(){
-    return normaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, _bola->getVelX());
+double Interface::getVelBolaX(bool espelhar){
+    if(espelhar){
+        return 1 - normaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, _bola->getVelX());
+    }
+    else{
+        return normaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, _bola->getVelX());
+    }
 }
 
 void Interface::setVelBolaX(double velbx){
     _bola->setVelX(desnormaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, velbx));
 }
 
-double Interface::getVelBolaY(){
+double Interface::getVelBolaY(bool espelhar){
     return normaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, _bola->getVelY());
 }
 
@@ -195,24 +223,37 @@ void Interface::setVelBolaY(double velby){
     _bola->setVelY(desnormaliza(MAX_VEL_BOLA, MIN_VEL_BOLA, velby));
 }
 
-double Interface::getPosXQuina(quint8 time, quint8 idRobo, int quina){
+double Interface::getPosXQuina(quint8 time, quint8 idRobo, int quina, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
-        return normaliza(MAX_POS_X, MIN_POS_X, getQuinaX(_robo[encontraRobo(time, idRobo)], quina));
+        if(espelhar){
+            if(quina == 2) quina = 1;
+            else if(quina == 1) quina = 2;
+            else if(quina == 0) quina = 3;
+            else if(quina == 3) quina = 0;
+            return 1 - normaliza(MAX_POS_X, MIN_POS_X, getQuinaX(_robo[encontraRobo(time, idRobo)], quina));
+        }
+        else{
+            return normaliza(MAX_POS_X, MIN_POS_X, getQuinaX(_robo[encontraRobo(time, idRobo)], quina));
+        }
     }
-
 }
 
-double Interface::getPosYQuina(quint8 time, quint8 idRobo, int quina){
+double Interface::getPosYQuina(quint8 time, quint8 idRobo, int quina, bool espelhar){
     if(encontraRobo(time, idRobo) == -1){
         return 0;
     }   
     else{
+        if(espelhar){
+            if(quina == 2) quina = 1;
+            else if(quina == 1) quina = 2;
+            else if(quina == 0) quina = 3;
+            else if(quina == 3) quina = 0;
+        }
         return normaliza(MAX_POS_Y, MIN_POS_Y, getQuinaY(_robo[encontraRobo(time, idRobo)], quina));
     }
-
 }
 
 double Interface::getQuinaX(robovss rob, int l){ // 0 - top dir; 1 - bai dir; 2 - bai esq; 3 - top esq
@@ -247,7 +288,6 @@ double Interface::getQuinaY(robovss rob, int l){ // 0 - top dir; 1 - bai dir; 2 
         return rob.getY() - ((robovss::largura/cte::raiz2) * cos(cte::PI/180 * (rob.getAng() - 45)));
     }
 }
-
 
 double Interface::get_denormalized_pos_bola_x(){
     return _bola->getX();

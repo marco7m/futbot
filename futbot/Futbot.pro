@@ -26,12 +26,13 @@ INCLUDEPATH *= . src
 
 SOURCES += \
     src/main.cpp \
-    src/controlsystem/gamewatch.cpp \
+#\    src/controlsystem/gamewatch.cpp \
+    src/controlsystem/gameplay.cpp \
     src/controlsystem/referee.cpp \
-    src/headcontroller/simpleia.cpp \
-    src/headcontroller/getbperror.cpp \
-    src/headcontroller/one_player_alone.cpp \
-    src/headcontroller/save_game.cpp \
+#\    src/headcontroller/simpleia.cpp \
+#\    src/headcontroller/getbperror.cpp \
+#\    src/headcontroller/one_player_alone.cpp \
+#\    src/headcontroller/save_game.cpp \
 # WRSim source files
 #    src/wrsim/src/WRSim/controle.cpp \
 #    src/wrsim/src/WRSim/controlewrsim.cpp \
@@ -56,12 +57,13 @@ SOURCES += \
   
 # Header files
 HEADERS  += \
-    src/controlsystem/gamewatch.h \
+#\    src/controlsystem/gamewatch.h \
+    src/controlsystem/gameplay.h \
     src/controlsystem/referee.h \
-    src/headcontroller/simpleia.h \
-    src/headcontroller/getbperror.h \
-    src/headcontroller/one_player_alone.h \
-    src/headcontroller/save_game.h \
+#\    src/headcontroller/simpleia.h \
+#\    src/headcontroller/getbperror.h \
+#\    src/headcontroller/one_player_alone.h \
+#\    src/headcontroller/save_game.h \
 # WRSim header files
 #    src/wrsim/src/WRSim/controle.h \
 #    src/wrsim/src/WRSim/controlewrsim.h \

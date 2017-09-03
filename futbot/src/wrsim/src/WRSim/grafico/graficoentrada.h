@@ -40,5 +40,6 @@ private:
     Interface interface;
     int team_control;
     int id_control;
+    bool mirror;
 };
 #endif // GRAFICOENTRADA_H

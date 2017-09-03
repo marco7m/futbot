@@ -10,7 +10,7 @@
 // depois seta os pesos deles
 //
 // CONEXOES:
-// network_input - connector - network_output
+// input - connector - output
 NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp){
     set_input(in);
     set_output(out); 
@@ -25,6 +25,14 @@ NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::string name){
     set_output(out);
     LoadNetwork(name);
     PrintTopology();
+}
+
+NeuralNetwork::NeuralNetwork(std::vector<std::vector<double> > nn_data){
+    double_ptr in{nn_data[0][0]};
+    double_ptr out{nn_data[0][nn_data[0].size() - 1]};
+    set_input(in);
+    set_output(out);
+    LoadNetwork(nn_data);
 }
 
 NeuralNetwork::~NeuralNetwork(){
@@ -86,7 +94,7 @@ void NeuralNetwork::PrintNeuralNetwork(){
 void NeuralNetwork::ConnectAll(){
     if(VERBOSE) std::cout << std::endl << "ConnectAll" << std::endl;
     // checa se as entradas e saidas da rede já foram conectadas
-    if((network_input.size == 0) || (network_output.size == 0)){
+    if((input.size == 0) || (output.size == 0)){
         std::cout << "ERROR: Connect first the inputs and outputs to the neural network" << std::endl;
         exit(1);
     }
@@ -99,7 +107,7 @@ void NeuralNetwork::ConnectAll(){
     
     // conecta as entradas na primeira camada
     for(int i = 0; i < (int)network[0].size(); i++){
-        network[0][i].connect_input(network_input);
+        network[0][i].connect_input(input);
         if(VERBOSE) std::cout << "conectando input do neuronio (0," << i << ") com input (*) da rede neural" << std::endl;
     }
 
@@ -133,7 +141,7 @@ void NeuralNetwork::ConnectAll(){
         // i = passa por todos os neuronios da ultima coluna da network
         // (int)network.size()-2 = indice da connection que está entre a ultima e a penultima coluna da network
         // &connection[(int)]network.size()-2].ptr[i] = ponteiro que aponta para 
-        network[(int)network.size()-1][i].connect_output(&network_output.ptr[i]);
+        network[(int)network.size()-1][i].connect_output(&output.ptr[i]);
         if(VERBOSE) std::cout << "conectando output do neuronio (" << (int)network.size()-1 << "," << i << ") com a output (" << i << ") da rede neural" << std::endl;
     }
 }
@@ -147,14 +155,14 @@ void NeuralNetwork::set_topology(std::vector<int> t){
 
     // NÃO TESTADO
     // se a saida já foi definida e a última camada tem um número diferente de neuronios do número de saidas, gera um erro
-    if((network_output.size != topology[(int)topology.size() - 1]) && (network_output.size != 0)){
+    if((output.size != topology[(int)topology.size() - 1]) && (output.size != 0)){
         std::cout << "ERROR: Outputs number differ from topology outputs number" << std::endl;
         exit(1);
     }
 
     // NÃO TESTADO
     // se a entrada já foi definida e a primeira camada tem um número diferente de neuronios do número de entradas, gera um erro
-    if((network_input.size != topology[0]) && (network_output.size != 0)){
+    if((input.size != topology[0]) && (output.size != 0)){
         std::cout << "ERROR: Inputs number differ from topology inputs number" << std::endl;
         exit(1);
     }
@@ -162,10 +170,10 @@ void NeuralNetwork::set_topology(std::vector<int> t){
 
 void NeuralNetwork::set_input(double_ptr i){
     if(VERBOSE) std::cout << std::endl << "set_input" << std::endl;
-    network_input = i;
+    input = i;
 
     // se a topologia já foi definida e a primeira camada tem um número diferente de neuronios do numero de entradas, gera um erro
-    if(((int)topology.size() != 0) && (network_input.size != topology[0])){
+    if(((int)topology.size() != 0) && (input.size != topology[0])){
         std::cout << "ERROR: Inputs number differ from topology inputs number" << std::endl;
         exit(1);
     }
@@ -173,11 +181,11 @@ void NeuralNetwork::set_input(double_ptr i){
 
 void NeuralNetwork::set_output(double_ptr o){
     if(VERBOSE) std::cout << std::endl << "set_output" << std::endl;
-    network_output = o;
+    output = o;
     
     // NÃO TESTADO
     // se a topologia já foi definida e a última camada tem um número diferente de neuronios do número de saidas, gera um erro
-    if(((int)topology.size() != 0) && (network_output.size != topology[(int)topology.size() - 1])){
+    if(((int)topology.size() != 0) && (output.size != topology[(int)topology.size() - 1])){
         std::cout << "ERROR: Outputs number differ from topology outputs number" << std::endl;
         exit(1);
     }

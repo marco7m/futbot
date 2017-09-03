@@ -1,37 +1,37 @@
-
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
 #include "objetos/robovss.h"
 #include "objetos/bola.h"
 
+// para obter os valores reais, time = 0; para obter os valores espelhados, time = 1.
 class Interface{
 public:
     Interface(robovss *r, bola *b);
     Interface();
 
-    double getPosX(quint8 time, quint8 idRobo);
-    void setPosX(quint8 time, quint8 idRobo, double posx);
-    double getPosY(quint8 time, quint8 idRobo);
-    void setPosY(quint8 time, quint8 idRobo, double posy);
+    double getPosX(quint8 time, quint8 idRobo, bool espelhar = false);
+    void setPosX(quint8 time, quint8 idRobo, double posx, bool espelhar = false);
+    double getPosY(quint8 time, quint8 idRobo, bool espelhar = false);
+    void setPosY(quint8 time, quint8 idRobo, double posy, bool espelhar = false);
     double getAng(quint8 time, quint8 idRobo);
     void setAng(quint8 time, quint8 idRobo, double ang);
-    double getVel(quint8 time, quint8 idRobo);
-    void setVel(quint8 time, quint8 idRobo, double vel);
-    double getVelX(quint8 time, quint8 idRobo);
-    double getVelY(quint8 time, quint8 idRobo);
-    double getVelAng(quint8 time, quint8 idRobo);
-    void setVelAng(quint8 time, quint8 idRobo, double velAng);
-    double getPosBolaX();
+    double getVel(quint8 time, quint8 idRobo, bool espelhar = false);
+    void setVel(quint8 time, quint8 idRobo, double vel, bool espelhar = false);
+    double getVelX(quint8 time, quint8 idRobo, bool espelhar = false);
+    double getVelY(quint8 time, quint8 idRobo, bool espelhar = false);
+    double getVelAng(quint8 time, quint8 idRobo, bool espelhar = false);
+    void setVelAng(quint8 time, quint8 idRobo, double velAng, bool espelhar = false);
+    double getPosBolaX(bool espelhar = false);
     void setPosBolaX(double posbx);
-    double getPosBolaY();
+    double getPosBolaY(bool espelhar = false);
     void setPosBolaY(double posby);
-    double getVelBolaX();
+    double getVelBolaX(bool espelhar = false);
     void setVelBolaX(double velbx);
-    double getVelBolaY();
+    double getVelBolaY(bool espelhar = false);
     void setVelBolaY(double velby);
-    double getPosXQuina(quint8 time, quint8 idRobo, int quina);
-    double getPosYQuina(quint8 time, quint8 idRobo, int quina);
+    double getPosXQuina(quint8 time, quint8 idRobo, int quina, bool espelhar = false);
+    double getPosYQuina(quint8 time, quint8 idRobo, int quina, bool espelhar = false);
 
     double get_denormalized_pos_bola_x();
 
