@@ -9,7 +9,8 @@ int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
     GamePlay gameplay{};
-    gameplay.watch_mode(Csv::get_double_data("data/nn0002.csv"), Csv::get_double_data("data/nn0002.csv"));
+    gameplay.save_manual_mode(60000);
+//    gameplay.watch_mode(Csv::get_double_data("data/nn0002.csv"), Csv::get_double_data("data/nn0002.csv"));
 //    gameplay.manual_mode();
 
     return a.exec();

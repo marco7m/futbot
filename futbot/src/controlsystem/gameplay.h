@@ -19,12 +19,15 @@ public:
     GamePlay();
     ~GamePlay();
 
+    void fast_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time);
     void watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b);
     void manual_mode();
+    void save_manual_mode(double total_save_time);
 
 public slots:
     void slot_watch_mode();
     void slot_manual_mode();
+    void slot_save_manual_mode();
 
 private:
     robovss* _robo = nullptr;
@@ -39,6 +42,10 @@ private:
     NeuralNetwork* _neural_network_a = nullptr;
     NeuralNetwork* _neural_network_b = nullptr;
 
+    //save_manual_mode variables
+    unsigned long long total_save_time;
+    std::vector<std::vector<double> > data_all_input;
+    std::vector<std::vector<double> > data_all_output;
 
     void clear_all_pointers();
 
