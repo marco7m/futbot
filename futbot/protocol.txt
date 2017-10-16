@@ -1,3 +1,5 @@
 team 0 - > lado esquerdo sempre
 team 1 - > lado direito sempre
 
+topology (NeuralNetwork):
+topology[0] = numero de entradas da rede 

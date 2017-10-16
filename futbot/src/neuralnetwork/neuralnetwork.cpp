@@ -208,6 +208,7 @@ void NeuralNetwork::SaveNetwork(std::string name){
     if(VERBOSE) std::cout << std::endl << "SaveNetwork" << std::endl;
     std::vector<std::vector<std::string> > nn_to_save;
     std::vector<std::string> nn_line;
+
     // prepara a primeira linha com a topologia
     for(int i = 0; i < (int)topology.size(); i++){
         nn_line.push_back(std::to_string(topology[i]));

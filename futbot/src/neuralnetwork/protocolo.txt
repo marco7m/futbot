@@ -3,3 +3,12 @@
         - os neuronios da primeira camada na topologia (indice [1] da topologia, e não indice[0]), recebem como entradas todas as entradas
 - a última camada da topologia tem o mesmo número de neuronios que a quantidade de saídas
 
+- PROTOCOLO DE ARMAZENAMENTO DA REDE NEURAL
+    - Rede Neural: network[i][j] da classe NeuralNetwork.
+    - i é o indice das colunas da rede neural (ou camadas) começando da mais próxima à entrada, e j é o indice dos neuronios que estão na camada i.
+    - O armazenamento é feito da seguinte forma:
+        - são armazenados todos os pesos do primeiro neurônio da camada mais próxima à entrada, 
+          então é armazenado a bias deste neurônio,
+          então todos os pesos do segundo neurônio da camada mais próxima à entrada, 
+          a bias dele, e assim em diante, camada por camada.
+    
