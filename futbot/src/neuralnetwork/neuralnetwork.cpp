@@ -223,6 +223,8 @@ void NeuralNetwork::SaveNetwork(std::string name){
             for(int k = 0; k < topology[i]; k++){
                 nn_line.push_back(std::to_string(network[i][j].get_weight(k)));
             }
+            // coloca a bias do neuronio logo após os pesos
+            nn_line.push_back(std::to_string(network[i][j].get_bias()));
         }
     }
     nn_to_save.push_back(nn_line);
@@ -344,8 +346,7 @@ void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
     for(int c = 0; i < (int)nn_data[1].size(); c++){
     
         // move as variaveis i,j,k
-        if(++k < network[i][j].get_number_inputs()){
-        }
+        if(++k < network[i][j].get_number_inputs() + 1){} // o + 1 é por causa da bias
         else if(++j < (int)network[i].size()){
             k = 0;
         }
@@ -354,11 +355,17 @@ void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
             k = 0;
         }
         else{
-            break;
+            std::cout << "ERROR: More weights in file than are indicated by topology." << std::endl;
+            exit(1);
         }
         
-        // aqui vai passar peso por peso que está no arquivo
-        network[i][j].set_weight(k,nn_data[1][c]);
+        // aqui vai passar peso por peso e bias que está no arquivo
+        if(k == network[i][j].get_number_inputs()){
+            network[i][j].set_bias(nn_data[1][c]);
+        }
+        else{
+            network[i][j].set_weight(k,nn_data[1][c]);
+        }
     }
 }
 
@@ -388,8 +395,7 @@ void NeuralNetwork::LoadNetwork(std::string data_name){
     for(int c = 0; i < (int)nn_data[1].size(); c++){
     
         // move as variaveis i,j,k
-        if(++k < network[i][j].get_number_inputs()){
-        }
+        if(++k < network[i][j].get_number_inputs() + 1){} // o + 1 é por causa da bias
         else if(++j < (int)network[i].size()){
             k = 0;
         }
@@ -398,11 +404,17 @@ void NeuralNetwork::LoadNetwork(std::string data_name){
             k = 0;
         }
         else{
-            break;
+            std::cout << "ERROR: More weights in file than are indicated by topology." << std::endl;
+            exit(1);
         }
         
-        // aqui vai passar peso por peso que está no arquivo
-        network[i][j].set_weight(k,nn_data[1][c]);
+        // aqui vai passar peso por peso e bias que está no arquivo
+        if(k == network[i][j].get_number_inputs()){
+            network[i][j].set_bias(nn_data[1][c]);
+        }
+        else{
+            network[i][j].set_weight(k,nn_data[1][c]);
+        }
     }
 }
 
