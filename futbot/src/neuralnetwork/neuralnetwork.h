@@ -34,11 +34,8 @@ public:
     // então ele começa a percorrer as outras fileiras até chegar a última.
     void SaveNetwork(std::string name);
 
-    // igual a outra, mas sem a classe Csv
-    void _OldSaveNetwork(std::string name);
     void LoadNetwork(std::vector<std::vector<double> > nn_data);
     void LoadNetwork(std::string name);
-    void _OldLoadNetwork(std::string name);
 
 private:
     // a rede contém todos os neuronios
