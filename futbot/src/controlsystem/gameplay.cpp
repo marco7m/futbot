@@ -437,15 +437,8 @@ void GamePlay::slot_watch_mode(){
 
 
     // aplica as entradas na rede neural
-    _neural_network_a->DoTheJobOnce();
+    _neural_network_a->feed();
 
-    // saida dos dados da rede neural A
-    _interface->setVel(0,0,_neural_network_a->output.ptr[0]);
-    _interface->setVelAng(0,0,_neural_network_a->output.ptr[1]);
-    _interface->setVel(0,1,_neural_network_a->output.ptr[2]);
-    _interface->setVelAng(0,1,_neural_network_a->output.ptr[3]);
-    _interface->setVel(0,2,_neural_network_a->output.ptr[4]);
-    _interface->setVelAng(0,2,_neural_network_a->output.ptr[5]);
 
     
     //======================  ENTRADA DE DADOS IA_B =========================
@@ -492,7 +485,20 @@ void GamePlay::slot_watch_mode(){
 
 
     // aplica as entradas na rede neural
-    _neural_network_b->DoTheJobOnce();
+    _neural_network_b->feed();
+
+
+    // APLICA AS SAIDAS DAS REDES NEURAIS
+
+    // saida dos dados da rede neural A
+    _interface->setVel(0,0,_neural_network_a->output.ptr[0]);
+    _interface->setVelAng(0,0,_neural_network_a->output.ptr[1]);
+    _interface->setVel(0,1,_neural_network_a->output.ptr[2]);
+    _interface->setVelAng(0,1,_neural_network_a->output.ptr[3]);
+    _interface->setVel(0,2,_neural_network_a->output.ptr[4]);
+    _interface->setVelAng(0,2,_neural_network_a->output.ptr[5]);
+
+
 
     // saida dos dados da rede neural B
     _interface->setVel(1,0,_neural_network_b->output.ptr[0],true);
@@ -501,6 +507,11 @@ void GamePlay::slot_watch_mode(){
     _interface->setVelAng(1,1,_neural_network_b->output.ptr[3],true);
     _interface->setVel(1,2,_neural_network_b->output.ptr[4],true);
     _interface->setVelAng(1,2,_neural_network_b->output.ptr[5],true);
+
+
+
+
+
 }
 
 void GamePlay::slot_manual_mode(){

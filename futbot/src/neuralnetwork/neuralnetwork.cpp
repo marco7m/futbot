@@ -191,11 +191,12 @@ void NeuralNetwork::set_output(double_ptr o){
     }
 }
 
-void NeuralNetwork::DoTheJobOnce(){
-    if(VERBOSE) std::cout << "DoTheJobOnce" << std::endl;
+void NeuralNetwork::feed(){
+    if(VERBOSE) std::cout << "feed" << std::endl;
     for(int i = 0; i < (int)network.size(); i++){
         for(int j = 0; j < (int)network[i].size(); j++){
             network[i][j].work();
+            // AAA NÃO ENTENDI ESSA PARTE
             if( i == (int)network.size() - 1 ){
                 if(network[i][j].get_output_value() != 0){
                 }
@@ -254,7 +255,7 @@ void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
     int j = 0; // neuronio na coluna
     int k = -1; // peso no neuronio (-1 para a lógica dos ifs logo abaixo funcionar
    
-    for(int c = 0; i < (int)nn_data[1].size(); c++){
+    for(int c = 0; i < (int)nn_data[1].size(); c++){ // i < (int)nn_data[1].size() (não entendi essa parte)
     
         // move as variaveis i,j,k
         if(++k < network[i][j].get_number_inputs() + 1){} // o + 1 é por causa da bias
@@ -266,10 +267,23 @@ void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
             k = 0;
         }
         else{
-            std::cout << "ERROR: More weights in file than are indicated by topology." << std::endl;
-            exit(1);
+            if(c !=  (int)nn_data[1].size() ){
+                std::cout << "ERROR: Weights in file are of a different number than are indicated by topology." << std::endl;
+                exit(1);
+            }
+            else{
+                break;
+            }
         }
         
+//        // DEBUG 
+//        std::cout << "" << std::endl;
+//        std::cout << "c = " << c << std::endl;
+//        std::cout << "k = " << k << std::endl;
+//        std::cout << "i = " << i << std::endl;
+//        std::cout << "j = " << j << std::endl;
+//        // fim DEBUG
+       
         // aqui vai passar peso por peso e bias que está no arquivo
         if(k == network[i][j].get_number_inputs()){
             network[i][j].set_bias(nn_data[1][c]);
@@ -277,6 +291,7 @@ void NeuralNetwork::LoadNetwork(std::vector<std::vector<double> > nn_data){
         else{
             network[i][j].set_weight(k,nn_data[1][c]);
         }
+    
     }
 }
 
@@ -316,6 +331,7 @@ void NeuralNetwork::LoadNetwork(std::string data_name){
         }
         else{
             std::cout << "ERROR: More weights in file than are indicated by topology." << std::endl;
+            std::cout << "" << std::endl;
             exit(1);
         }
         

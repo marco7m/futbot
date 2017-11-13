@@ -21,7 +21,7 @@ public:
     void set_topology(std::vector<int> t);
     void set_input(double_ptr i);
     void set_output(double_ptr o);
-    void DoTheJobOnce();
+    void feed();
     void set_random_weights();
 
     double_ptr input;
