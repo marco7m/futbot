@@ -73,8 +73,9 @@ void Neuron::work(){
         *output += (weight[i] * input.ptr[i]);
     }
     *output += bias;  // *output += bias * 1
-    // a função de ativação é tangente hiperbólico
+    // a função de ativação é tangente hiperbólico + 1 /2 para normalizar entre 0 e 1
     *output = (2/(1 + exp(-2 * (*output))))-1;
+    *output = (*output + 1)/2;
 }
 
 

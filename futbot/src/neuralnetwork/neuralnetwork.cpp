@@ -11,10 +11,15 @@
 //
 // CONEXOES:
 // input - connector - output
-NeuralNetwork::NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp){
+NeuralNetwork::NeuralNetwork(std::vector<int> tp){
+    double_ptr in{tp[0]};
+    double_ptr out{tp[tp.size() - 1]};
+
     set_input(in);
     set_output(out); 
+
     set_topology(tp);
+
     CreateNetwork();
     ConnectAll();
     set_random_weights();

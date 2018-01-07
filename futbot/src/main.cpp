@@ -15,10 +15,10 @@ int main(int argc, char *argv[]){
 
     std::vector<std::vector<double> > team_a = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
     std::vector<std::vector<double> > team_b = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
-    gameplay.fast_mode(team_a, team_b, 3600000);
-//    gameplay.watch_mode(team_a, team_b);
+//    gameplay.fast_mode(team_a, team_b, 3600000);
+    gameplay.watch_mode(team_a, team_b);
 
-//    return a.exec();
+    return a.exec();
     return 0;
 }
 
