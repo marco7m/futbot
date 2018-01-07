@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "controlsystem/gameplay.h"
 #include "utils/csv.h"
+#include <iostream>
 
 // main generica
 int main(int argc, char *argv[]){
@@ -10,13 +11,15 @@ int main(int argc, char *argv[]){
 
     GamePlay gameplay{};
 //    gameplay.save_manual_mode(60000);
-//    gameplay.watch_mode(Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv"), Csv::get_double_data("data/ia_list/nn_iaparada/nn_iaparada.csv"));
-//    gameplay.watch_mode(Csv::get_double_data("data/ia_list/nn_iaparada/nn_iaparada.csv"), Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv"));
-    gameplay.watch_mode(Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv"), Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv"));
 //    gameplay.manual_mode();
 
-    return a.exec();
-//    return 0;
+    std::vector<std::vector<double> > team_a = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
+    std::vector<std::vector<double> > team_b = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
+    gameplay.fast_mode(team_a, team_b, 3600000);
+//    gameplay.watch_mode(team_a, team_b);
+
+//    return a.exec();
+    return 0;
 }
 
 

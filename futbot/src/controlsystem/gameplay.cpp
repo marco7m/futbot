@@ -101,6 +101,123 @@ void GamePlay::fast_mode(std::vector<std::vector<double> > team_a, std::vector<s
         _referee->check_game();
 
         *_tempo = *_tempo+10;   
+
+        //======================  ENTRADA DE DADOS IA_A =========================
+        int i = 0;
+        for(int t = 0; t < 2; t++){
+            for(int id = 0; id < 3; id++){
+                _neural_network_a->input.ptr[i] = _interface->getPosX(t,id);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosXQuina(t,id,0);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosXQuina(t,id,1);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosXQuina(t,id,2);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosXQuina(t,id,3);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosY(t,id);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosYQuina(t,id,0);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosYQuina(t,id,1);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosYQuina(t,id,2);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getPosYQuina(t,id,3);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getVelX(t,id);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getVelY(t,id);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getVelAng(t,id);
+                i++;
+                _neural_network_a->input.ptr[i] = _interface->getVel(t,id);
+                i++;
+            }
+        } 
+        _neural_network_a->input.ptr[i] = _interface->getPosBolaX();
+        i++;
+        _neural_network_a->input.ptr[i] = _interface->getPosBolaY();
+        i++;
+        _neural_network_a->input.ptr[i] = _interface->getVelBolaX();
+        i++;
+        _neural_network_a->input.ptr[i] = _interface->getVelBolaY();
+        i = 0;
+
+
+        // aplica as entradas na rede neural
+        _neural_network_a->feed();
+
+
+        
+        //======================  ENTRADA DE DADOS IA_B =========================
+        for(int t = 1; t >= 0; t--){
+            for(int id = 0; id < 3; id++){
+                _neural_network_b->input.ptr[i] = _interface->getPosX(t,id,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosXQuina(t,id,0,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosXQuina(t,id,1,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosXQuina(t,id,2,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosXQuina(t,id,3,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosY(t,id,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosYQuina(t,id,0,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosYQuina(t,id,1,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosYQuina(t,id,2,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getPosYQuina(t,id,3,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getVelX(t,id,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getVelY(t,id,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getVelAng(t,id,true);
+                i++;
+                _neural_network_b->input.ptr[i] = _interface->getVel(t,id,true);
+                i++;
+            }
+        } 
+        _neural_network_b->input.ptr[i] = _interface->getPosBolaX(true);
+        i++;
+        _neural_network_b->input.ptr[i] = _interface->getPosBolaY(true);
+        i++;
+        _neural_network_b->input.ptr[i] = _interface->getVelBolaX(true);
+        i++;
+        _neural_network_b->input.ptr[i] = _interface->getVelBolaY(true);
+        i = 0;
+
+
+        // aplica as entradas na rede neural
+        _neural_network_b->feed();
+
+
+        // APLICA AS SAIDAS DAS REDES NEURAIS
+
+        // saida dos dados da rede neural A
+        _interface->setVel(0,0,_neural_network_a->output.ptr[0]);
+        _interface->setVelAng(0,0,_neural_network_a->output.ptr[1]);
+        _interface->setVel(0,1,_neural_network_a->output.ptr[2]);
+        _interface->setVelAng(0,1,_neural_network_a->output.ptr[3]);
+        _interface->setVel(0,2,_neural_network_a->output.ptr[4]);
+        _interface->setVelAng(0,2,_neural_network_a->output.ptr[5]);
+
+
+
+        // saida dos dados da rede neural B
+        _interface->setVel(1,0,_neural_network_b->output.ptr[0],true);
+        _interface->setVelAng(1,0,_neural_network_b->output.ptr[1],true);
+        _interface->setVel(1,1,_neural_network_b->output.ptr[2],true);
+        _interface->setVelAng(1,1,_neural_network_b->output.ptr[3],true);
+        _interface->setVel(1,2,_neural_network_b->output.ptr[4],true);
+        _interface->setVelAng(1,2,_neural_network_b->output.ptr[5],true);
+
     }
 
     clear_all_pointers();
@@ -197,11 +314,6 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
     _timer = new QTimer();
     QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(slot_watch_mode()));
     _timer->start(10);
-
-
-
-
-    
 }
 
 void GamePlay::manual_mode(){
@@ -390,7 +502,7 @@ void GamePlay::slot_watch_mode(){
     _grafico->roda();
 
     *_tempo = *_tempo+10;
-    std::cout << *_tempo << std::endl;
+//    std::cout << *_tempo << std::endl;
 
     //======================  ENTRADA DE DADOS IA_A =========================
     int i = 0;
