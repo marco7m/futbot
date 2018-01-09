@@ -9,7 +9,7 @@
 
 class NeuralNetwork{
 public:
-    NeuralNetwork(double_ptr in, double_ptr out, std::vector<int> tp);
+    NeuralNetwork(std::vector<int> tp);
     NeuralNetwork(double_ptr in, double_ptr out, std::string name);
     NeuralNetwork(std::vector<std::vector<double> > nn_data);
     ~NeuralNetwork();

@@ -13,7 +13,7 @@
 // input - connector - output
 NeuralNetwork::NeuralNetwork(std::vector<int> tp){
     double_ptr in{tp[0]};
-    double_ptr out{tp[tp.size() - 1]};
+    double_ptr out{tp[(int)tp.size() - 1]};
 
     set_input(in);
     set_output(out); 
