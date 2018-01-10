@@ -29,6 +29,7 @@ SOURCES += \
     src/controlsystem/gameplay.cpp \
     src/controlsystem/referee.cpp \
     src/controlsystem/controlsystem.cpp \
+    src/controlsystem/moverobots.cpp \
 #\    src/headcontroller/simpleia.cpp \
 #\    src/headcontroller/getbperror.cpp \
 #\    src/headcontroller/one_player_alone.cpp \
@@ -60,6 +61,7 @@ HEADERS  += \
     src/controlsystem/gameplay.h \
     src/controlsystem/referee.h \
     src/controlsystem/controlsystem.h \
+    src/controlsystem/moverobots.h \
 #\    src/headcontroller/simpleia.h \
 #\    src/headcontroller/getbperror.h \
 #\    src/headcontroller/one_player_alone.h \

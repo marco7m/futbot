@@ -8,22 +8,22 @@
 
 // main generica
 int main(int argc, char *argv[]){
-//    QApplication a(argc, argv);
+    QApplication a(argc, argv);
 
-    ControlSystem cs{};
+//    ControlSystem cs{};
 
 
-//    GamePlay gameplay{};
+    GamePlay gameplay{};
 //    gameplay.save_manual_mode(60000);
-//    gameplay.manual_mode();
+    gameplay.manual_mode();
 
-//    std::vector<std::vector<double> > team_a = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
-//    std::vector<std::vector<double> > team_b = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
+    std::vector<std::vector<double> > team_a = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
+    std::vector<std::vector<double> > team_b = Csv::get_double_data("data/ia_list/nn_teste/nn_teste.csv");
 //    gameplay.fast_mode(team_a, team_b, 3600000);
 //    gameplay.watch_mode(team_a, team_b);
 
-//    return a.exec();
-    return 0;
+    return a.exec();
+//    return 0;
 }
 
 

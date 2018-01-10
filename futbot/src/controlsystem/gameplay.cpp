@@ -15,80 +15,29 @@ void GamePlay::get_fitness(NeuralNetwork* _neural_network_a, NeuralNetwork* _neu
 
     // inicialização dos robôs
     _robo = new robovss[6];
-
     _robo[0].setTime(0);
     _robo[0].setIdRobo(0);
- 
     _robo[1].setTime(0);
     _robo[1].setIdRobo(1);
- 
     _robo[2].setTime(0);
     _robo[2].setIdRobo(2);
- 
     _robo[3].setTime(1);
     _robo[3].setIdRobo(0);
- 
     _robo[4].setTime(1);
     _robo[4].setIdRobo(1);
- 
     _robo[5].setTime(1);
     _robo[5].setIdRobo(2);
 
     _bola = new bola();
-
     _interface = new Interface(_robo, _bola);
-
     _tempo = new unsigned long long;
-    
     _referee = new Referee(*_interface, _tempo);
-
-    // cria fisica
     _fisica = new fisica(_robo, _tempo, _bola);
 
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _interface->setPosX(0,0,0.25);
-    _interface->setPosY(0,0,0.5);
-    _interface->setAng(0,0,0.25);
-    _interface->setVel(0,0,0.5);
-    _interface->setVelAng(0,0,0.5);
-
-    _interface->setPosX(0,1,0.25);
-    _interface->setPosY(0,1,0.25);
-    _interface->setAng(0,1,0.25);
-    _interface->setVel(0,1,0.5);
-    _interface->setVelAng(0,1,0.5);
-
-    _interface->setPosX(0,2,0.25);
-    _interface->setPosY(0,2,0.75);
-    _interface->setAng(0,2,0.25);
-    _interface->setVel(0,2,0.5);
-    _interface->setVelAng(0,2,0.5);
-
-    _interface->setPosX(1,0,0.75);
-    _interface->setPosY(1,0,0.5);
-    _interface->setAng(1,0,0.75);
-    _interface->setVel(1,0,0.5);
-    _interface->setVelAng(1,0,0.5);
-
-    _interface->setPosX(1,1,0.75);
-    _interface->setPosY(1,1,0.25);
-    _interface->setAng(1,1,0.75);
-    _interface->setVel(1,1,0.5);
-    _interface->setVelAng(1,1,0.5);
-
-    _interface->setPosX(1,2,0.75);
-    _interface->setPosY(1,2,0.75);
-    _interface->setAng(1,2,0.75);
-    _interface->setVel(1,2,0.5);
-    _interface->setVelAng(1,2,0.5);
-
-    // posiciona a bola
-    _interface->setPosBolaX(0.5);
-    _interface->setPosBolaY(0.5);
-    _interface->setVelBolaX(0.5);
-    _interface->setVelBolaY(0.5);
+    MoveRobots::default_position(*_interface);
 
     *_tempo = 0;
 
@@ -260,47 +209,7 @@ void GamePlay::fast_mode(std::vector<std::vector<double> > team_a, std::vector<s
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _interface->setPosX(0,0,0.25);
-    _interface->setPosY(0,0,0.5);
-    _interface->setAng(0,0,0.25);
-    _interface->setVel(0,0,0.5);
-    _interface->setVelAng(0,0,0.5);
-
-    _interface->setPosX(0,1,0.25);
-    _interface->setPosY(0,1,0.25);
-    _interface->setAng(0,1,0.25);
-    _interface->setVel(0,1,0.5);
-    _interface->setVelAng(0,1,0.5);
-
-    _interface->setPosX(0,2,0.25);
-    _interface->setPosY(0,2,0.75);
-    _interface->setAng(0,2,0.25);
-    _interface->setVel(0,2,0.5);
-    _interface->setVelAng(0,2,0.5);
-
-    _interface->setPosX(1,0,0.75);
-    _interface->setPosY(1,0,0.5);
-    _interface->setAng(1,0,0.75);
-    _interface->setVel(1,0,0.5);
-    _interface->setVelAng(1,0,0.5);
-
-    _interface->setPosX(1,1,0.75);
-    _interface->setPosY(1,1,0.25);
-    _interface->setAng(1,1,0.75);
-    _interface->setVel(1,1,0.5);
-    _interface->setVelAng(1,1,0.5);
-
-    _interface->setPosX(1,2,0.75);
-    _interface->setPosY(1,2,0.75);
-    _interface->setAng(1,2,0.75);
-    _interface->setVel(1,2,0.5);
-    _interface->setVelAng(1,2,0.5);
-
-    // posiciona a bola
-    _interface->setPosBolaX(0.5);
-    _interface->setPosBolaY(0.5);
-    _interface->setVelBolaX(0.5);
-    _interface->setVelBolaY(0.5);
+    MoveRobots::default_position(*_interface);
 
     *_tempo = 0;
 
@@ -471,47 +380,7 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _interface->setPosX(0,0,0.25);
-    _interface->setPosY(0,0,0.5);
-    _interface->setAng(0,0,0.25);
-    _interface->setVel(0,0,0.5);
-    _interface->setVelAng(0,0,0.5);
-
-    _interface->setPosX(0,1,0.25);
-    _interface->setPosY(0,1,0.25);
-    _interface->setAng(0,1,0.25);
-    _interface->setVel(0,1,0.5);
-    _interface->setVelAng(0,1,0.5);
-
-    _interface->setPosX(0,2,0.25);
-    _interface->setPosY(0,2,0.75);
-    _interface->setAng(0,2,0.25);
-    _interface->setVel(0,2,0.5);
-    _interface->setVelAng(0,2,0.5);
-
-    _interface->setPosX(1,0,0.75);
-    _interface->setPosY(1,0,0.5);
-    _interface->setAng(1,0,0.75);
-    _interface->setVel(1,0,0.5);
-    _interface->setVelAng(1,0,0.5);
-
-    _interface->setPosX(1,1,0.75);
-    _interface->setPosY(1,1,0.25);
-    _interface->setAng(1,1,0.75);
-    _interface->setVel(1,1,0.5);
-    _interface->setVelAng(1,1,0.5);
-
-    _interface->setPosX(1,2,0.75);
-    _interface->setPosY(1,2,0.75);
-    _interface->setAng(1,2,0.75);
-    _interface->setVel(1,2,0.5);
-    _interface->setVelAng(1,2,0.5);
-
-    // posiciona a bola
-    _interface->setPosBolaX(0.5);
-    _interface->setPosBolaY(0.5);
-    _interface->setVelBolaX(0.5);
-    _interface->setVelBolaY(0.5);
+    MoveRobots::default_position(*_interface);
 
     *_tempo = 0;
 
@@ -560,48 +429,8 @@ void GamePlay::manual_mode(){
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _interface->setPosX(0,0,0.25);
-    _interface->setPosY(0,0,0.5);
-    _interface->setAng(0,0,0.25);
-    _interface->setVel(0,0,0.5);
-    _interface->setVelAng(0,0,0.5);
-
-    _interface->setPosX(0,1,0.25);
-    _interface->setPosY(0,1,0.25);
-    _interface->setAng(0,1,0.25);
-    _interface->setVel(0,1,0.5);
-    _interface->setVelAng(0,1,0.5);
-
-    _interface->setPosX(0,2,0.25);
-    _interface->setPosY(0,2,0.75);
-    _interface->setAng(0,2,0.25);
-    _interface->setVel(0,2,0.5);
-    _interface->setVelAng(0,2,0.5);
-
-    _interface->setPosX(1,0,0.75);
-    _interface->setPosY(1,0,0.5);
-    _interface->setAng(1,0,0.75);
-    _interface->setVel(1,0,0.5);
-    _interface->setVelAng(1,0,0.5);
-
-    _interface->setPosX(1,1,0.75);
-    _interface->setPosY(1,1,0.25);
-    _interface->setAng(1,1,0.75);
-    _interface->setVel(1,1,0.5);
-    _interface->setVelAng(1,1,0.5);
-
-    _interface->setPosX(1,2,0.75);
-    _interface->setPosY(1,2,0.75);
-    _interface->setAng(1,2,0.75);
-    _interface->setVel(1,2,0.5);
-    _interface->setVelAng(1,2,0.5);
-
-    // posiciona a bola
-    _interface->setPosBolaX(0.5);
-    _interface->setPosBolaY(0.5);
-    _interface->setVelBolaX(0.5);
-    _interface->setVelBolaY(0.5);
-
+    MoveRobots::default_position(*_interface);
+    
     *_tempo = 0;
 
     // cria parte gráfica
@@ -651,47 +480,7 @@ void GamePlay::save_manual_mode(double tst){
     // configurações pré inicio de partida
 
     // posiciona os robôs
-    _interface->setPosX(0,0,0.25);
-    _interface->setPosY(0,0,0.5);
-    _interface->setAng(0,0,0.25);
-    _interface->setVel(0,0,0.5);
-    _interface->setVelAng(0,0,0.5);
-
-    _interface->setPosX(0,1,0.25);
-    _interface->setPosY(0,1,0.25);
-    _interface->setAng(0,1,0.25);
-    _interface->setVel(0,1,0.5);
-    _interface->setVelAng(0,1,0.5);
-
-    _interface->setPosX(0,2,0.25);
-    _interface->setPosY(0,2,0.75);
-    _interface->setAng(0,2,0.25);
-    _interface->setVel(0,2,0.5);
-    _interface->setVelAng(0,2,0.5);
-
-    _interface->setPosX(1,0,0.75);
-    _interface->setPosY(1,0,0.5);
-    _interface->setAng(1,0,0.75);
-    _interface->setVel(1,0,0.5);
-    _interface->setVelAng(1,0,0.5);
-
-    _interface->setPosX(1,1,0.75);
-    _interface->setPosY(1,1,0.25);
-    _interface->setAng(1,1,0.75);
-    _interface->setVel(1,1,0.5);
-    _interface->setVelAng(1,1,0.5);
-
-    _interface->setPosX(1,2,0.75);
-    _interface->setPosY(1,2,0.75);
-    _interface->setAng(1,2,0.75);
-    _interface->setVel(1,2,0.5);
-    _interface->setVelAng(1,2,0.5);
-
-    // posiciona a bola
-    _interface->setPosBolaX(0.5);
-    _interface->setPosBolaY(0.5);
-    _interface->setVelBolaX(0.5);
-    _interface->setVelBolaY(0.5);
+    MoveRobots::default_position(*_interface);
 
     *_tempo = 0;
 

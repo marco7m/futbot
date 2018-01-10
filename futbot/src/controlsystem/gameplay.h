@@ -6,7 +6,8 @@
 #include "wrsim/src/WRSim/fisica.h"
 #include "wrsim/src/WRSim/grafico/grafico.h"
 #include "controlsystem/referee.h"
-#include "neuralnetwork/neuralnetwork.h"
+#include "src/neuralnetwork/neuralnetwork.h"
+#include "src/controlsystem/moverobots.h"
 
 #include <QObject>
 #include <QTimer>

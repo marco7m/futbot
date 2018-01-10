@@ -26,6 +26,7 @@
 #include "../objetos/robovss.h"
 #include "../objetos/bola.h"
 #include "../interface.h"
+#include "src/controlsystem/moverobots.h"
 
 class graficoentrada: public QGraphicsPixmapItem{
 public:
