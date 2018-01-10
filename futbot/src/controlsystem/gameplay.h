@@ -19,6 +19,7 @@ public:
     GamePlay();
     ~GamePlay();
 
+    void get_fitness(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time);
     void fast_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time);
     void watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b);
     void manual_mode();
