@@ -105,6 +105,10 @@ void graficoentrada::keyPressEvent(QKeyEvent *event){
         MoveRobots::default_position(interface);
     }
 
+    if(event->key() == Qt::Key_T){
+        MoveRobots::hide_all_but_one(interface);
+    }
+
     // escolhe qual robo controlar
     if(event->key() == Qt::Key_1){
         team_control = 0;        

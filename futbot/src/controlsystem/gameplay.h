@@ -8,9 +8,9 @@
 #include "controlsystem/referee.h"
 #include "src/neuralnetwork/neuralnetwork.h"
 #include "src/controlsystem/moverobots.h"
+#include "src/controlsystem/feedforward.h"
 
 #include <QObject>
-#include <QTimer>
 #include <QTimer>
 #include <vector>
 
@@ -20,7 +20,7 @@ public:
     GamePlay();
     ~GamePlay();
 
-    void get_fitness(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time);
+    void get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time);
     void fast_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time);
     void watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b);
     void manual_mode();
@@ -40,6 +40,7 @@ private:
     fisica* _fisica = nullptr;
     grafico* _grafico = nullptr;
     QTimer* _timer = nullptr;
+    FeedForward* _feedforward = nullptr;
 
     NeuralNetwork* _neural_network_a = nullptr;
     NeuralNetwork* _neural_network_b = nullptr;

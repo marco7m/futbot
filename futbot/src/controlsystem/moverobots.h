@@ -6,6 +6,7 @@
 class MoveRobots{
 public:
     static void default_position(Interface i);
+    static void hide_all_but_one(Interface i);
         
 
 

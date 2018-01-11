@@ -6,8 +6,9 @@ ControlSystem::ControlSystem(){
     play_time = 10*1000*60; // 1 minuto
 
     create_random_population();
+
     std::cout << "inicio" << std::endl;
-    gp.get_fitness(population[0], population[1], play_time);
+    gp.get_fit_move_point(population[0], population[1], play_time);
     std::cout << "fim" << std::endl;
 }
 

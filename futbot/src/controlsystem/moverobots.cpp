@@ -1,46 +1,94 @@
 #include "moverobots.h"
 
-void MoveRobots::default_position(Interface i){
+void MoveRobots::hide_all_but_one(Interface interface){
+    
     // posiciona os robôs
-    i.setPosX(0,0,0.25);
-    i.setPosY(0,0,0.5);
-    i.setAng(0,0,0.25);
-    i.setVel(0,0,0.5);
-    i.setVelAng(0,0,0.5);
+    interface.setPosX(0,0,0.25);
+    interface.setPosY(0,0,0.5);
+    interface.setAng(0,0,0.25);
+    interface.setVel(0,0,0.5);
+    interface.setVelAng(0,0,0.5);
 
-    i.setPosX(0,1,0.25);
-    i.setPosY(0,1,0.25);
-    i.setAng(0,1,0.25);
-    i.setVel(0,1,0.5);
-    i.setVelAng(0,1,0.5);
+    interface.setPosX(0,1,0.0);
+    interface.setPosY(0,1,0.0);
+    interface.setAng(0,1,0.0);
+    interface.setVel(0,1,0.5);
+    interface.setVelAng(0,1,0.5);
 
-    i.setPosX(0,2,0.25);
-    i.setPosY(0,2,0.75);
-    i.setAng(0,2,0.25);
-    i.setVel(0,2,0.5);
-    i.setVelAng(0,2,0.5);
+    interface.setPosX(0,2,0.0);
+    interface.setPosY(0,2,0.0);
+    interface.setAng(0,2,0.0);
+    interface.setVel(0,2,0.5);
+    interface.setVelAng(0,2,0.5);
 
-    i.setPosX(1,0,0.75);
-    i.setPosY(1,0,0.5);
-    i.setAng(1,0,0.75);
-    i.setVel(1,0,0.5);
-    i.setVelAng(1,0,0.5);
+    interface.setPosX(1,0,0.0);
+    interface.setPosY(1,0,0.0);
+    interface.setAng(1,0,0.0);
+    interface.setVel(1,0,0.5);
+    interface.setVelAng(1,0,0.5);
 
-    i.setPosX(1,1,0.75);
-    i.setPosY(1,1,0.25);
-    i.setAng(1,1,0.75);
-    i.setVel(1,1,0.5);
-    i.setVelAng(1,1,0.5);
+    interface.setPosX(1,1,0.0);
+    interface.setPosY(1,1,0.0);
+    interface.setAng(1,1,0.0);
+    interface.setVel(1,1,0.0);
+    interface.setVelAng(1,1,0.5);
 
-    i.setPosX(1,2,0.75);
-    i.setPosY(1,2,0.75);
-    i.setAng(1,2,0.75);
-    i.setVel(1,2,0.5);
-    i.setVelAng(1,2,0.5);
+    interface.setPosX(1,2,0.0);
+    interface.setPosY(1,2,0.0);
+    interface.setAng(1,2,0.0);
+    interface.setVel(1,2,0.5);
+    interface.setVelAng(1,2,0.5);
 
     // posiciona a bola
-    i.setPosBolaX(0.5);
-    i.setPosBolaY(0.5);
-    i.setVelBolaX(0.5);
-    i.setVelBolaY(0.5);
+    interface.setPosBolaX(0.0);
+    interface.setPosBolaY(0.0);
+    interface.setVelBolaX(0.5);
+    interface.setVelBolaY(0.5);
+
+}
+
+void MoveRobots::default_position(Interface interface){
+    
+    // posiciona os robôs
+    interface.setPosX(0,0,0.25);
+    interface.setPosY(0,0,0.5);
+    interface.setAng(0,0,0.25);
+    interface.setVel(0,0,0.5);
+    interface.setVelAng(0,0,0.5);
+
+    interface.setPosX(0,1,0.25);
+    interface.setPosY(0,1,0.25);
+    interface.setAng(0,1,0.25);
+    interface.setVel(0,1,0.5);
+    interface.setVelAng(0,1,0.5);
+
+    interface.setPosX(0,2,0.25);
+    interface.setPosY(0,2,0.75);
+    interface.setAng(0,2,0.25);
+    interface.setVel(0,2,0.5);
+    interface.setVelAng(0,2,0.5);
+
+    interface.setPosX(1,0,0.75);
+    interface.setPosY(1,0,0.5);
+    interface.setAng(1,0,0.75);
+    interface.setVel(1,0,0.5);
+    interface.setVelAng(1,0,0.5);
+
+    interface.setPosX(1,1,0.75);
+    interface.setPosY(1,1,0.25);
+    interface.setAng(1,1,0.75);
+    interface.setVel(1,1,0.5);
+    interface.setVelAng(1,1,0.5);
+
+    interface.setPosX(1,2,0.75);
+    interface.setPosY(1,2,0.75);
+    interface.setAng(1,2,0.75);
+    interface.setVel(1,2,0.5);
+    interface.setVelAng(1,2,0.5);
+
+    // posiciona a bola
+    interface.setPosBolaX(0.5);
+    interface.setPosBolaY(0.5);
+    interface.setVelBolaX(0.5);
+    interface.setVelBolaY(0.5);
 }

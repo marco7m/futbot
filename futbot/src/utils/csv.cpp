@@ -213,7 +213,7 @@ void Csv::save_data(std::vector<std::vector<std::string> > all_data,std::string 
         for(int i = 0; i < (int)all_data.size(); i++){
             for(int j = 0; j < (int)all_data[i].size(); j++){
                 file << all_data[i][j];
-                if(j < all_data[i].size() - 1) file << sc;
+                if(j < (int)all_data[i].size() - 1) file << sc;
             }
             if(i+1 < (int)all_data.size()) file << "\n";
         }
@@ -231,7 +231,7 @@ void Csv::save_data(std::vector<std::vector<double> > all_data,std::string name,
         for(int i = 0; i < (int)all_data.size(); i++){
             for(int j = 0; j < (int)all_data[i].size(); j++){
                 file << all_data[i][j];
-                if(j < all_data[i].size() - 1) file << sc;
+                if(j < (int)all_data[i].size() - 1) file << sc;
             }
             if(i+1 < (int)all_data.size()) file << "\n";
         }
@@ -283,7 +283,7 @@ void Csv::print_data(std::vector<std::vector<double> > data){
 std::vector<std::vector<double> > Csv::transpose(std::vector<std::vector<double> > data){
     // check if data is square and can be transposed
     for(int i = 0, s = (int)data[0].size(); i < (int)data.size(); i++){
-        if(data[i].size() != s){
+        if((int)data[i].size() != s){
             std::cout << "DATA CAN NOT BE TRANSPOSED BY THIS FUNCTION!!!" << std::endl;
             exit(EXIT_FAILURE);
         }
