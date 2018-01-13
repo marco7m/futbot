@@ -68,7 +68,7 @@ std::vector<std::vector<std::string> > Csv::get_string_data(std::string name, ch
 
         // enquanto não chegou no fim do arquivo
         while(std::getline(file,file_line_data)){
-            for(int i = 0; i < (int)file_line_data.size() - 1; i++){
+            for(int i = 0; i < (int)file_line_data.size(); i++){
                 if(file_line_data[i] != sc){
                     file_line_data_word.push_back(file_line_data[i]);
                 }
@@ -104,7 +104,7 @@ std::vector<std::vector<double> > Csv::get_double_data(std::string name, char sc
 
         // enquanto não chegou no fim do arquivo
         while(std::getline(file,file_line_data)){
-            for(int i = 0; i < (int)file_line_data.size() - 1; i++){
+            for(int i = 0; i < (int)file_line_data.size(); i++){
                 if(file_line_data[i] != sc){
                     file_line_data_word.push_back(file_line_data[i]);
                 }
