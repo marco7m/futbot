@@ -4,12 +4,13 @@ ControlSystem::ControlSystem(){
     // parametros de configuração
     ia_number = 9;
     play_time = 10*1000*60; // 1 minuto
+    play_time = 10000;
 
     create_random_population();
 
-    std::cout << "inicio" << std::endl;
-    gp.get_fit_move_point(population[0], population[1], play_time);
-    std::cout << "fim" << std::endl;
+//    gp.get_fit_move_point(population[0], population[0], play_time);
+    gp.play_saved_game();
+    
 }
 
 ControlSystem::~ControlSystem(){

@@ -1,8 +1,5 @@
 #include "gameplay.h"
 
-#include <iostream>
-#include "wrsim/src/WRSim/interface.h"
-#include "utils/csv.h"
 
 GamePlay::GamePlay(){
 }
@@ -11,6 +8,8 @@ GamePlay::~GamePlay(){
     clear_all_pointers();
 }
 
+// apenas um robô em campo
+// treina ele para ir até o centro do campo
 void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time){
 
     // inicialização dos robôs
@@ -42,7 +41,7 @@ void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwor
 
     while(*_tempo < play_time){
         _fisica->roda();
-        _referee->check_game();
+        _referee->check_game_centerAndSave();
 
         *_tempo = *_tempo+10;   
 
@@ -177,6 +176,7 @@ void GamePlay::manual_mode(){
     _timer->start(10);
 }
 
+// saves almost all data, if not all
 void GamePlay::save_manual_mode(double tst){
     total_save_time = tst;
     
@@ -212,6 +212,42 @@ void GamePlay::save_manual_mode(double tst){
     // cria e inicializa o timer
     _timer = new QTimer();
     QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(slot_save_manual_mode()));
+    _timer->start(10);
+}
+
+// plays a game stored with the protocol used by Referee class
+void GamePlay::play_saved_game(){
+    // inicialização dos robôs
+    _robo = new robovss[6];
+    _robo[0].setTime(0);
+    _robo[0].setIdRobo(0);
+    _robo[1].setTime(0);
+    _robo[1].setIdRobo(1);
+    _robo[2].setTime(0);
+    _robo[2].setIdRobo(2);
+    _robo[3].setTime(1);
+    _robo[3].setIdRobo(0);
+    _robo[4].setTime(1);
+    _robo[4].setIdRobo(1);
+    _robo[5].setTime(1);
+    _robo[5].setIdRobo(2);
+
+    _bola = new bola();
+    _interface = new Interface(_robo, _bola);
+    _tempo = new unsigned long long;
+    _referee = new Referee(*_interface, _tempo);
+
+    // posiciona os robôs
+    MoveRobots::default_position(*_interface);
+
+    *_tempo = 0;
+
+    // cria parte gráfica
+    _grafico = new grafico(_robo, _bola, *_interface);
+
+    // cria e inicializa o timer
+    _timer = new QTimer();
+    QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(slot_play_saved_game()));
     _timer->start(10);
 }
 
@@ -284,6 +320,46 @@ void GamePlay::slot_save_manual_mode(){
         clear_all_pointers();
     }
 }
+
+void GamePlay::slot_play_saved_game(){
+    std::vector<std::vector<double> > loaded_game;
+    loaded_game = Csv::get_double_data("data/referee/tmp.csv", ',');
+    if(*_tempo < loaded_game.size()){
+        _grafico->roda();
+
+        *_tempo = *_tempo + 1;
+
+        std::cout << "tempo: " << *_tempo * 10 << std::endl;
+
+        _interface->setPosX(0,0,loaded_game[*_tempo][0]);
+        _interface->setPosY(0,0,loaded_game[*_tempo][1]);
+        _interface->setAng(0,0,loaded_game[*_tempo][2]);
+
+        _interface->setPosX(0,1,loaded_game[*_tempo][3]);
+        _interface->setPosY(0,1,loaded_game[*_tempo][4]);
+        _interface->setAng(0,1,loaded_game[*_tempo][5]);
+
+        _interface->setPosX(0,2,loaded_game[*_tempo][6]);
+        _interface->setPosY(0,2,loaded_game[*_tempo][7]);
+        _interface->setAng(0,2,loaded_game[*_tempo][8]);
+
+        _interface->setPosX(1,0,loaded_game[*_tempo][9]);
+        _interface->setPosY(1,0,loaded_game[*_tempo][10]);
+        _interface->setAng(1,0,loaded_game[*_tempo][11]);
+
+        _interface->setPosX(1,1,loaded_game[*_tempo][12]);
+        _interface->setPosY(1,1,loaded_game[*_tempo][13]);
+        _interface->setAng(1,1,loaded_game[*_tempo][14]);
+
+        _interface->setPosX(1,2,loaded_game[*_tempo][15]);
+        _interface->setPosY(1,2,loaded_game[*_tempo][16]);
+        _interface->setAng(1,2,loaded_game[*_tempo][17]);
+
+        _interface->setPosBolaX(loaded_game[*_tempo][18]);
+        _interface->setPosBolaY(loaded_game[*_tempo][19]);
+    }
+}
+
 
 void GamePlay::clear_all_pointers(){
     if(_robo != nullptr){

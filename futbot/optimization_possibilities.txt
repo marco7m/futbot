@@ -1,2 +1,3 @@
 - class Game recebe o endereço da rede neural, e então carrega ela antes da partida, receber diretamente o objeto já montado da rede pode diminuir o tempo de execução do algoritmo evolutivo
 - na classe interface a função encontra robo pode ser chamada apenas uma vez em cada função
+- talvez remover o #include <unistd.h> da classe referee
