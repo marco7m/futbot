@@ -4,6 +4,3 @@ bin/
 data/
 Makefile
 *.swp
-go.sh
-gof.sh
-goc.sh
