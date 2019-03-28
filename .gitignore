@@ -4,3 +4,5 @@ bin/
 data/
 Makefile
 *.swp
+*.swo
+.qmake.stash

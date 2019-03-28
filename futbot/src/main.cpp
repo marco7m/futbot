@@ -8,7 +8,7 @@
 
 // main generica
 int main(int argc, char *argv[]){
-    QApplication a(argc, argv);
+//    QApplication a(argc, argv);
 
     ControlSystem cs{};
 //    GamePlay gameplay{};
@@ -20,8 +20,8 @@ int main(int argc, char *argv[]){
 //    gameplay.fast_mode(team_a, team_b, 3600000);
 //    gameplay.watch_mode(team_a, team_b);
 
-    return a.exec();
-//    return 0;
+//    return a.exec();
+    return 0;
 }
 
 
