@@ -1,4 +1,4 @@
-// main do HeadController
+#define MANUAL_PLAY_MODE
 
 #include <QApplication>
 #include "controlsystem/gameplay.h"
@@ -6,7 +6,7 @@
 #include "utils/csv.h"
 #include <iostream>
 
-// main generica
+#ifdef ESTAVA_ASSIM
 int main(int argc, char *argv[]){
 //    QApplication a(argc, argv);
 
@@ -23,7 +23,18 @@ int main(int argc, char *argv[]){
 //    return a.exec();
     return 0;
 }
+#endif
 
+#ifdef MANUAL_PLAY_MODE
+int main(int argc, char *argv[]){
+    QApplication a(argc, argv);
+    GamePlay gameplay{};
+    gameplay.manual_mode();
+    return a.exec();
+}
+#endif
+
+    
 
 
 
