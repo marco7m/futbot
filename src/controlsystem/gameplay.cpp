@@ -329,8 +329,6 @@ void GamePlay::slot_play_saved_game(){
     if(*_tempo < loaded_game.size()){
         _grafico->roda();
 
-        *_tempo = *_tempo + 1;
-
         std::cout << "tempo: " << *_tempo * 10 << std::endl;
 
         _interface->setPosX(0,0,loaded_game[*_tempo][0]);
@@ -359,6 +357,9 @@ void GamePlay::slot_play_saved_game(){
 
         _interface->setPosBolaX(loaded_game[*_tempo][18]);
         _interface->setPosBolaY(loaded_game[*_tempo][19]);
+        
+        *_tempo = *_tempo + 1;
+
     }
 }
 
