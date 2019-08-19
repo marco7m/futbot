@@ -1,6 +1,5 @@
 #include "gameplay.h"
 
-
 GamePlay::GamePlay(){
 }
 
@@ -137,7 +136,8 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
     _timer->start(10);
 }
 
-void GamePlay::manual_mode(){
+// se save_game_preview == true ele salva dados suficientes do jogo para poder assisti-lo novamente
+void GamePlay::manual_mode(bool save_game_preview){
     
     // inicialização dos robôs
     _robo = new robovss[6];
@@ -157,7 +157,7 @@ void GamePlay::manual_mode(){
     _bola = new bola();
     _interface = new Interface(_robo, _bola);
     _tempo = new unsigned long long;
-    _referee = new Referee(*_interface, _tempo);
+    _referee = new Referee(*_interface, _tempo, save_game_preview);
     _fisica = new fisica(_robo, _tempo, _bola);
 
     // configurações pré inicio de partida
@@ -245,6 +245,10 @@ void GamePlay::play_saved_game(){
     // cria parte gráfica
     _grafico = new grafico(_robo, _bola, *_interface);
 
+    // carrega o jogo salvo
+    loaded_game = Csv::get_double_data("data/referee/game.csv", ',');
+
+    // roda o jogo
     // cria e inicializa o timer
     _timer = new QTimer();
     QObject::connect(_timer,SIGNAL(timeout()),this,SLOT(slot_play_saved_game()));
@@ -322,8 +326,6 @@ void GamePlay::slot_save_manual_mode(){
 }
 
 void GamePlay::slot_play_saved_game(){
-    std::vector<std::vector<double> > loaded_game;
-    loaded_game = Csv::get_double_data("data/referee/tmp.csv", ',');
     if(*_tempo < loaded_game.size()){
         _grafico->roda();
 

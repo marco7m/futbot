@@ -27,7 +27,7 @@ public:
     void get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time);
     void fast_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time);
     void watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b);
-    void manual_mode();
+    void manual_mode(bool save_game_preview = false);
     void save_manual_mode(double total_save_time);
     void play_saved_game();
 
@@ -56,6 +56,8 @@ private:
     std::vector<std::vector<double> > data_all_input;
     std::vector<std::vector<double> > data_all_output;
 
+    //play_saved_game variables
+    std::vector<std::vector<double> > loaded_game;
     void clear_all_pointers();
 
 

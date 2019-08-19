@@ -1,4 +1,6 @@
-#define MANUAL_PLAY_MODE
+#define PLAY_SAVED_GAME
+//#define MANUAL_PLAY_MODE
+//#define MANUAL_PLAY_MODE_SAVING
 
 #include <QApplication>
 #include "controlsystem/gameplay.h"
@@ -34,7 +36,25 @@ int main(int argc, char *argv[]){
 }
 #endif
 
-    
+#ifdef MANUAL_PLAY_MODE_SAVING
+int main(int argc, char *argv[]){
+    QApplication a(argc, argv);
+    GamePlay gameplay{};
+    gameplay.manual_mode(true);
+    return a.exec();
+}
+#endif
+
+#ifdef PLAY_SAVED_GAME
+int main(int argc, char *argv[]){
+    QApplication a(argc, argv);
+    GamePlay gameplay{};
+    gameplay.play_saved_game();
+    return a.exec();
+}
+#endif
+
+  
 
 
 

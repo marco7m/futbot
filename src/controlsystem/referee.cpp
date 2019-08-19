@@ -1,22 +1,23 @@
 #include "referee.h"
 #include <iostream>
 
-Referee::Referee(Interface inter, unsigned long long *t){
+Referee::Referee(Interface inter, unsigned long long *t, bool f_save_game){
     interface = inter;
     tempo = t;
-    flag_save_game = false;
+    save_game = f_save_game;
 }
 
 // TODO
 Referee::~Referee(){
-    if(flag_save_game){
-        Csv::save_data(saved_game, "data/referee/tmp.csv", ',');
+    if(save_game){
+        Csv::save_data(saved_game, "data/referee/game.csv", ',');
     }
 }
 
 void Referee::check_game(){
     if(right_goal()) std::cout << "GOOOL DIREITO!" << std::endl;
     if(left_goal()) std::cout << "GOOOL ESQUERDO!" << std::endl;
+    if(save_game) save_game_frame();
 }
 
 void Referee::check_game_centerAndSave(){
@@ -34,31 +35,13 @@ bool Referee::right_goal(){
 }
 
 void Referee::save_game_frame(){
-    flag_save_game = true;
-
-    saved_frame.push_back(interface.getPosX(0,0));
-    saved_frame.push_back(interface.getPosY(0,0));
-    saved_frame.push_back(interface.getAng(0,0));
-
-    saved_frame.push_back(interface.getPosX(0,1));
-    saved_frame.push_back(interface.getPosY(0,1));
-    saved_frame.push_back(interface.getAng(0,1));
-
-    saved_frame.push_back(interface.getPosX(0,2));
-    saved_frame.push_back(interface.getPosY(0,2));
-    saved_frame.push_back(interface.getAng(0,2));
-    
-    saved_frame.push_back(interface.getPosX(1,0));
-    saved_frame.push_back(interface.getPosY(1,0));
-    saved_frame.push_back(interface.getAng(1,0));
-
-    saved_frame.push_back(interface.getPosX(1,1));
-    saved_frame.push_back(interface.getPosY(1,1));
-    saved_frame.push_back(interface.getAng(1,1));
-
-    saved_frame.push_back(interface.getPosX(1,2));
-    saved_frame.push_back(interface.getPosY(1,2));
-    saved_frame.push_back(interface.getAng(1,2));
+    for(int team = 0; team <= 1; team++){
+        for(int id = 0; id <= 2; id++){
+            saved_frame.push_back(interface.getPosX(team,id));
+            saved_frame.push_back(interface.getPosY(team,id));
+            saved_frame.push_back(interface.getAng(team,id));
+        }
+    }
 
     saved_frame.push_back(interface.getPosBolaX());
     saved_frame.push_back(interface.getPosBolaY());

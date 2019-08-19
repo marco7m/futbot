@@ -7,7 +7,7 @@
 
 class Referee{
 public:
-    Referee(Interface inter, unsigned long long *t);
+    Referee(Interface inter, unsigned long long *t, bool f_save_game = false);
     ~Referee();
 
     // arbitros
@@ -23,7 +23,7 @@ private:
 
     std::vector<std::vector<double> > saved_game;
     std::vector<double> saved_frame; //posx,poxy,ang
-    bool flag_save_game;
+    bool save_game;
 
 };
 
