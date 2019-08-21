@@ -11,23 +11,7 @@ GamePlay::~GamePlay(){
 // treina ele para ir até o centro do campo
 void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time){
 
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
-
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
+    init_game_interface();
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
@@ -56,23 +40,7 @@ void GamePlay::fast_mode(std::vector<std::vector<double> > team_a, std::vector<s
     _neural_network_a = new NeuralNetwork(team_a);
     _neural_network_b = new NeuralNetwork(team_b);
 
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
-
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
+    init_game_interface();
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
@@ -100,23 +68,7 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
     _neural_network_a = new NeuralNetwork(team_a);
     _neural_network_b = new NeuralNetwork(team_b);
 
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
-
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
+    init_game_interface();
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
@@ -139,23 +91,8 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
 // se save_game_preview == true ele salva dados suficientes do jogo para poder assisti-lo novamente
 void GamePlay::manual_mode(bool save_game_preview){
     
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
+    init_game_interface();
 
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo, save_game_preview);
     _fisica = new fisica(_robo, _tempo, _bola);
@@ -180,23 +117,7 @@ void GamePlay::manual_mode(bool save_game_preview){
 void GamePlay::save_manual_mode(double tst){
     total_save_time = tst;
     
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
-
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
+    init_game_interface();
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
@@ -217,23 +138,8 @@ void GamePlay::save_manual_mode(double tst){
 
 // plays a game stored with the protocol used by Referee class
 void GamePlay::play_saved_game(){
-    // inicialização dos robôs
-    _robo = new robovss[6];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(0);
-    _robo[1].setIdRobo(1);
-    _robo[2].setTime(0);
-    _robo[2].setIdRobo(2);
-    _robo[3].setTime(1);
-    _robo[3].setIdRobo(0);
-    _robo[4].setTime(1);
-    _robo[4].setIdRobo(1);
-    _robo[5].setTime(1);
-    _robo[5].setIdRobo(2);
 
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
+    init_game_interface();
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
 
@@ -363,6 +269,25 @@ void GamePlay::slot_play_saved_game(){
     }
 }
 
+void GamePlay::init_game_interface(){
+    // inicialização dos robôs
+    _robo = new robovss[6];
+    _robo[0].setTime(0);
+    _robo[0].setIdRobo(0);
+    _robo[1].setTime(0);
+    _robo[1].setIdRobo(1);
+    _robo[2].setTime(0);
+    _robo[2].setIdRobo(2);
+    _robo[3].setTime(1);
+    _robo[3].setIdRobo(0);
+    _robo[4].setTime(1);
+    _robo[4].setIdRobo(1);
+    _robo[5].setTime(1);
+    _robo[5].setIdRobo(2);
+
+    _bola = new bola();
+    _interface = new Interface(_robo, _bola);
+}
 
 void GamePlay::clear_all_pointers(){
     if(_robo != nullptr){

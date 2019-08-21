@@ -58,6 +58,8 @@ private:
 
     //play_saved_game variables
     std::vector<std::vector<double> > loaded_game;
+
+    void init_game_interface();
     void clear_all_pointers();
 
 
