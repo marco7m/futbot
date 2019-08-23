@@ -3,7 +3,7 @@
 ControlSystem::ControlSystem(){
     // parametros de configuração
     ia_number = 9;
-    play_time = 10*1000*60; // 1 minuto
+    play_time = 10*1000*60; 
     play_time = 10000;
 
     create_random_population();

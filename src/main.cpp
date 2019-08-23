@@ -1,5 +1,5 @@
-#define PLAY_SAVED_GAME
-//#define MANUAL_PLAY_MODE
+//#define PLAY_SAVED_GAME
+#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
 
 #include <QApplication>

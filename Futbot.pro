@@ -31,6 +31,7 @@ SOURCES += \
     src/controlsystem/controlsystem.cpp \
     src/controlsystem/moverobots.cpp \
     src/controlsystem/feedforward.cpp \
+    src/controlsystem/fitness.cpp \
 #\    src/headcontroller/simpleia.cpp \
 #\    src/headcontroller/getbperror.cpp \
 #\    src/headcontroller/one_player_alone.cpp \
@@ -64,6 +65,7 @@ HEADERS  += \
     src/controlsystem/controlsystem.h \
     src/controlsystem/moverobots.h \
     src/controlsystem/feedforward.h \
+    src/controlsystem/fitness.h \
 #\    src/headcontroller/simpleia.h \
 #\    src/headcontroller/getbperror.h \
 #\    src/headcontroller/one_player_alone.h \

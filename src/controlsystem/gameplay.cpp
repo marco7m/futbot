@@ -35,7 +35,7 @@ void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwor
 }
 
 
-void GamePlay::fast_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time){
+void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time){
 
     _neural_network_a = new NeuralNetwork(team_a);
     _neural_network_b = new NeuralNetwork(team_b);
@@ -344,4 +344,9 @@ void GamePlay::clear_all_pointers(){
         delete _neural_network_b;
         _neural_network_b = nullptr;
     }
+    if(_fitness != nullptr){
+        delete _fitness;
+        _fitness = nullptr;
+    }
+
 }
