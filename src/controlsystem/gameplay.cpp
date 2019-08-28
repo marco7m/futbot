@@ -63,7 +63,7 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
     clear_all_pointers();
 }
 
-void GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > team, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
+double GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > team, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
 
     _neural_network_a = new NeuralNetwork(team);
 
@@ -82,6 +82,8 @@ void GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > te
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
     _feedforward = new FeedForward(*_interface, _neural_network_a);
+    
+    _fitness = new Fitness(*_interface);
 
     // posiciona os robôs
     MoveRobots::default_position(*_interface);
@@ -95,9 +97,14 @@ void GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > te
         *_tempo = *_tempo+10;   
 
         _feedforward->ia_alone();
+
+        _fitness->update_fitness_frame();
     }
 
+    double fit_points = _fitness->get_fit_points();
     clear_all_pointers();
+
+    return fit_points;
 }
 
 void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b){
