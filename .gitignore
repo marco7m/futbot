@@ -2,7 +2,6 @@ Session.vim
 tmp/
 bin/
 data/
-Makefile
 *.swp
 *.swo
 .qmake.stash
