@@ -12,14 +12,17 @@ public:
 
 private:
     // parametros de configuração
-    int ia_number;    
-    int play_time;
+    const int ia_number; // número de IAs a cada geração
+    const int play_time; // tempo de duração da partida
 
     std::vector<NeuralNetwork*> create_random_population();
-    void clear_population();
 
     std::vector<NeuralNetwork*> population;
     GamePlay gp{};
+
+    feed_forward(NeuralNetwork* nn);
+    
+    void clear_population();
 
 };
 
