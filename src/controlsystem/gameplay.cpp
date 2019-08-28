@@ -15,7 +15,7 @@ void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwor
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
-    _feedforward = new FeedForward(_neural_network_a, _neural_network_b, *_interface);
+    _feedforward = new FeedForward(*_interface, _neural_network_a, _neural_network_b);
 
     // posiciona os robôs
     MoveRobots::default_position(*_interface);
@@ -44,7 +44,7 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
-    _feedforward = new FeedForward(_neural_network_a, _neural_network_b, *_interface);
+    _feedforward = new FeedForward(*_interface, _neural_network_a, _neural_network_b);
 
     // posiciona os robôs
     MoveRobots::default_position(*_interface);
@@ -63,6 +63,43 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
     clear_all_pointers();
 }
 
+void GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > team, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
+
+    _neural_network_a = new NeuralNetwork(team);
+
+    // inicialização dos robôs
+    _robo = new robovss[2];
+    _robo[0].setTime(0);
+    _robo[0].setIdRobo(0);
+    _robo[1].setTime(1);
+    _robo[1].setIdRobo(0);
+
+
+    _bola = new bola();
+    _interface = new Interface(_robo, _bola);
+
+    _tempo = new unsigned long long;
+    _referee = new Referee(*_interface, _tempo);
+    _fisica = new fisica(_robo, _tempo, _bola);
+    _feedforward = new FeedForward(*_interface, _neural_network_a);
+
+    // posiciona os robôs
+    MoveRobots::default_position(*_interface);
+
+    *_tempo = 0;
+
+    while(*_tempo < play_time){
+        _fisica->roda();
+        _referee->check_game();
+
+        *_tempo = *_tempo+10;   
+
+        _feedforward->ia_alone();
+    }
+
+    clear_all_pointers();
+}
+
 void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b){
 
     _neural_network_a = new NeuralNetwork(team_a);
@@ -72,7 +109,7 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
     _tempo = new unsigned long long;
     _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
-    _feedforward = new FeedForward(_neural_network_a, _neural_network_b, *_interface);
+    _feedforward = new FeedForward(*_interface, _neural_network_a, _neural_network_b);
 
     // posiciona os robôs
     MoveRobots::default_position(*_interface);

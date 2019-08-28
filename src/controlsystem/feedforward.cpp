@@ -1,6 +1,6 @@
 #include "feedforward.h"
 
-FeedForward::FeedForward(NeuralNetwork* iaa, NeuralNetwork* iab, Interface inter){
+FeedForward::FeedForward(Interface inter, NeuralNetwork* iaa, NeuralNetwork* iab){
     ia_a = iaa;
     ia_b = iab;
     interface = inter;
