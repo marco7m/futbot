@@ -6,7 +6,7 @@
 
 class FeedForward{
 public:
-    FeedForward(NeuralNetwork* iaa, NeuralNetwork* iab, Interface inter);
+    FeedForward(NeuralNetwork* iaa, NeuralNetwork* iab = nullptr, Interface inter);
 
     // IAs = 2
     // Inputs = 88
