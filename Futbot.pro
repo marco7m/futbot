@@ -32,10 +32,8 @@ SOURCES += \
     src/controlsystem/moverobots.cpp \
     src/controlsystem/feedforward.cpp \
     src/controlsystem/fitness.cpp \
-#\    src/headcontroller/simpleia.cpp \
-#\    src/headcontroller/getbperror.cpp \
-#\    src/headcontroller/one_player_alone.cpp \
-#\    src/headcontroller/save_game.cpp \
+    src/geneticalgorithm/crossover.cpp \
+    src/geneticalgorithm/evolutioncontrol.cpp \
 # WRSim source files
 #    src/wrsim/src/WRSim/controle.cpp \
 #    src/wrsim/src/WRSim/controlewrsim.cpp \
@@ -66,10 +64,8 @@ HEADERS  += \
     src/controlsystem/moverobots.h \
     src/controlsystem/feedforward.h \
     src/controlsystem/fitness.h \
-#\    src/headcontroller/simpleia.h \
-#\    src/headcontroller/getbperror.h \
-#\    src/headcontroller/one_player_alone.h \
-#\    src/headcontroller/save_game.h \
+    src/geneticalgorithm/crossover.h \
+    src/geneticalgorithm/evolutioncontrol.h \
 # WRSim header files
 #    src/wrsim/src/WRSim/controle.h \
 #    src/wrsim/src/WRSim/controlewrsim.h \
