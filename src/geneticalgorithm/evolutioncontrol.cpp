@@ -15,24 +15,22 @@ void EvolutionControl::create_random_population(int population_size){
     // carrego o vector de ponteiro de redes neurais que sera a minha população
     clear_population(); 
     for(int i = 0; i < population_size; i++){
-        NeuralNetwork* nn = new NeuralNetwork(tp);
-        population.push_back(nn);
+        population.push_back({0,new NeuralNetwork(tp)});
     }
 
     return;
 }
 
-void EvolutionControl::train_the_guys(){
+void EvolutionControl::train_the_guys(int play_time){
     GamePlay gp{};
 
-    std::vector<double> value;
     for(int i = 0; i < population.size(); i++){
-        value.push_back(gp.fast_one_with_one_dead_robot(population[i].net, play_time, 0.5, 0.5, 0.8, 0.5));
+        population[i].fitness = gp.fast_one_with_one_dead_robot(population[i].net, play_time, 0.5, 0.5, 0.8, 0.5);
     }
-    sort(population.begin(), population.end(), [](auto const &a, auto const &b) { return a.fitness < b.fitness; });
+    sort(population.begin(), population.end(), [](Individual const &a, Individual const &b) { return a.fitness < b.fitness; });
 
     for(int i = 0; i < population.size(); i++){
-        std::cout << population.fitness << std::endl;
+        std::cout << population[i].fitness << std::endl;
     }
 
 
@@ -41,7 +39,7 @@ void EvolutionControl::train_the_guys(){
 // deleta todos os ponteiros de NeuralNetwork dos individuos da população, e da um clear no vector
 void EvolutionControl::clear_population(){
     for(int i = 0; i < (int)population.size(); i++){
-        delete population[i];
+        delete population[i].net;
     }
     population.clear();
 }

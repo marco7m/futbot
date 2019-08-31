@@ -12,6 +12,7 @@ public:
 
     void alone(NeuralNetwork* nn, float rand_factor);
     
+    double simple_rand(double max);
 private:
 
 };

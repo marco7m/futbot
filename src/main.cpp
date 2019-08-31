@@ -2,11 +2,11 @@
 //#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
 //#define TRAINING_1
+#define TEMP_TEST
 
 
 #ifdef TEMP_TEST
 int main(int argc, char *argv[]){
-    
     return 0;
 }
 #endif
