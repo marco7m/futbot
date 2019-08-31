@@ -63,33 +63,25 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
     clear_all_pointers();
 }
 
-double GamePlay::fast_one_with_one_dead_robot(std::vector<std::vector<double> > team, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
-
-    _neural_network_a = new NeuralNetwork(team);
-
-    // inicialização dos robôs
-    _robo = new robovss[2];
-    _robo[0].setTime(0);
-    _robo[0].setIdRobo(0);
-    _robo[1].setTime(1);
-    _robo[1].setIdRobo(0);
-
-
-    _bola = new bola();
-    _interface = new Interface(_robo, _bola);
-
-    _tempo = new unsigned long long;
-    _referee = new Referee(*_interface, _tempo);
-    _fisica = new fisica(_robo, _tempo, _bola);
-    _feedforward = new FeedForward(*_interface, _neural_network_a);
+double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
     
+    init_game_interface();
+    MoveRobots::default_position(*_interface);
+    MoveRobots::hide_robot(*_interface,0,1);
+    MoveRobots::hide_robot(*_interface,0,2);
+    MoveRobots::hide_robot(*_interface,1,0);
+    MoveRobots::hide_robot(*_interface,1,1);
+    MoveRobots::hide_robot(*_interface,1,2);
+    
+    _tempo = new unsigned long long;
+    _referee = new Referee(*_interface, _tempo, true, "data/referee/teste.csv");
+    _fisica = new fisica(_robo, _tempo, _bola);
+    _feedforward = new FeedForward(*_interface, nn);
     _fitness = new Fitness(*_interface);
 
     // posiciona os robôs
-    MoveRobots::default_position(*_interface);
 
     *_tempo = 0;
-
     while(*_tempo < play_time){
         _fisica->roda();
         _referee->check_game();
@@ -141,6 +133,7 @@ void GamePlay::manual_mode(bool save_game_preview){
     _referee = new Referee(*_interface, _tempo, save_game_preview);
     _fisica = new fisica(_robo, _tempo, _bola);
 
+    _fitness = new Fitness(*_interface);
     // configurações pré inicio de partida
 
     // posiciona os robôs
@@ -181,7 +174,7 @@ void GamePlay::save_manual_mode(double tst){
 }
 
 // plays a game stored with the protocol used by Referee class
-void GamePlay::play_saved_game(){
+void GamePlay::play_saved_game(std::string file_name){
 
     init_game_interface();
     _tempo = new unsigned long long;
@@ -196,7 +189,7 @@ void GamePlay::play_saved_game(){
     _grafico = new grafico(_robo, _bola, *_interface);
 
     // carrega o jogo salvo
-    loaded_game = Csv::get_double_data("data/referee/game.csv", ',');
+    loaded_game = Csv::get_double_data(file_name, ',');
 
     // roda o jogo
     // cria e inicializa o timer
@@ -215,6 +208,7 @@ void GamePlay::slot_watch_mode(){
 
 void GamePlay::slot_manual_mode(){
     _fisica->roda();
+    _fitness->update_fitness_frame();
     _referee->check_game();
     _grafico->roda();
     *_tempo = *_tempo+10;

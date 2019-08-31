@@ -27,11 +27,11 @@ public:
 
     void get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time);
     void fast_match(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time);
-    double fast_one_with_one_dead_robot(std::vector<std::vector<double> > team, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y);
+    double fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y);
     void watch_mode(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b);
     void manual_mode(bool save_game_preview = false);
     void save_manual_mode(double total_save_time);
-    void play_saved_game();
+    void play_saved_game(std::string file_name);
 
 public slots:
     void slot_watch_mode();

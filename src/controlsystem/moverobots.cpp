@@ -47,6 +47,14 @@ void MoveRobots::hide_all_but_one(Interface interface){
 
 }
 
+void MoveRobots::hide_robot(Interface interface, uint8_t team, uint8_t id){
+    interface.setPosX(team,id,0.0);
+    interface.setPosY(team,id,0.0);
+    interface.setAng(team,id,0.0);
+    interface.setVel(team,id,0.5);
+    interface.setVelAng(team,id,0.5);
+}
+
 void MoveRobots::default_position(Interface interface){
     
     // posiciona os robôs
