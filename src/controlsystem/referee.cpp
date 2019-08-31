@@ -1,16 +1,17 @@
 #include "referee.h"
 #include <iostream>
 
-Referee::Referee(Interface inter, unsigned long long *t, bool f_save_game){
+Referee::Referee(Interface inter, unsigned long long *t, bool f_save_game, std::string file_name){
     interface = inter;
     tempo = t;
     save_game = f_save_game;
+    save_file_name = file_name;
 }
 
 // TODO
 Referee::~Referee(){
     if(save_game){
-        Csv::save_data(saved_game, "data/referee/game.csv", ',');
+        Csv::save_data(saved_game, save_file_name, ',');
     }
 }
 
