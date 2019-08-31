@@ -63,7 +63,8 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
     clear_all_pointers();
 }
 
-double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y){
+// if it has a file name, it saves a file
+double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_time, double block_pos_x, double block_pos_y, double target_pos_x, double target_pos_y, std::string file_name){
     
     init_game_interface();
     MoveRobots::default_position(*_interface);
@@ -74,7 +75,12 @@ double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_tim
     MoveRobots::hide_robot(*_interface,1,2);
     
     _tempo = new unsigned long long;
-    _referee = new Referee(*_interface, _tempo, true, "data/referee/teste.csv");
+    if(file_name == ""){
+        _referee = new Referee(*_interface, _tempo);
+    }
+    else{
+        _referee = new Referee(*_interface, _tempo, true, file_name);
+    }
     _fisica = new fisica(_robo, _tempo, _bola);
     _feedforward = new FeedForward(*_interface, nn);
     _fitness = new Fitness(*_interface);
