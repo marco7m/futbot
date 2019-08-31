@@ -1,14 +1,28 @@
 //#define PLAY_SAVED_GAME
-#define MANUAL_PLAY_MODE
+//#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
+//#define TRAINING_1
 
-#include <QApplication>
-#include "controlsystem/gameplay.h"
+
+#ifdef TEMP_TEST
+int main(int argc, char *argv[]){
+    
+    return 0;
+}
+#endif
+
+#ifdef TRAINING_1
 #include "controlsystem/controlsystem.h"
-#include "utils/csv.h"
-#include <iostream>
+
+int main(int argc, char *argv[]){
+    ControlSystem cs{};
+    return 0;
+}
+#endif
 
 #ifdef ESTAVA_ASSIM
+#include "controlsystem/controlsystem.h"
+
 int main(int argc, char *argv[]){
 //    QApplication a(argc, argv);
 
@@ -28,6 +42,9 @@ int main(int argc, char *argv[]){
 #endif
 
 #ifdef MANUAL_PLAY_MODE
+#include <QApplication>
+#include "controlsystem/gameplay.h"
+
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
@@ -37,6 +54,9 @@ int main(int argc, char *argv[]){
 #endif
 
 #ifdef MANUAL_PLAY_MODE_SAVING
+#include <QApplication>
+#include "controlsystem/gameplay.h"
+
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
@@ -46,10 +66,13 @@ int main(int argc, char *argv[]){
 #endif
 
 #ifdef PLAY_SAVED_GAME
+#include <QApplication>
+#include "controlsystem/gameplay.h"
+
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
-    gameplay.play_saved_game();
+    gameplay.play_saved_game("data/referee/teste.csv");
     return a.exec();
 }
 #endif
