@@ -358,3 +358,31 @@ void NeuralNetwork::set_random_weights(){
         }
     }    
 }
+
+int NeuralNetwork::num_column(){
+    return network.size();    
+}
+
+int NeuralNetwork::num_neurons_in_column(int column){
+    return network[column].size();
+}
+
+int NeuralNetwork::num_inputs_neuron(uint8_t net_column, uint8_t neuron_in_column){
+    return network[net_column][neuron_in_column].get_number_inputs();
+}
+
+double NeuralNetwork::get_neuron_weight(uint8_t net_column, uint8_t neuron_in_column, uint8_t neuron_input){
+    return network[net_column][neuron_in_column].get_weight(neuron_input);
+}
+
+void NeuralNetwork::set_neuron_weight(uint8_t net_column, uint8_t neuron_in_column, uint8_t neuron_input, double weight_value){
+    network[net_column][neuron_in_column].set_weight(neuron_input, weight_value);
+}
+
+double NeuralNetwork::get_neuron_bias(uint8_t net_column, uint8_t neuron_in_column){
+    return network[net_column][neuron_in_column].get_bias();
+}
+
+void NeuralNetwork::set_neuron_bias(uint8_t net_column, uint8_t neuron_in_column, double bias_value){
+    network[net_column][neuron_in_column].set_bias(bias_value);
+}
