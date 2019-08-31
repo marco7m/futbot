@@ -1,8 +1,24 @@
-//#define PLAY_SAVED_GAME
+//#define PLAY_SAVED_GAME 
 //#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
-//#define TRAINING_1
-#define TEMP_TEST
+#define TRAINING_1
+//#define TEMP_TEST
+
+#ifdef PLAY_SAVED_GAME
+#include <QApplication>
+#include "controlsystem/gameplay.h"
+#include <string>
+
+int main(int argc, char *argv[]){
+    QApplication a(argc, argv);
+    GamePlay gameplay{};
+    if(argc == 4){
+        gameplay.play_saved_game(std::string(argv[1]) + std::string(argv[2]) + std::string("-") + std::string(argv[3]));
+    }
+    return a.exec();
+}
+#endif
+
 
 
 #ifdef TEMP_TEST
@@ -61,18 +77,6 @@ int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
     gameplay.manual_mode(true);
-    return a.exec();
-}
-#endif
-
-#ifdef PLAY_SAVED_GAME
-#include <QApplication>
-#include "controlsystem/gameplay.h"
-
-int main(int argc, char *argv[]){
-    QApplication a(argc, argv);
-    GamePlay gameplay{};
-    gameplay.play_saved_game("data/referee/teste.csv");
     return a.exec();
 }
 #endif

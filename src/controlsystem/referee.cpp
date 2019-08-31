@@ -16,8 +16,8 @@ Referee::~Referee(){
 }
 
 void Referee::check_game(){
-    if(right_goal()) std::cout << "GOOOL DIREITO!" << std::endl;
-    if(left_goal()) std::cout << "GOOOL ESQUERDO!" << std::endl;
+//    if(right_goal()) std::cout << "GOOOL DIREITO!" << std::endl;
+//    if(left_goal()) std::cout << "GOOOL ESQUERDO!" << std::endl;
     if(save_game) save_game_frame();
 }
 

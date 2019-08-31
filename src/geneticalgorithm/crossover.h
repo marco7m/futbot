@@ -10,7 +10,7 @@ class Crossover{
 public:
     Crossover();
 
-    void alone(NeuralNetwork* nn, float rand_factor);
+    void alone(NeuralNetwork* nn_in, NeuralNetwork* nn_out, float rand_factor);
     
     double simple_rand(double max);
 private:

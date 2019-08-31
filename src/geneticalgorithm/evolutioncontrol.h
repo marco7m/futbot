@@ -19,7 +19,7 @@ public:
 
 private:
     struct Individual{
-        double fitness;
+        double fit;
         NeuralNetwork* net;
     };
 
