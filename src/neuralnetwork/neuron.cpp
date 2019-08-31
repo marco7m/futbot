@@ -1,6 +1,6 @@
 #include "neuron.h"
 #include <iostream>
-#include "random.h"
+#include "src/neuralnetwork/random.h"
 #include "math.h"
 
 Neuron::Neuron(){

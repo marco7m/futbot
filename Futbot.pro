@@ -85,6 +85,7 @@ HEADERS  += \
 # NeuralNetwork header files
     src/neuralnetwork/neuron.h\
     src/neuralnetwork/neuralnetwork.h\
+    src/neuralnetwork/random.h
 # utils header files
     src/utils/my_ptr.h
     src/utils/csv.h
