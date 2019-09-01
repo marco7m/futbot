@@ -1,7 +1,7 @@
-//#define PLAY_SAVED_GAME 
+#define PLAY_SAVED_GAME 
 //#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
-#define TRAINING_1
+//#define TRAINING_1
 //#define TEMP_TEST
 
 #ifdef PLAY_SAVED_GAME
@@ -12,8 +12,11 @@
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
-    if(argc == 4){
-        gameplay.play_saved_game(std::string(argv[1]) + std::string(argv[2]) + std::string("-") + std::string(argv[3]));
+    if(argc == 2){
+        gameplay.play_saved_game(std::string(argv[1]));
+    }
+    else{
+        std::cout << "arg: data/fileaddres" << std::endl;
     }
     return a.exec();
 }
