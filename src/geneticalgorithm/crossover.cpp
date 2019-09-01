@@ -1,11 +1,10 @@
 #include "crossover.h"
 
 Crossover::Crossover(){
-
+    std::srand(std::time(nullptr));
 }
 
 void Crossover::alone(NeuralNetwork* nn_in, NeuralNetwork* nn_out, float rand_factor){
-    std::srand(std::time(nullptr));
     for(int col = 0; col < nn_in->num_column(); col++){ // go through the columns
         for(int neu = 0; neu < nn_in->num_neurons_in_column(col); neu++){ // go through the neurons
             nn_out->set_neuron_bias(col, neu, nn_in->get_neuron_bias(col, neu) + simple_rand(rand_factor)); // update the bias
