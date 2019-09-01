@@ -21,14 +21,14 @@ void EvolutionControl::create_random_population(int population_size){
     return;
 }
 
-void EvolutionControl::train_the_guys(int play_time){
+void EvolutionControl::train_the_guys(int game_duration){
     GamePlay gp{};
     Crossover cross{};
 
     for(int gen = 0; gen < 50; gen++){
         std::cout << "gen " << gen << std::endl;
         for(int ind = 0; ind < population.size(); ind++){
-            population[ind].fit = gp.fast_one_with_one_dead_robot(population[ind].net, play_time, 0.5, 0.5, 0.8, 0.5,std::string("data/referee/training01/") + std::to_string(gen) + std::string("-") + std::to_string(ind));
+            population[ind].fit = gp.fast_one_with_one_dead_robot(population[ind].net, game_duration, 0.5, 0.5, 0.8, 0.5);
         }
         sort(population.begin(), population.end(), [](Individual const &a, Individual const &b) { return a.fit > b.fit; });
         for(int i = 0; i < population.size(); i++){
@@ -36,13 +36,13 @@ void EvolutionControl::train_the_guys(int play_time){
         std::cout << "best " << population[0].fit << std::endl;
         std::cout << "worst " << population[population.size()-1].fit << std::endl;
 
+        // save game of the best one
+        gp.fast_one_with_one_dead_robot(population[0].net, game_duration, 0.5, 0.5, 0.8, 0.5,std::string("data/referee/training01/gen_") + std::to_string(gen) + std::string(".csv"));
+
         // generate next generation
         std::srand(std::time(nullptr));
-
-        // pct to save
         float pct_to_save = 0.1;
         int choosen_mate = 0;
-        std::cout << "======================test: " << population.size()*pct_to_save << std::endl;
         for(int i = population.size()*pct_to_save; i < population.size(); i++){
             choosen_mate = (int)(((float) std::rand() / (float) RAND_MAX) * pct_to_save*population.size());
             cross.alone(population[choosen_mate].net, population[i].net,0.01);        

@@ -1,7 +1,7 @@
-#define PLAY_SAVED_GAME 
+//#define PLAY_SAVED_GAME 
 //#define MANUAL_PLAY_MODE
 //#define MANUAL_PLAY_MODE_SAVING
-//#define TRAINING_1
+#define TRAINING_1
 //#define TEMP_TEST
 
 #ifdef PLAY_SAVED_GAME
