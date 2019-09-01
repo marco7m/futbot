@@ -20,6 +20,7 @@ public:
     // uma partida com apenas um robô, o robô do time 0 e com id 0
     // os outros robôs e a bola estarão escondidos no canto superior esquerdo
     void ia_alone();
+    void ia_alone_full_raw_inputs();
 
 private:
     NeuralNetwork* ia_a = nullptr;
