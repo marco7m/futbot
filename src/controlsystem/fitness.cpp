@@ -14,10 +14,16 @@ void Fitness::target_point(double x, double y){
     fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
 }
 
+// punishes when is far from the ball
+void Fitness::target_ball(){
+    fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
+}
+
 void Fitness::count_time(){
     fit_points -= 1;
 }
 
+// nao utilizada, apagar?
 void Fitness::update_fitness_frame(){
     target_point(0.8,0.5);
 }

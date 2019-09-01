@@ -21,6 +21,7 @@ public:
     // os outros robôs e a bola estarão escondidos no canto superior esquerdo
     void ia_alone();
     void ia_alone_full_raw_inputs();
+    void ia_alone_with_ball_pos();
 
 private:
     NeuralNetwork* ia_a = nullptr;

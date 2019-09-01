@@ -10,10 +10,13 @@ public:
     Fitness(Interface inter);
     ~Fitness();
     void update_fitness_frame();
-    double get_fit_points();
-private:
+
     // fit functions
     void target_point(double x, double y);
+    void target_ball();
+    
+    double get_fit_points();
+private:
     void count_time();
 
     // variables

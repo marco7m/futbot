@@ -170,6 +170,7 @@ void FeedForward::ia_alone_full_raw_inputs(){
     interface.setVelAng(0,0,ia_a->output.ptr[1]);
 }
 
+// 6 inputs, 2 outputs
 void FeedForward::ia_alone(){
     //======================  ENTRADA DE DADOS IA_A =========================
     int i = 0;
@@ -184,6 +185,37 @@ void FeedForward::ia_alone(){
     ia_a->input.ptr[i] = interface.getVelAng(0,0);
     i++;
     ia_a->input.ptr[i] = interface.getVel(0,0);
+    i++;
+
+    // aplica as entradas na rede neural
+    ia_a->feed();
+
+    // APLICA AS SAIDAS DAS REDES NEURAIS
+
+    // saida dos dados da rede neural A
+    interface.setVel(0,0,ia_a->output.ptr[0]);
+    interface.setVelAng(0,0,ia_a->output.ptr[1]);
+}
+
+void FeedForward::ia_alone_with_ball_pos(){
+    //======================  ENTRADA DE DADOS IA_A =========================
+    int i = 0;
+    ia_a->input.ptr[i] = interface.getPosX(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getPosY(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getVelX(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getVelY(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getVelAng(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getVel(0,0);
+    i++;
+
+    ia_a->input.ptr[i] = interface.getPosBolaX();
+    i++;
+    ia_a->input.ptr[i] = interface.getPosBolaY();
     i++;
 
     // aplica as entradas na rede neural
