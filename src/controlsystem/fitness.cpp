@@ -24,7 +24,7 @@ void Fitness::avoid_point(double x, double y){
 }
 
 void Fitness::vel_ang_is_bad(double sensitivity){
-    fit_points -= sensitivity * interface.getVelAng(0,0);
+    fit_points -= sensitivity * abs(interface.getVelAng(0,0));
 }
 
 void Fitness::count_time(){
