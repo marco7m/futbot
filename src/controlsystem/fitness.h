@@ -13,7 +13,9 @@ public:
 
     // fit functions
     void target_point(double x, double y);
+    void avoid_point(double x, double y);
     void target_ball();
+    void vel_ang_is_bad(double sensitivity);
     
     double get_fit_points();
 private:

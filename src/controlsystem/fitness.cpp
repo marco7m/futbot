@@ -19,6 +19,14 @@ void Fitness::target_ball(){
     fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
 }
 
+void Fitness::avoid_point(double x, double y){
+    fit_points += 0.3*dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
+}
+
+void Fitness::vel_ang_is_bad(double sensitivity){
+    fit_points -= sensitivity * interface.getVelAng(0,0);
+}
+
 void Fitness::count_time(){
     fit_points -= 1;
 }
