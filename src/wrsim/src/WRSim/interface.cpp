@@ -294,6 +294,8 @@ double Interface::get_denormalized_pos_bola_x(){
 }
 
 
+double getDirComponentX(quint8 time, quint8 idRobo, bool espelhar = false);
+double getDirComponentY(quint8 time, quint8 idRobo, bool espelhar = false);
 
 
 

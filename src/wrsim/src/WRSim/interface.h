@@ -35,6 +35,11 @@ public:
 
     double get_denormalized_pos_bola_x();
 
+    // non "pure" functions
+    // getDirComponent: return the component of an unitary vector pointing in the direction the robot is pointing to
+    double getDirComponentX(quint8 time, quint8 idRobo, bool espelhar = false);
+    double getDirComponentY(quint8 time, quint8 idRobo, bool espelhar = false);
+
 
 private:
     robovss *_robo;

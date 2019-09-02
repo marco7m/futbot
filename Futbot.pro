@@ -47,6 +47,7 @@ SOURCES += \
     src/wrsim/src/WRSim/objetos/bola.cpp \
     src/wrsim/src/WRSim/objetos/probe.cpp \
     src/wrsim/src/WRSim/objetos/robovss.cpp \
+#    src/wrsim/src/WRSim/objetos/gsconnect.cpp \
     src/wrsim/src/WRSim/mainwindow.cpp \
     src/wrsim/src/WRSim/interface.cpp \
 # NeuralNetwork source files
@@ -80,6 +81,7 @@ HEADERS  += \
     src/wrsim/src/WRSim/objetos/bola.h \
     src/wrsim/src/WRSim/objetos/probe.h \
     src/wrsim/src/WRSim/objetos/robovss.h \
+#    src/wrsim/src/WRSim/objetos/gsconnect.h \
     src/wrsim/src/WRSim/mainwindow.h \
     src/wrsim/src/WRSim/interface.h \
 # NeuralNetwork header files
