@@ -463,28 +463,28 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-tmp/obj/main.o: src/main.cpp src/controlsystem/controlsystem.h \
-		src/neuralnetwork/neuralnetwork.h \
-		src/neuralnetwork/neuron.h \
-		src/utils/my_ptr.h \
-		src/utils/csv.h \
-		src/wrsim/src/WRSim/interface.h \
+tmp/obj/main.o: src/main.cpp src/controlsystem/gameplay.h \
 		src/wrsim/src/WRSim/objetos/robovss.h \
 		src/wrsim/src/WRSim/cte.h \
 		src/wrsim/src/WRSim/objetos/bola.h \
-		src/controlsystem/gameplay.h \
 		src/wrsim/src/WRSim/fisica.h \
 		src/wrsim/src/WRSim/objetos/probe.h \
 		src/wrsim/src/WRSim/grafico/grafico.h \
 		src/wrsim/src/WRSim/grafico/graficoentrada.h \
+		src/wrsim/src/WRSim/interface.h \
 		src/controlsystem/moverobots.h \
 		src/wrsim/src/WRSim/grafico/graficorobovss.h \
 		src/wrsim/src/WRSim/grafico/graficobola.h \
 		src/wrsim/src/WRSim/grafico/graficoprobe.h \
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
+		src/utils/csv.h \
+		src/neuralnetwork/neuralnetwork.h \
+		src/neuralnetwork/neuron.h \
+		src/utils/my_ptr.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h \
+		src/controlsystem/controlsystem.h \
 		src/geneticalgorithm/evolutioncontrol.h \
 		src/geneticalgorithm/crossover.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/main.o src/main.cpp
