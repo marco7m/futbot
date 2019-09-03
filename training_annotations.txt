@@ -1,0 +1,7 @@
+training 9 
+NUM_TESTS = 1
+
+training10-target_ball-rand_rob-rand_ball
+vel_ang_is_bad(0.5)
+rand robot pos
+rand ball pos
