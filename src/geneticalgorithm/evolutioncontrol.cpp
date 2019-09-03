@@ -10,7 +10,7 @@ EvolutionControl::~EvolutionControl(){
 // os pesos de cada individuo é inicializado com valores aleatórios entre -1 e 1
 void EvolutionControl::create_random_population(int population_size){
     // crio uma topologia (sistema atual tem 88 entradas e 2 saidas)
-    std::vector<int> tp{6,60,60,60,2};
+    std::vector<int> tp{10,60,60,60,2};
 
     // carrego o vector de ponteiro de redes neurais que sera a minha população
     clear_population(); 
@@ -22,35 +22,55 @@ void EvolutionControl::create_random_population(int population_size){
 }
 
 void EvolutionControl::train_the_guys(int game_duration){
+
+    const int NUM_GENERATIONS = 10000; // number of generations
+    const float PCT_SAVE_POPULATION = 0.1;
+
     GamePlay gp{};
     Crossover cross{};
     std::srand(std::time(nullptr));
 
-    float target_x = 0;
-    float target_y = 0;
-    for(int gen = 0; gen < 2000; gen++){
-        std::cout << "gen " << gen << std::endl;
+    for(int gen = 0; gen < NUM_GENERATIONS; gen++){
+        std::cout << "gen " << gen;
+        double pos_ball_x;
+        double pos_ball_y;
+        double pos_rob_x;
+        double pos_rob_y;
+        pos_ball_x = ((float) std::rand() / (float) RAND_MAX) * 1;
+        pos_ball_y = ((float) std::rand() / (float) RAND_MAX) * 1;
+        pos_rob_x = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
+        pos_rob_y = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
         for(int ind = 0; ind < population.size(); ind++){
-            target_x = (((float) std::rand() / (float) RAND_MAX) * 1.0);
-            target_y = (((float) std::rand() / (float) RAND_MAX) * 1.0);
-            population[ind].fit = gp.fast_one_with_one_dead_robot(population[ind].net, game_duration);
+            population[ind].fit = gp.fast_one_with_one_dead_robot(
+                    population[ind].net, \
+                    game_duration, \
+                    pos_ball_x, \
+                    pos_ball_y, \
+                    pos_rob_x, \
+                    pos_rob_y \
+                    );
         }
         sort(population.begin(), population.end(), [](Individual const &a, Individual const &b) { return a.fit > b.fit; });
-        
-        std::cout << "best " << population[0].fit << std::endl;
-        std::cout << "worst " << population[population.size()-1].fit << std::endl;
+
+        std::cout << "\tbest " << population[0].fit;
+        std::cout << "\tworst " << population[population.size()-1].fit << std::endl;
 
         // save game of the best one
-        gp.fast_one_with_one_dead_robot(population[0].net, game_duration, std::string("data/referee/training09-target_ball/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv"));
+        gp.fast_one_with_one_dead_robot(population[0].net, \
+                game_duration, \
+                pos_ball_x, \
+                pos_ball_y, \
+                pos_rob_x, \
+                pos_rob_y, \
+                std::string("data/referee/training10-target_ball-rand_rob-rand_ball/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
+                );
 
         // generate next generation
-        std::cout << "std::time "<< std::time(nullptr) << std::endl;
-        float pct_to_save = 0.1;
         int choosen_mate = 0;
         float rand_factor = 0;
-        for(int i = population.size()*pct_to_save; i < population.size(); i++){
-            choosen_mate = (int)(((float) std::rand() / (float) RAND_MAX) * pct_to_save*population.size());
-            rand_factor = (((float) std::rand() / (float) RAND_MAX) * 0.1);
+        for(int i = population.size()*PCT_SAVE_POPULATION; i < population.size(); i++){
+            choosen_mate = (int)(((float) std::rand() / (float) RAND_MAX) * PCT_SAVE_POPULATION*population.size());
+            rand_factor = (((float) std::rand() / (float) RAND_MAX) * 0.5);
             cross.alone(population[choosen_mate].net, population[i].net,rand_factor);        
         }
     }

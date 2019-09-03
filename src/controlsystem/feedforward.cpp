@@ -212,6 +212,11 @@ void FeedForward::ia_alone_with_ball_pos(){
     i++;
     ia_a->input.ptr[i] = interface.getVel(0,0);
     i++;
+    ia_a->input.ptr[i] = interface.getDirComponentX(0,0);
+    i++;
+    ia_a->input.ptr[i] = interface.getDirComponentY(0,0);
+    i++;
+
 
     ia_a->input.ptr[i] = interface.getPosBolaX();
     i++;

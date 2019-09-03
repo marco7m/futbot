@@ -1,7 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include <math.h>
+#include <cmath>
 #include "objetos/robovss.h"
 #include "objetos/bola.h"
 

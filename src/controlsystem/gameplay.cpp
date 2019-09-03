@@ -64,8 +64,16 @@ void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<
 }
 
 // if it has a file name, it saves a file
-double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_time, std::string file_name){
-    
+double GamePlay::fast_one_with_one_dead_robot(\
+        NeuralNetwork* nn, \
+        double play_time, \
+        double pos_ball_x, \
+        double pos_ball_y, \
+        double pos_rob_x, \
+        double pos_rob_y, \
+        std::string file_name \
+        ){
+
     init_game_interface();
     MoveRobots::default_position(*_interface);
     MoveRobots::hide_robot(*_interface,0,1);
@@ -73,9 +81,12 @@ double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_tim
     MoveRobots::hide_robot(*_interface,1,0);
     MoveRobots::hide_robot(*_interface,1,1);
     MoveRobots::hide_robot(*_interface,1,2);
+
+    _interface->setPosX(0,0,pos_rob_x);
+    _interface->setPosY(0,0,pos_rob_y);
     
-    _interface->setPosBolaX(((float) std::rand() / (float) RAND_MAX) * 1);
-    _interface->setPosBolaY(((float) std::rand() / (float) RAND_MAX) * 1);
+    _interface->setPosBolaY(pos_ball_y);
+    _interface->setPosBolaX(pos_ball_x);
 
     _tempo = new unsigned long long;
     if(file_name == ""){
@@ -100,6 +111,7 @@ double GamePlay::fast_one_with_one_dead_robot(NeuralNetwork* nn, double play_tim
         _feedforward->ia_alone();
 
         _fitness->target_ball();
+        _fitness->vel_ang_is_bad(0.5);
     }
 
     double fit_points = _fitness->get_fit_points();
