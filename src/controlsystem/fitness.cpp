@@ -19,6 +19,9 @@ void Fitness::target_ball(){
     fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
 }
 
+void Fitness::move_or_rotate(){
+    fit_points -= abs(interface.getVel(0,0)) * abs(interface.getVelAng(0,0));
+}
 void Fitness::avoid_point(double x, double y){
     fit_points += 0.3*dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
 }

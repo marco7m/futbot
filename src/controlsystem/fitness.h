@@ -15,6 +15,7 @@ public:
     void target_point(double x, double y);
     void avoid_point(double x, double y);
     void target_ball();
+    void move_or_rotate();
     void vel_ang_is_bad(double sensitivity);
     
     double get_fit_points();

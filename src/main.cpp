@@ -1,6 +1,5 @@
 //#define PLAY_SAVED_GAME 
 //#define MANUAL_PLAY_MODE
-//#define MANUAL_PLAY_MODE_SAVING
 #define TRAINING_1
 //#define TEMP_TEST
 
@@ -68,18 +67,6 @@ int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     GamePlay gameplay{};
     gameplay.manual_mode();
-    return a.exec();
-}
-#endif
-
-#ifdef MANUAL_PLAY_MODE_SAVING
-#include <QApplication>
-#include "controlsystem/gameplay.h"
-
-int main(int argc, char *argv[]){
-    QApplication a(argc, argv);
-    GamePlay gameplay{};
-    gameplay.manual_mode(true);
     return a.exec();
 }
 #endif

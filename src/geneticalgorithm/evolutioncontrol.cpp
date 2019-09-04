@@ -10,7 +10,7 @@ EvolutionControl::~EvolutionControl(){
 // os pesos de cada individuo é inicializado com valores aleatórios entre -1 e 1
 void EvolutionControl::create_random_population(int population_size){
     // crio uma topologia (sistema atual tem 88 entradas e 2 saidas)
-    std::vector<int> tp{10,60,60,60,2};
+    std::vector<int> tp{10,20,20,20,2};
 
     // carrego o vector de ponteiro de redes neurais que sera a minha população
     clear_population(); 
@@ -62,7 +62,7 @@ void EvolutionControl::train_the_guys(int game_duration){
                 pos_ball_y, \
                 pos_rob_x, \
                 pos_rob_y, \
-                std::string("data/referee/training10-target_ball-rand_rob-rand_ball/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
+                std::string("data/referee/training11-random_testing/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
                 );
 
         // generate next generation

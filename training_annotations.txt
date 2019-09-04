@@ -1,7 +1,18 @@
 training 9 
+nn  = 10,60,60,60,2
 NUM_TESTS = 1
 
 training10-target_ball-rand_rob-rand_ball
+nn  = 10,60,60,60,2
 vel_ang_is_bad(0.5)
 rand robot pos
 rand ball pos
+
+training10-target_ball-rand_rob-rand_ball
+nn  = 10,60,60,60,2
+vel_ang_is_bad(0.5)
+rand robot pos
+rand ball pos
+
+training11
+nn  = 10,20,20,20,2
