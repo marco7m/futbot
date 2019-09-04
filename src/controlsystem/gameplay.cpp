@@ -7,34 +7,6 @@ GamePlay::~GamePlay(){
     clear_all_pointers();
 }
 
-// apenas um robô em campo
-// treina ele para ir até o centro do campo
-void GamePlay::get_fit_move_point(NeuralNetwork* _neural_network_a, NeuralNetwork* _neural_network_b, double play_time){
-
-    init_game_interface();
-    _tempo = new unsigned long long;
-    _referee = new Referee(*_interface, _tempo);
-    _fisica = new fisica(_robo, _tempo, _bola);
-    _feedforward = new FeedForward(*_interface, _neural_network_a, _neural_network_b);
-
-    // posiciona os robôs
-    MoveRobots::default_position(*_interface);
-
-    *_tempo = 0;
-
-    while(*_tempo < play_time){
-        _fisica->roda();
-        _referee->check_game_centerAndSave();
-
-        *_tempo = *_tempo+10;   
-
-        _feedforward->ia_match();
-    }
-
-    clear_all_pointers();
-}
-
-
 void GamePlay::fast_match(std::vector<std::vector<double> > team_a, std::vector<std::vector<double> > team_b, double play_time){
 
     _neural_network_a = new NeuralNetwork(team_a);
@@ -93,7 +65,7 @@ double GamePlay::fast_one_with_one_dead_robot(\
         _referee = new Referee(*_interface, _tempo);
     }
     else{
-        _referee = new Referee(*_interface, _tempo, true, file_name);
+        _referee = new Referee(*_interface, _tempo, file_name);
     }
     _fisica = new fisica(_robo, _tempo, _bola);
     _feedforward = new FeedForward(*_interface, nn);
@@ -111,6 +83,7 @@ double GamePlay::fast_one_with_one_dead_robot(\
         _feedforward->ia_alone();
 
         _fitness->target_ball();
+        _fitness->move_or_rotate();
         _fitness->vel_ang_is_bad(0.5);
     }
 
@@ -146,12 +119,12 @@ void GamePlay::watch_mode(std::vector<std::vector<double> > team_a, std::vector<
 }
 
 // se save_game_preview == true ele salva dados suficientes do jogo para poder assisti-lo novamente
-void GamePlay::manual_mode(bool save_game_preview){
+void GamePlay::manual_mode(){
     
     init_game_interface();
 
     _tempo = new unsigned long long;
-    _referee = new Referee(*_interface, _tempo, save_game_preview);
+    _referee = new Referee(*_interface, _tempo);
     _fisica = new fisica(_robo, _tempo, _bola);
 
     _fitness = new Fitness(*_interface);

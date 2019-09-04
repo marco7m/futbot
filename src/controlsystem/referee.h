@@ -5,15 +5,17 @@
 #include <vector>
 #include <string>
 #include "src/utils/csv.h"
+#include "src/utils/my_ptr.h"
 
 class Referee{
 public:
-    Referee(Interface inter, unsigned long long *t, bool f_save_game = false, std::string file_name = "default.csv");
+    Referee(Interface inter, unsigned long long *t, std::string file_name = "");
     ~Referee();
 
-    // arbitros
     void check_game();
-    void check_game_centerAndSave();
+
+    // rules
+//    void go_to_points(int* points
 
 private:
     Interface interface;
@@ -27,6 +29,8 @@ private:
     std::vector<double> saved_frame; //posx,poxy,ang
     bool save_game;
     std::string save_file_name;
+
+    int score_a = 0;
 
 };
 

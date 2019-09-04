@@ -1,11 +1,16 @@
 #include "referee.h"
 #include <iostream>
 
-Referee::Referee(Interface inter, unsigned long long *t, bool f_save_game, std::string file_name){
+Referee::Referee(Interface inter, unsigned long long *t, std::string file_name){
     interface = inter;
     tempo = t;
-    save_game = f_save_game;
     save_file_name = file_name;
+    if(file_name == ""){
+        save_game = false;
+    }
+    else{
+        save_game = true;
+    }
 }
 
 // TODO
@@ -19,10 +24,6 @@ void Referee::check_game(){
 //    if(right_goal()) std::cout << "GOOOL DIREITO!" << std::endl;
 //    if(left_goal()) std::cout << "GOOOL ESQUERDO!" << std::endl;
     if(save_game) save_game_frame();
-}
-
-void Referee::check_game_centerAndSave(){
-    save_game_frame();
 }
 
 bool Referee::left_goal(){
