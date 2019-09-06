@@ -5,3 +5,4 @@ data/
 *.swp
 *.swo
 .qmake.stash
+log/
