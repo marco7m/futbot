@@ -233,7 +233,7 @@ void FeedForward::ia_alone_with_ball_pos(){
     interface.setVelAng(0,0,ia_a->output.ptr[1]);
 }
 
-void FeedForward::ia_alone_with_ball_pos(){
+void FeedForward::ia_alone_with_ball_pos_and_more(){
     //======================  ENTRADA DE DADOS IA_A =========================
     int i = 0;
     ia_a->input.ptr[i] = interface.getPosX(0,0);
@@ -253,9 +253,9 @@ void FeedForward::ia_alone_with_ball_pos(){
     ia_a->input.ptr[i] = interface.getDirComponentY(0,0);
     i++;
 
-    ia_a->input.ptr[i] = interface.getPosBolaX() - interface.getPosX();
+    ia_a->input.ptr[i] = interface.getPosBolaX() - interface.getPosX(0,0);
     i++;
-    ia_a->input.ptr[i] = interface.getPosBolaY() - interface.getPosY();
+    ia_a->input.ptr[i] = interface.getPosBolaY() - interface.getPosY(0,0);
     i++;
 
 

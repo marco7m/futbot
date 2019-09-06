@@ -22,6 +22,7 @@ public:
     void ia_alone();
     void ia_alone_full_raw_inputs();
     void ia_alone_with_ball_pos();
+    void ia_alone_with_ball_pos_and_more();
 
 private:
     NeuralNetwork* ia_a = nullptr;
