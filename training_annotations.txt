@@ -28,3 +28,11 @@ fitness:
     move_or_rotate()
 
 nn  = 10,500,500,500,2
+
+training13:
+fitness *= 0.5
+fitness += gp.fast
+fitness:
+    target_ball()
+    vel_ang_is_bad(0.5)
+nn  = 10,60,60,60,2

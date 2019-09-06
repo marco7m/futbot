@@ -83,7 +83,6 @@ double GamePlay::fast_one_with_one_dead_robot(\
         _feedforward->ia_alone();
 
         _fitness->target_ball();
-        _fitness->move_or_rotate();
         _fitness->vel_ang_is_bad(0.5);
     }
 
