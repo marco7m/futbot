@@ -63,7 +63,7 @@ void EvolutionControl::train_the_guys(int game_duration){
                 pos_ball_y, \
                 pos_rob_x, \
                 pos_rob_y, \
-                std::string("data/referee/training13/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
+                std::string("data/referee/training13-/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
                 );
 
         // generate next generation
