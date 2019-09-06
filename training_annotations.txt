@@ -35,4 +35,18 @@ fitness += gp.fast
 fitness:
     target_ball()
     vel_ang_is_bad(0.5)
+
+inputs:
+    getPosX(0,0)
+    getPosY(0,0)
+    getVelX(0,0)
+    getVelY(0,0)
+    getVelAng(0,0)
+    getVel(0,0)
+    getDirComponentX(0,0)
+    getDirComponentY(0,0)
+    getPosBolaX() - getPosX()
+    getPosBolaY() - getPosY()
+    
+
 nn  = 10,60,60,60,2

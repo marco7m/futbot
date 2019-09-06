@@ -10,7 +10,7 @@ EvolutionControl::~EvolutionControl(){
 // os pesos de cada individuo é inicializado com valores aleatórios entre -1 e 1
 void EvolutionControl::create_random_population(int population_size){
     // crio uma topologia (sistema atual tem 88 entradas e 2 saidas)
-    std::vector<int> tp{10,60,60,60,2};
+    std::vector<int> tp{12,60,60,60,2};
 
     // carrego o vector de ponteiro de redes neurais que sera a minha população
     clear_population(); 
