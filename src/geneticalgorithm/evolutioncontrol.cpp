@@ -43,7 +43,12 @@ void EvolutionControl::train_the_guys(int game_duration){
             pos_rob_x = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
             pos_rob_y = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
             for(int ind = 0; ind < population.size(); ind++){
-                population[ind].fit *= 0.5;
+                if(rodada == 0){
+                    population[ind].fit = 0;
+                } 
+                else{
+                    population[ind].fit *= 0.5;
+                } 
                 population[ind].fit += gp.fast_one_with_one_dead_robot(
                         population[ind].net, \
                         game_duration, \
