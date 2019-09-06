@@ -25,6 +25,7 @@ void EvolutionControl::train_the_guys(int game_duration){
 
     const int NUM_GENERATIONS = 10000; // number of generations
     const float PCT_SAVE_POPULATION = 0.1;
+    const int NUM_RODADAS = 10;
 
     GamePlay gp{};
     Crossover cross{};
@@ -36,20 +37,22 @@ void EvolutionControl::train_the_guys(int game_duration){
         double pos_ball_y;
         double pos_rob_x;
         double pos_rob_y;
-        pos_ball_x = ((float) std::rand() / (float) RAND_MAX) * 1;
-        pos_ball_y = ((float) std::rand() / (float) RAND_MAX) * 1;
-        pos_rob_x = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
-        pos_rob_y = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
-        for(int ind = 0; ind < population.size(); ind++){
-            population[ind].fit *= 0.5;
-            population[ind].fit += gp.fast_one_with_one_dead_robot(
-                    population[ind].net, \
-                    game_duration, \
-                    pos_ball_x, \
-                    pos_ball_y, \
-                    pos_rob_x, \
-                    pos_rob_y \
-                    );
+        for(int rodada = 0; rodada < NUM_RODADAS; rodada++){
+            pos_ball_x = ((float) std::rand() / (float) RAND_MAX) * 1;
+            pos_ball_y = ((float) std::rand() / (float) RAND_MAX) * 1;
+            pos_rob_x = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
+            pos_rob_y = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
+            for(int ind = 0; ind < population.size(); ind++){
+                population[ind].fit *= 0.5;
+                population[ind].fit += gp.fast_one_with_one_dead_robot(
+                        population[ind].net, \
+                        game_duration, \
+                        pos_ball_x, \
+                        pos_ball_y, \
+                        pos_rob_x, \
+                        pos_rob_y \
+                        );
+            }
         }
         sort(population.begin(), population.end(), [](Individual const &a, Individual const &b) { return a.fit > b.fit; });
 
