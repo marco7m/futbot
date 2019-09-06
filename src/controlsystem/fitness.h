@@ -2,8 +2,9 @@
 #define FITNESS_H
 
 #include <iostream>
-#include "../wrsim/src/WRSim/interface.h"
 #include <cmath>
+#include "../wrsim/src/WRSim/interface.h"
+#include "src/utils/geom.h"
 
 class Fitness{
 public:
@@ -25,8 +26,5 @@ private:
     // variables
     Interface interface;
     double fit_points;
-
-    // auxiliar functions
-    double dist(double x1,double y1,double x2,double y2);
 };
 #endif

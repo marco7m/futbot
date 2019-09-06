@@ -11,19 +11,19 @@ Fitness::~Fitness(){
 
 // punishes when is far from certain point
 void Fitness::target_point(double x, double y){
-    fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
+    fit_points -= Geom::dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
 }
 
 // punishes when is far from the ball
 void Fitness::target_ball(){
-    fit_points -= dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
+    fit_points -= Geom::dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
 }
 
 void Fitness::move_or_rotate(){
     fit_points -= abs(interface.getVel(0,0)) * abs(interface.getVelAng(0,0));
 }
 void Fitness::avoid_point(double x, double y){
-    fit_points += 0.3*dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
+    fit_points += 0.3*Geom::dist(interface.getPosX(0,0), interface.getPosY(0,0), x, y);
 }
 
 void Fitness::vel_ang_is_bad(double sensitivity){
@@ -37,11 +37,6 @@ void Fitness::count_time(){
 // nao utilizada, apagar?
 void Fitness::update_fitness_frame(){
     target_point(0.8,0.5);
-}
-
-// return the distance of two points
-double Fitness::dist(double x1,double y1,double x2,double y2){
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
     
 double Fitness::get_fit_points(){

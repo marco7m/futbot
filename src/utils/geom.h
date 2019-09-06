@@ -2,7 +2,7 @@
 #define GEOM_H
 
 #include <cmath>
-
+ 
 class Geom{
 public:
     Geom();

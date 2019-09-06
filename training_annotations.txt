@@ -15,4 +15,16 @@ rand robot pos
 rand ball pos
 
 training11
+fitness:
+    target_ball()
+    move_or_rotate()
+    vel_ang_is_bad(0.5)
+
 nn  = 10,20,20,20,2
+
+training12
+fitness:
+    target_ball()
+    move_or_rotate()
+
+nn  = 10,500,500,500,2

@@ -6,6 +6,7 @@
 #include <string>
 #include "src/utils/csv.h"
 #include "src/utils/my_ptr.h"
+#include "src/utils/geom.h"
 
 class Referee{
 public:
@@ -15,7 +16,7 @@ public:
     void check_game();
 
     // rules
-//    void go_to_points(int* points
+    void restart_if_in_points();
 
 private:
     Interface interface;
@@ -30,7 +31,7 @@ private:
     bool save_game;
     std::string save_file_name;
 
-    int score_a = 0;
+    int score_a;
 
 };
 
