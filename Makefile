@@ -71,7 +71,8 @@ SOURCES       = src/main.cpp \
 		src/wrsim/src/WRSim/interface.cpp \
 		src/neuralnetwork/neuron.cpp \
 		src/neuralnetwork/neuralnetwork.cpp \
-		src/utils/csv.cpp tmp/rc/qrc_recursos.cpp \
+		src/utils/csv.cpp \
+		src/utils/geom.cpp tmp/rc/qrc_recursos.cpp \
 		tmp/moc/moc_gameplay.cpp \
 		tmp/moc/moc_mainwindow.cpp
 OBJECTS       = tmp/obj/main.o \
@@ -98,6 +99,7 @@ OBJECTS       = tmp/obj/main.o \
 		tmp/obj/neuron.o \
 		tmp/obj/neuralnetwork.o \
 		tmp/obj/csv.o \
+		tmp/obj/geom.o \
 		tmp/obj/qrc_recursos.o \
 		tmp/obj/moc_gameplay.o \
 		tmp/obj/moc_mainwindow.o
@@ -185,7 +187,10 @@ DIST          = src/wrsim/Notas.txt \
 		src/wrsim/src/WRSim/interface.h \
 		src/neuralnetwork/neuron.h \
 		src/neuralnetwork/neuralnetwork.h \
-		src/neuralnetwork/random.h src/main.cpp \
+		src/neuralnetwork/random.h \
+		src/utils/my_ptr.h \
+		src/utils/csv.h \
+		src/utils/geom.h src/main.cpp \
 		src/controlsystem/gameplay.cpp \
 		src/controlsystem/referee.cpp \
 		src/controlsystem/controlsystem.cpp \
@@ -208,7 +213,8 @@ DIST          = src/wrsim/Notas.txt \
 		src/wrsim/src/WRSim/interface.cpp \
 		src/neuralnetwork/neuron.cpp \
 		src/neuralnetwork/neuralnetwork.cpp \
-		src/utils/csv.cpp
+		src/utils/csv.cpp \
+		src/utils/geom.cpp
 QMAKE_TARGET  = futbot
 DESTDIR       = bin/
 TARGET        = bin/futbot
@@ -367,8 +373,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents src/wrsim/img/recursos.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents src/controlsystem/gameplay.h src/controlsystem/referee.h src/controlsystem/controlsystem.h src/controlsystem/moverobots.h src/controlsystem/feedforward.h src/controlsystem/fitness.h src/geneticalgorithm/crossover.h src/geneticalgorithm/evolutioncontrol.h src/wrsim/src/WRSim/cte.h src/wrsim/src/WRSim/fisica.h src/wrsim/src/WRSim/grafico/grafico.h src/wrsim/src/WRSim/grafico/graficobola.h src/wrsim/src/WRSim/grafico/graficocampovss.h src/wrsim/src/WRSim/grafico/graficoentrada.h src/wrsim/src/WRSim/grafico/graficoprobe.h src/wrsim/src/WRSim/grafico/graficorobovss.h src/wrsim/src/WRSim/objetos/bola.h src/wrsim/src/WRSim/objetos/probe.h src/wrsim/src/WRSim/objetos/robovss.h src/wrsim/src/WRSim/mainwindow.h src/wrsim/src/WRSim/interface.h src/neuralnetwork/neuron.h src/neuralnetwork/neuralnetwork.h src/neuralnetwork/random.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/controlsystem/gameplay.cpp src/controlsystem/referee.cpp src/controlsystem/controlsystem.cpp src/controlsystem/moverobots.cpp src/controlsystem/feedforward.cpp src/controlsystem/fitness.cpp src/geneticalgorithm/crossover.cpp src/geneticalgorithm/evolutioncontrol.cpp src/wrsim/src/WRSim/fisica.cpp src/wrsim/src/WRSim/grafico/grafico.cpp src/wrsim/src/WRSim/grafico/graficobola.cpp src/wrsim/src/WRSim/grafico/graficocampovss.cpp src/wrsim/src/WRSim/grafico/graficoentrada.cpp src/wrsim/src/WRSim/grafico/graficoprobe.cpp src/wrsim/src/WRSim/grafico/graficorobovss.cpp src/wrsim/src/WRSim/objetos/bola.cpp src/wrsim/src/WRSim/objetos/probe.cpp src/wrsim/src/WRSim/objetos/robovss.cpp src/wrsim/src/WRSim/mainwindow.cpp src/wrsim/src/WRSim/interface.cpp src/neuralnetwork/neuron.cpp src/neuralnetwork/neuralnetwork.cpp src/utils/csv.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/controlsystem/gameplay.h src/controlsystem/referee.h src/controlsystem/controlsystem.h src/controlsystem/moverobots.h src/controlsystem/feedforward.h src/controlsystem/fitness.h src/geneticalgorithm/crossover.h src/geneticalgorithm/evolutioncontrol.h src/wrsim/src/WRSim/cte.h src/wrsim/src/WRSim/fisica.h src/wrsim/src/WRSim/grafico/grafico.h src/wrsim/src/WRSim/grafico/graficobola.h src/wrsim/src/WRSim/grafico/graficocampovss.h src/wrsim/src/WRSim/grafico/graficoentrada.h src/wrsim/src/WRSim/grafico/graficoprobe.h src/wrsim/src/WRSim/grafico/graficorobovss.h src/wrsim/src/WRSim/objetos/bola.h src/wrsim/src/WRSim/objetos/probe.h src/wrsim/src/WRSim/objetos/robovss.h src/wrsim/src/WRSim/mainwindow.h src/wrsim/src/WRSim/interface.h src/neuralnetwork/neuron.h src/neuralnetwork/neuralnetwork.h src/neuralnetwork/random.h src/utils/my_ptr.h src/utils/csv.h src/utils/geom.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/controlsystem/gameplay.cpp src/controlsystem/referee.cpp src/controlsystem/controlsystem.cpp src/controlsystem/moverobots.cpp src/controlsystem/feedforward.cpp src/controlsystem/fitness.cpp src/geneticalgorithm/crossover.cpp src/geneticalgorithm/evolutioncontrol.cpp src/wrsim/src/WRSim/fisica.cpp src/wrsim/src/WRSim/grafico/grafico.cpp src/wrsim/src/WRSim/grafico/graficobola.cpp src/wrsim/src/WRSim/grafico/graficocampovss.cpp src/wrsim/src/WRSim/grafico/graficoentrada.cpp src/wrsim/src/WRSim/grafico/graficoprobe.cpp src/wrsim/src/WRSim/grafico/graficorobovss.cpp src/wrsim/src/WRSim/objetos/bola.cpp src/wrsim/src/WRSim/objetos/probe.cpp src/wrsim/src/WRSim/objetos/robovss.cpp src/wrsim/src/WRSim/mainwindow.cpp src/wrsim/src/WRSim/interface.cpp src/neuralnetwork/neuron.cpp src/neuralnetwork/neuralnetwork.cpp src/utils/csv.cpp src/utils/geom.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents src/wrsim/src/WRSim/mainwindow.ui $(DISTDIR)/
 
 
@@ -431,9 +437,10 @@ tmp/moc/moc_gameplay.cpp: src/wrsim/src/WRSim/objetos/robovss.h \
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
 		src/utils/csv.h \
+		src/utils/my_ptr.h \
+		src/utils/geom.h \
 		src/neuralnetwork/neuralnetwork.h \
 		src/neuralnetwork/neuron.h \
-		src/utils/my_ptr.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h \
 		src/controlsystem/gameplay.h \
@@ -479,9 +486,10 @@ tmp/obj/main.o: src/main.cpp src/controlsystem/gameplay.h \
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
 		src/utils/csv.h \
+		src/utils/my_ptr.h \
+		src/utils/geom.h \
 		src/neuralnetwork/neuralnetwork.h \
 		src/neuralnetwork/neuron.h \
-		src/utils/my_ptr.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h \
 		src/controlsystem/controlsystem.h \
@@ -505,9 +513,10 @@ tmp/obj/gameplay.o: src/controlsystem/gameplay.cpp src/controlsystem/gameplay.h 
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
 		src/utils/csv.h \
+		src/utils/my_ptr.h \
+		src/utils/geom.h \
 		src/neuralnetwork/neuralnetwork.h \
 		src/neuralnetwork/neuron.h \
-		src/utils/my_ptr.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/gameplay.o src/controlsystem/gameplay.cpp
@@ -517,7 +526,9 @@ tmp/obj/referee.o: src/controlsystem/referee.cpp src/controlsystem/referee.h \
 		src/wrsim/src/WRSim/objetos/robovss.h \
 		src/wrsim/src/WRSim/cte.h \
 		src/wrsim/src/WRSim/objetos/bola.h \
-		src/utils/csv.h
+		src/utils/csv.h \
+		src/utils/my_ptr.h \
+		src/utils/geom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/referee.o src/controlsystem/referee.cpp
 
 tmp/obj/controlsystem.o: src/controlsystem/controlsystem.cpp src/controlsystem/controlsystem.h \
@@ -540,6 +551,7 @@ tmp/obj/controlsystem.o: src/controlsystem/controlsystem.cpp src/controlsystem/c
 		src/wrsim/src/WRSim/grafico/graficoprobe.h \
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
+		src/utils/geom.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h \
 		src/geneticalgorithm/evolutioncontrol.h \
@@ -568,7 +580,8 @@ tmp/obj/fitness.o: src/controlsystem/fitness.cpp src/controlsystem/fitness.h \
 		src/wrsim/src/WRSim/interface.h \
 		src/wrsim/src/WRSim/objetos/robovss.h \
 		src/wrsim/src/WRSim/cte.h \
-		src/wrsim/src/WRSim/objetos/bola.h
+		src/wrsim/src/WRSim/objetos/bola.h \
+		src/utils/geom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/fitness.o src/controlsystem/fitness.cpp
 
 tmp/obj/crossover.o: src/geneticalgorithm/crossover.cpp src/geneticalgorithm/crossover.h \
@@ -599,6 +612,7 @@ tmp/obj/evolutioncontrol.o: src/geneticalgorithm/evolutioncontrol.cpp src/geneti
 		src/wrsim/src/WRSim/grafico/graficoprobe.h \
 		src/wrsim/src/WRSim/grafico/graficocampovss.h \
 		src/controlsystem/referee.h \
+		src/utils/geom.h \
 		src/controlsystem/feedforward.h \
 		src/controlsystem/fitness.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/evolutioncontrol.o src/geneticalgorithm/evolutioncontrol.cpp
@@ -677,6 +691,9 @@ tmp/obj/neuralnetwork.o: src/neuralnetwork/neuralnetwork.cpp src/neuralnetwork/n
 
 tmp/obj/csv.o: src/utils/csv.cpp src/utils/csv.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/csv.o src/utils/csv.cpp
+
+tmp/obj/geom.o: src/utils/geom.cpp src/utils/geom.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/geom.o src/utils/geom.cpp
 
 tmp/obj/qrc_recursos.o: tmp/rc/qrc_recursos.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tmp/obj/qrc_recursos.o tmp/rc/qrc_recursos.cpp

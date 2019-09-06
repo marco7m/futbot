@@ -55,7 +55,8 @@ SOURCES += \
     src/neuralnetwork/neuralnetwork.cpp \
     # src/neuralnetwork/main.cpp \
 # utils source files
-    src/utils/csv.cpp
+    src/utils/csv.cpp \
+    src/utils/geom.cpp
   
 # Header files
 HEADERS  += \
@@ -87,10 +88,11 @@ HEADERS  += \
 # NeuralNetwork header files
     src/neuralnetwork/neuron.h\
     src/neuralnetwork/neuralnetwork.h\
-    src/neuralnetwork/random.h
+    src/neuralnetwork/random.h \
 # utils header files
-    src/utils/my_ptr.h
-    src/utils/csv.h
+    src/utils/my_ptr.h \
+    src/utils/csv.h \
+    src/utils/geom.h
 
 # Forms
 FORMS    += \
