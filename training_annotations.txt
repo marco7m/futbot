@@ -30,6 +30,8 @@ fitness:
 nn  = 10,500,500,500,2
 
 training13:
+get best one from three rounds
+
 fitness *= 0.5
 fitness += gp.fast
 fitness:
@@ -50,3 +52,7 @@ inputs:
     
 
 nn  = 10,60,60,60,2
+
+
+training14:
+    same as training13 but without rounds
