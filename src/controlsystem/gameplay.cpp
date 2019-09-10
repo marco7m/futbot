@@ -203,7 +203,6 @@ void GamePlay::slot_manual_mode(){
     _fisica->roda();
     _fitness->update_fitness_frame();
     _referee->check_game();
-    _referee->restart_if_in_points();
     _grafico->roda();
     *_tempo = *_tempo+10;
 }
