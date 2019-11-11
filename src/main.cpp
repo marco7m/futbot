@@ -1,7 +1,7 @@
 //#define PLAY_SAVED_GAME 
 //#define MANUAL_PLAY_MODE
-#define TRAINING_1
-//#define TEMP_TEST
+//#define TRAINING_1
+#define TEMP_TEST
 
 #ifdef PLAY_SAVED_GAME
 #include <QApplication>
@@ -24,7 +24,13 @@ int main(int argc, char *argv[]){
 
 
 #ifdef TEMP_TEST
+#include <QPointF>
+#include <QLineF>
+#include <iostream>
+#include "src/
+
 int main(int argc, char *argv[]){
+
     return 0;
 }
 #endif

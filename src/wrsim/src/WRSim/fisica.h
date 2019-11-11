@@ -19,6 +19,9 @@ public:
     void roda();
 
     void colocaProbe(QPointF qpoint, int np);
+
+    bool estaDentro(QPointF quadrado[4], QPointF ponto);
+    int JRS(QLineF linha, QPointF ponto);
 private:
     robovss *robo;
     bola *_bola;
@@ -34,9 +37,7 @@ private:
     double dist(double x1,double y1,double x2,double y2);
     double dist(QPointF p1, QPointF p2);
     double produtoEscalar(QLineF A, QLineF v);
-    int JRS(QLineF linha, QPointF ponto);
     int lineSide(QLineF linha, QPointF ponto);
-    bool estaDentro(QPointF quadrado[4], QPointF ponto);
 
     //var temp para testar colisão antes de mover o robo
     double tempAng;
