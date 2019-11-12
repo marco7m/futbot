@@ -16,12 +16,13 @@ class fisica{
 
 public:
     fisica(robovss *r, unsigned long long *t, bola *b, probe *p = 0);
+    fisica();
     void roda();
 
     void colocaProbe(QPointF qpoint, int np);
 
     bool estaDentro(QPointF quadrado[4], QPointF ponto);
-    int JRS(QLineF linha, QPointF ponto);
+    bool JRS(QLineF linha, QPointF ponto);
 private:
     robovss *robo;
     bola *_bola;

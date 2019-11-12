@@ -13,6 +13,9 @@ fisica::fisica(robovss *r, unsigned long long *t, bola *b, probe *p){
 
 }
 
+fisica::fisica(){
+}
+
 void fisica::roda(){
 
     // este loop vai fazer a fisica para cada robô separadamente
@@ -660,8 +663,9 @@ void fisica::colocaProbe(QPointF qpoint, int np){
 // algoritmo para descobrir se um ponto está à direita ou esquerda de uma linha, considerando-se p1 da linha como a parte de baixo
 //dela
 // se a saída desta função for negativa, o ponto está à esquerda, se for positiva está à direita e se for nula está nela
-int fisica::JRS(QLineF linha, QPointF ponto){
-    return ((linha.x1() - ponto.x()) * (linha.y2() - ponto.y()) - ((linha.x2() - ponto.x()) * (linha.y1() - ponto.y())));
+bool fisica::JRS(QLineF linha, QPointF ponto){
+    if( ((linha.x1() - ponto.x()) * (linha.y2() - ponto.y()) - ((linha.x2() - ponto.x()) * (linha.y1() - ponto.y()))) >= 0) return true;
+    else return false;
 }
 
 

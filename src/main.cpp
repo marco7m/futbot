@@ -27,10 +27,53 @@ int main(int argc, char *argv[]){
 #include <QPointF>
 #include <QLineF>
 #include <iostream>
-#include "src/
+#include <ctime>
+#include <chrono>
+#include "wrsim/src/WRSim/fisica.h"
 
 int main(int argc, char *argv[]){
+    int num_jrs = 1000000;
+    int num_quadrado = 1000000;
+//    bool estaDentro(QPointF quadrado[4], QPointF ponto);
 
+    // JRS VARIABLES
+    QPointF point = QPoint(0.21,0.2); 
+    QPointF pointA = QPoint(3.81,20.83); 
+    QPointF pointB = QPoint(2.1,80.3); 
+    QLineF line = QLineF(pointA, pointB); 
+
+    // QUADRADO VARIABLES
+    QPointF quadrado[4];
+    quadrado[0] = QPointF(1,1);
+    quadrado[0] = QPointF(4,2);
+    quadrado[0] = QPointF(3,5);
+    quadrado[0] = QPointF(4,0);
+    QPointF pointP = QPoint(2.21,3.2); 
+    
+    fisica *fis = new fisica();
+
+    // JRS	
+    std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+    for(int i = 0; i < num_jrs; i++){
+        fis->JRS(line,point);
+        fis->JRS(line,point);
+        fis->JRS(line,point);
+        fis->JRS(line,point);
+    } 
+    std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+    std::cout << "Processa JRS " << num_jrs << " vezes em " << time_span.count() << " segundos." << std::endl;
+
+    // QUADRADO	
+    std::chrono::high_resolution_clock::time_point t3 = std::chrono::high_resolution_clock::now();
+    for(int i = 0; i < num_jrs; i++){
+        fis->estaDentro(quadrado,pointP);
+    } 
+    std::chrono::high_resolution_clock::time_point t4 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span_2 = std::chrono::duration_cast<std::chrono::duration<double>>(t4 - t3);
+    std::cout << "Processa QUADRADO " << num_jrs << " vezes em " << time_span_2.count() << " segundos." << std::endl;
+
+    std::cout << "=========================== FIM ========================" << std::endl;
     return 0;
 }
 #endif
