@@ -18,6 +18,7 @@ public:
     void target_ball();
     void move_or_rotate();
     void vel_ang_is_bad(double sensitivity);
+    void manual_fit(double points); // add fitpoints from external source
     
     double get_fit_points();
 private:

@@ -30,6 +30,10 @@ void Fitness::vel_ang_is_bad(double sensitivity){
     fit_points -= sensitivity * abs(interface.getVelAng(0,0));
 }
 
+void Fitness::manual_fit(double points){
+    fit_points += points;
+}
+
 void Fitness::count_time(){
     fit_points -= 1;
 }
