@@ -1,10 +1,11 @@
 #include "referee.h"
 #include <iostream>
 
-Referee::Referee(Interface inter, unsigned long long *t, std::string file_name){
+Referee::Referee(Interface inter, unsigned long long *t, std::string file_name, Fitness* fit){
     interface = inter;
     tempo = t;
     save_file_name = file_name;
+    _fitness = fit;
     if(file_name == ""){
         save_game = false;
     }
@@ -24,7 +25,6 @@ Referee::~Referee(){
 void Referee::check_game(){
 //    if(right_goal()) std::cout << "GOOOL DIREITO!" << std::endl;
 //    if(left_goal()) std::cout << "GOOOL ESQUERDO!" << std::endl;
-    restart_if_in_points();
     if(save_game) save_game_frame();
 }
 
@@ -48,6 +48,9 @@ void Referee::restart_if_in_points(){
         }
         interface.setPosBolaX(points[score_a][0]);
         interface.setPosBolaY(points[score_a][1]);
+        if(_fitness != nullptr){
+            _fitness->manual_fit(200);
+        }
     }
 }
 

@@ -7,10 +7,11 @@
 #include "src/utils/csv.h"
 #include "src/utils/my_ptr.h"
 #include "src/utils/geom.h"
+#include "src/controlsystem/fitness.h"
 
 class Referee{
 public:
-    Referee(Interface inter, unsigned long long *t, std::string file_name = "");
+    Referee(Interface inter, unsigned long long *t, std::string file_name = "", Fitness* fit = nullptr);
     ~Referee();
 
     void check_game();
@@ -32,6 +33,7 @@ private:
     std::string save_file_name;
 
     int score_a;
+    Fitness* _fitness = nullptr;
 
     // find a better place for this
     // used in -> void Referee::restart_if_in_points(){
