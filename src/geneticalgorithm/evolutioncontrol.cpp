@@ -1,5 +1,7 @@
 #include "evolutioncontrol.h"
 
+#define FBM_DIR "data/referee/training23-/gen_"
+#define FBM_TOPOLOGY 300,300
 EvolutionControl::EvolutionControl(){
 
 }
@@ -10,7 +12,7 @@ EvolutionControl::~EvolutionControl(){
 // os pesos de cada individuo é inicializado com valores aleatórios entre -1 e 1
 void EvolutionControl::create_random_population(int population_size){
     // crio uma topologia (sistema atual tem 88 entradas e 2 saidas)
-    std::vector<int> tp{12,60,60,60,2};
+    std::vector<int> tp{12,FBM_TOPOLOGY,2};
 
     // carrego o vector de ponteiro de redes neurais que sera a minha população
     clear_population(); 
@@ -23,23 +25,19 @@ void EvolutionControl::create_random_population(int population_size){
 
 void EvolutionControl::train_the_guys(int game_duration){
 
-    const int NUM_GENERATIONS = 1000; // number of generations
+    const int NUM_GENERATIONS = 10000; // number of generations
     const float PCT_SAVE_POPULATION = 0.1;
 
-    GamePlay gp{};
     Crossover cross{};
     std::srand(std::time(nullptr));
 
     for(int gen = 0; gen < NUM_GENERATIONS; gen++){
         std::cout << "gen " << gen;
+        GamePlay gp{};
         double pos_ball_x;
         double pos_ball_y;
         double pos_rob_x;
         double pos_rob_y;
-        pos_ball_x = ((float) std::rand() / (float) RAND_MAX) * 1;
-        pos_ball_y = ((float) std::rand() / (float) RAND_MAX) * 1;
-        pos_rob_x = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
-        pos_rob_y = 0.1 + (((float) std::rand() / (float) RAND_MAX) * 0.8);
         for(int ind = 0; ind < population.size(); ind++){
             population[ind].fit = gp.fast_one_with_one_dead_robot(
                     population[ind].net, \
@@ -62,7 +60,7 @@ void EvolutionControl::train_the_guys(int game_duration){
                 pos_ball_y, \
                 pos_rob_x, \
                 pos_rob_y, \
-                std::string("data/referee/training20-/gen_") + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
+                std::string(FBM_DIR) + std::to_string(gen) + std::string("-fit_") + std::to_string(population[0].fit) + std::string(".csv") \
                 );
 
         // generate next generation
