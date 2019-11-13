@@ -1,0 +1,36 @@
+o propósito do meu tcc é fazer uma ferramenta para o desenvolvimento de algoritmos evolutivos para o time de futebol de robos
+
+ele é modular para facilitar a sua modificação e adaptação a novas tecnologias
+
+ele teve alguns resultados preliminares que comprovam a sua funcionalidade
+
+
+explicit fitness remapping -> fitness ranking \cite{Beasley1993}
+
+
+colocar em algum lugar o tempo q demora pra simular uma partida de N minutos
+
+resumo
+20 palavras por frase
+1 ou 2 frases por tópico
+
+colocar em algum lugar, talvez no objetivo, que vai treinar, vai treinar de novo com a engine fisica melhor e depois vai usar essa IA com robôs reais
+
+colocar: acessado em: 
+nas referencias de sites
+
+na hora de explicar RNA no fundamentos teoricos, explicar o que é treinar uma rede neural (ajustar os pesos)
+
+TALVEZ
+colocar um capitulo explicando as variáveis da classe interface
+
+
+FALAR SIMOES
+
+- digo que fiz um teste com o backpropagation antes gravando o jogo que eu fiz manualmente e os resultados foram ruins? SIM
+
+- a prova das equações é em desenvolvimento ou revisão teorica?
+
+LEMBRAR
+
+Falar da classe fitness no desenvolvimento -> algoritmo genético

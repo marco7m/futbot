@@ -1,0 +1,43 @@
+\chapter{Fundamentos Teóricos}
+
+\section{\textcolor{red}{futebol de robos vss}}
+\textcolor{red}{Explicar o que é e as regras do futebol de robôs \cite{IEEE2008}}
+
+\section{\textcolor{red}{Conceitos Básicos de Programação Orientada a Objetos}}
+
+\section{Algoritmos Evolutivos}
+O algoritmo evolutivo (AE) é uma técnica de otimização importante que vem crescido na ultima década. Devido a sua natureza flexível e comportamento robusto herdado da computação evolutiva, ele se torna um método eficiente para solução de problemas de otimização global e é utilizado principalmente quando se tem uma capacidade de computação limitada e informação insuficiente ou imperfeita. 
+
+Existem diversas subáreas dentro dos AEs, dentre elas estão a programação evolutiva, estratégia evolutiva, programação genética e o algoritmo genético (AG), que é a mais popular dentre elas e foi inspirado nos mecanismos da evolução e genética natural \cite{Srinivas1994}. Todas as subáreas dos AEs trabalham com o princípio comum da evolução simulada de indivíduos utilizando o processo de seleção, mutação e reprodução. Pode-se diferenciar as diferentes subáreas dos algoritmos evolutivos com base na sua implementação e no modo com que elas são aplicadas a um problema em particular \cite{Vikhar2017}.
+
+Na implementação de um algoritmo genético existem algumas fases que devem ser elaboradas para a iteração do algoritmo, elas serão descritas em detalhes a seguir.
+
+\subsection{População Inicial}
+
+O processo de se aplicar um algoritmo genético para a resolução de um problema, se inicia com a criação de uma população inicial. A população inicial é composta por indivíduos, sendo cada um deles, uma solução para o problema gerado geralmente aleatoriamente.
+
+Os indivíduos são representados por um conjunto de parâmetros, sendo cada um desses parâmetros chamado de gene. Os parâmetros do indivíduo são representados como uma sequencia de números. 
+
+Uma outra nomenclatura utilizada para o conjunto dos genes do indivíduo é cromossomo.
+
+\subsection{Função de Aptidão}
+
+A função de aptidão desempenha um papel importante no sucesso do algoritmo genético em encontrar a melhor solução para um problema, pois é ela que classifica o cromossomo com relação à sua performance. Isso é uma ligação importante entre o AG e o sistema.
+\cite{Man1996}
+
+\subsection{Reprodução}
+Durante a fase de reprodução do algoritmo genético, indivíduos são selecionados aleatoriamente, utilizando uma estratégia que favorite os melhores classificados pela função de aptidão, para gerar descendentes que irão compor a próxima geração.
+
+Após a escolha dos indivíduos, eles passarão por dois processos. O primeiro é o cruzamento, que a partir do cromossomo de dois ou mais indivíduos é gerado o cromossomo de um terceiro indivíduo. Esse novo cromossomo é gerado a partir da combinação dos genes dos indivíduos anteriormente selecionados. Esse processo geralmente não é utilizado em todos os indivíduos, alguns costumam ser escolhidos para passarem seus genes para a próxima geração sem a interferência do cruzamento.
+
+O segundo processo é chamado de mutação, ele é aplicado a cada cromossomo após o processo de cruzamento. Esse processo altera aleatoriamente cada gene em um valor bem pequeno. A mutação é uma etapa muito importante para a busca da melhor solução em todo o espaço de busca, pois ela proporciona uma pequena aleatoriedade na busca, o que ajuda a garantir que nenhum ponto no espaço de busca tem probabilidade zero de ser examinado.
+\cite{Beasley1993}
+
+\subsection{Predação}
+O processo de predação consiste na remoção de determinados indivíduos, não passando eles para a próxima geração e nem permitindo que eles se reproduzam. Geralmente se escolhe os piores indivíduos de acordo com a função de aptidão para serem removidos ou terem maiores chances de serem removidos, a fim de se diminuir as chances de uma característica indesejada seja passada para a próxima geração, porém pode-se também optar por remover um indivíduo aleatório desde que esse não seja o melhor indivíduo da geração.
+
+\section{\textcolor{red}{Rede Neural Artificial}}
+
+\textcolor{red}{Não feito}
+
+\section{\textcolor{red}{Algoritmo Neuro-evolutivo}}
