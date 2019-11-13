@@ -65,7 +65,7 @@ double GamePlay::fast_one_with_one_dead_robot(\
         _referee = new Referee(*_interface, _tempo);
     }
     else{
-        _referee = new Referee(*_interface, _tempo, file_name, _fitness);
+        _referee = new Referee(*_interface, _tempo, file_name);
     }
     _fisica = new fisica(_robo, _tempo, _bola);
     _feedforward = new FeedForward(*_interface, nn);
@@ -77,13 +77,15 @@ double GamePlay::fast_one_with_one_dead_robot(\
     while(*_tempo < play_time){
         _fisica->roda();
         _referee->check_game();
-        _referee->restart_if_in_points();
+        if(_referee->restart_if_in_points()){
+            _fitness->manual_fit(5000);
+        }
         *_tempo = *_tempo+10;   
 
         _feedforward->ia_alone_with_ball_pos();
 
         _fitness->target_ball();
-        _fitness->vel_ang_is_bad(0.5);
+        _fitness->vel_ang_is_bad(0.1);
     }
 
     double fit_points = _fitness->get_fit_points();

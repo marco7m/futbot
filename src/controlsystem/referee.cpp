@@ -1,11 +1,10 @@
 #include "referee.h"
 #include <iostream>
 
-Referee::Referee(Interface inter, unsigned long long *t, std::string file_name, Fitness* fit){
+Referee::Referee(Interface inter, unsigned long long *t, std::string file_name){
     interface = inter;
     tempo = t;
     save_file_name = file_name;
-    _fitness = fit;
     if(file_name == ""){
         save_game = false;
     }
@@ -28,9 +27,9 @@ void Referee::check_game(){
     if(save_game) save_game_frame();
 }
 
-void Referee::restart_if_in_points(){
+bool Referee::restart_if_in_points(){
    
-    if(Geom::dist(interface.getPosBolaX(), interface.getPosBolaY(), interface.getPosX(0,0), interface.getPosY(0,0)) < 0.05){
+    if(Geom::dist(interface.getPosBolaX(), interface.getPosBolaY(), interface.getPosX(0,0), interface.getPosY(0,0)) < 0.15){
         if(score_a < 9){
             score_a++;
         }
@@ -39,18 +38,21 @@ void Referee::restart_if_in_points(){
             pos_robot = !pos_robot;
         }
         if(pos_robot){
-            interface.setPosX(0,0,0.1);
+            interface.setPosX(0,0,0.45);
             interface.setPosY(0,0,0.5);
+            interface.setAng(0,0,0);
         }
         else{
-            interface.setPosX(0,0,0.9);
+            interface.setPosX(0,0,0.65);
             interface.setPosY(0,0,0.5);
+            interface.setAng(0,0,0);
         }
         interface.setPosBolaX(points[score_a][0]);
         interface.setPosBolaY(points[score_a][1]);
-        if(_fitness != nullptr){
-            _fitness->manual_fit(200);
-        }
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
