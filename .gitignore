@@ -6,3 +6,4 @@ data/
 *.swo
 .qmake.stash
 log/
+Makefile
