@@ -33,6 +33,22 @@ private:
 
     int score_a;
 
+    // find a better place for this
+    // used in -> void Referee::restart_if_in_points(){
+    bool pos_robot = false;
+    double points[10][2] = {
+        {0.8,0.8},
+        {0.8,0.2},
+        {0.2,0.2},
+        {0.2,0.8},
+        {0.5,0.8},
+        {0.5,0.2},
+        {0.8,0.5},
+        {0.2,0.5},
+        {0.8,0.8},
+        {0.2,0.2}
+    };
+ 
 };
 
 #endif
