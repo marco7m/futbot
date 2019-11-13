@@ -16,7 +16,7 @@ void Fitness::target_point(double x, double y){
 
 // punishes when is far from the ball
 void Fitness::target_ball(){
-    fit_points -= Geom::dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
+    fit_points += 1/Geom::dist(interface.getPosX(0,0), interface.getPosY(0,0), interface.getPosBolaX(), interface.getPosBolaY());
 }
 
 void Fitness::move_or_rotate(){
